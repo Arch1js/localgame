@@ -6,8 +6,8 @@ module.exports = {
 	'facebookAuth' : {
 		'clientID' 		: '1610783645902344', // your App ID
 		'clientSecret' 	: '9fc07c34614c62d970b37a30bfc0cb78', // your App Secret
-		'callbackURL' 	: 'https://guarded-castle-78924.herokuapp.com'
-		// 'callbackURL' 	: 'http://localhost:8080/auth/facebook/callback'
+		'callbackURL' 	: 'https://guarded-castle-78924.herokuapp.com/auth/facebook/callback/'
+
 	},
 
 	'twitterAuth' : {
