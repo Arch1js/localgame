@@ -1,14 +1,48 @@
 <!doctype html>
 <html>
 <head>
-	<title>Node Authentication</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<title>Profile</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
-	</style>
+	<link href="/css/profile.css" rel="stylesheet" type="text/css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><img id="logo" src="/asets/logo.svg"><img id="title" src="/asets/localGame.svg"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Games</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+				<li id="user">
+					<h4><%= user.facebook.name || user.google.name || user.twitter.username %></h4>
+				</li>
+				<li>
+					<i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i>
+				</li>
+        <li id="logout">
+					<a href="/logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <div class="container">
 
 	<div class="page-header text-center">
@@ -29,7 +63,7 @@
 						<strong>email</strong>: <%= user.local.email %><br>
 						<strong>password</strong>: <%= user.local.password %>
 					</p>
-					
+
 					<a href="/unlink/local" class="btn btn-default">Unlink</a>
 				<% } else { %>
 					<a href="/connect/local" class="btn btn-default">Connect Local</a>
@@ -104,12 +138,6 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="text-center">
-		<p>Angular conversion by <a href="http://brandonmcquarie.com/">Brandon</a> and <a href="http://chrisheninger.com/">Chris</a>. Visit the <a href="https://github.com/brandonmcquarie/easy-node-authentication-angular">Github Repo</a>.</p>
-		<p>Original Node/Express demo by <a href="http://scotch.io">Scotch</a>. Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
-	</div>
-
 </div>
 </body>
 </html>
