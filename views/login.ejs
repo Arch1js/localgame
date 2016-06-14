@@ -4,45 +4,63 @@
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<style>
-		body 		{ padding-top:80px; }
-	</style>
+	<link href="/css/login.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+	<div class="container">
+	    <div class="col-md-12">
+	      <div class="col-xm-12 col-xm-offset-4 col-sm-12 col-sm-offset-2 col-md-6 col-md-offset-4">
+	        <img id="logo" src="/asets/logo.svg">
+	      </div>
+	  <div class="col-sm-12 col-sm-offset-3 col-md-12 col-md-offset-4" id="social">
+	        <div class="col-xs-4 col-sm-2 col-md-1">
+	          <a href="/auth/facebook" class="facebookBtn button"></a>
+	        </div>
+	        <div class="col-xs-4 col-sm-2 col-md-1">
+	          <a href="/auth/twitter" class="twitterBtn button"></a>
+	        </div>
+	        <div class="col-xs-4 col-sm-2 col-md-1">
+	          <a href="/auth/google" class="googleplusBtn button"></a>
+	        </div>
+	  </div>
 
-	<h1><span class="fa fa-sign-in"></span> Login</h1>
+	  <div class="col-sm-12 col-md-12">
+	    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+	      <hr>
+	    </div>
+	  </div>
 
-	<% if (message.length > 0) { %>
-		<div class="alert alert-danger"><%= message %></div>
-	<% } %>
+	  <div class="col-md-12">
+	    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+	      <% if (message.length > 0) { %>
+	          <div class="alert alert-danger"><%= message %></div>
+	      <% } %>
+	        <form class="omb_loginForm" action="/login" method="post">
+	        <div class="input-group">
+	          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	          <input type="text" class="form-control" name="email" placeholder="Email address">
+	        </div>
+	        <span class="help-block"></span>
 
-	<!-- LOGIN FORM -->
-	<form action="/login" method="post">
-		<div class="form-group">
-			<label>Email</label>
-			<input type="text" class="form-control" name="email">
-		</div>
-		<div class="form-group">
-			<label>Password</label>
-			<input type="password" class="form-control" name="password">
-		</div>
-
-		<button type="submit" class="btn btn-warning btn-lg">Login</button>
-	</form>
-
-	<hr>
-
-	<p>Need an account? <a href="/signup">Signup</a></p>
-	<p>Or go <a href="/">home</a>.</p>
-
-	<div class="text-center">
-		<p>Angular conversion by <a href="http://brandonmcquarie.com/">Brandon</a> and <a href="http://chrisheninger.com/">Chris</a>. Visit the <a href="https://github.com/brandonmcquarie/easy-node-authentication-angular">Github Repo</a>.</p>
-		<p>Original Node/Express demo by <a href="http://scotch.io">Scotch</a>. Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
-	</div>
-	
-</div>
-</div>
+	        <div class="input-group">
+	          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+	          <input  type="password" class="form-control" name="password" placeholder="Password">
+	        </div>
+	        <br>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+	      </form>
+	    </div>
+	    </div>
+	  <div class="col-md-12">
+	    <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-4">
+	      <p><a href="#">Forgot password?</a></p>
+	    </div>
+	    <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-1">
+	      <p><a href="/signup">Register</a></p>
+	    </div>
+	  </div>
+	  </div>
+	  </div>
 </body>
 </html>

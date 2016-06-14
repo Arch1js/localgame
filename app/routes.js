@@ -4,7 +4,7 @@ module.exports = function(app, passport) {
 
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
-		res.render('index.ejs');
+		res.render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// PROFILE SECTION =========================
@@ -17,7 +17,7 @@ module.exports = function(app, passport) {
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect('/');
+		res.redirect('/login');
 	});
 
 // =============================================================================
