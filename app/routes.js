@@ -39,8 +39,8 @@ app.post('/games', function(req, res) {
 
 	// main login page
 	app.get('/', function(req, res) {
-		// res.render('login.ejs', { message: req.flash('loginMessage') });
-		res.render('games.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs', { message: req.flash('loginMessage') });
+		// res.render('games.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// PROFILE SECTION =========================
