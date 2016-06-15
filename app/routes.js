@@ -4,11 +4,12 @@ app.post('/games', function(req, res) {
 		var search = req.body.text;
 
 		var search_key = search.replace(/ /g,"_");
-		// var search_key = "cod";
+		// var search_key = "just_cause";
 
 				var options = {
 					host: 'www.igdb.com',
 					path: '/api/v1/games/search?q='+search_key,
+					// path: '/api/v1/games/search?q='+search_key,
 					port: '443',
 					headers: {
 						'Accept': 'application/json',
@@ -38,8 +39,8 @@ app.post('/games', function(req, res) {
 
 	// main login page
 	app.get('/', function(req, res) {
-		res.render('login.ejs', { message: req.flash('loginMessage') });
-		// res.render('games.ejs', { message: req.flash('loginMessage') });
+		// res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('games.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// PROFILE SECTION =========================
