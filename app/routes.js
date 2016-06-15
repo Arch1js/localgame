@@ -1,10 +1,45 @@
 module.exports = function(app, passport) {
+//get game data route =========================================================
+app.post('/games', function(req, res) {
+		var search = req.body.text;
+
+		var search_key = search.replace(/ /g,"_");
+		// var search_key = "cod";
+
+				var options = {
+					host: 'www.igdb.com',
+					path: '/api/v1/games/search?q='+search_key,
+					port: '443',
+					headers: {
+						'Accept': 'application/json',
+						'Authorization': 'Token token="t8t8KrTTgdle_C-eRJhnT31L67Cnu0X5AywkbcqJkxc"'
+					}
+				};
+
+				callback = function(response) {
+
+					var str = ''
+					response.on('data', function (chunk) {
+						str += chunk;
+					});
+
+					response.on('end', function () {
+						console.log(str);
+						res.send(str); // return all todos in JSON format
+					});
+				}
+				var https = require('https');
+				var req = https.request(options, callback);
+				req.end();
+	});
+
 
 // normal routes ===============================================================
 
-	// show the home page (will also have our login links)
+	// main login page
 	app.get('/', function(req, res) {
 		res.render('login.ejs', { message: req.flash('loginMessage') });
+		// res.render('games.ejs', { message: req.flash('loginMessage') });
 	});
 
 	// PROFILE SECTION =========================
@@ -20,6 +55,11 @@ module.exports = function(app, passport) {
 		res.redirect('/login');
 	});
 
+	app.get('/games', isLoggedIn, function(req, res) {
+		res.render('games.ejs', {
+			user : req.user
+		});
+	});
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
