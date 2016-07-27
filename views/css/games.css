@@ -49,8 +49,26 @@ footer {
   color: #fff;
   text-align: center;
 }
-
-
+.fa-check {
+  color:  #03a9f4;
+}
+.circle{
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  padding: 11px 14px;
+  background: #ffee4d;
+  display: inline-block;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  -moz-box-shadow: 0px 0px 2px #888;
+  -webkit-box-shadow: 0px 0px 2px #888;
+  box-shadow: 0px 0px 2px #888;
+}
 .masonary-row.row {
 	-webkit-column-gap: 30px;
 	-moz-column-gap: 30px;

@@ -1,1 +1,1 @@
-angular.module('gameApp', ['searchController', 'searchService']);
+angular.module('gameApp', ['searchController', 'searchService', 'addGameService']);

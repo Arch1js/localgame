@@ -14,7 +14,8 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	<script src="js/controller/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/games.js"></script> <!-- load our todo service -->
+	<script src="js/services/search.js"></script> <!-- load our game service -->
+	<script src="js/services/addGame.js"></script> <!-- load our game service -->
 	<script src="/js/core.js"></script> <!-- load our main application -->
 </head>
 <body ng-controller="gameController">
@@ -28,7 +29,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img id="logo" src="/asets/logo.svg"><img id="title" src="/asets/localGame.svg"></a>
+      <a class="navbar-brand" href="#"><img id="logo" src="/asets/logo.svg" class="svg"><img id="title" src="/asets/localGame.svg" class="svg"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,10 +37,11 @@
       <ul class="nav navbar-nav">
         <li><a href="/profile">Home <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="/games">Games</a></li>
+				<li><a href="/mygames">My Games</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 				<li id="user">
-					<h4><%= user.facebook.name || user.google.name || user.twitter.username %></h4>
+					<!-- here goes user credential google.user stuff -->
 				</li>
 				<li>
 					<i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i>
@@ -53,11 +55,14 @@
 </nav>
 <main>
     <div class="content">
+			<p>{{gameID}}</p>
+			<p>{{name}}</p>
+			<p>{{cover}}</p>
 			<div class="col-md-12 centerBlock">
 				<div class="">
 					<form class="form-inline" role="form">
 						<div class="form-group col-sm-10 col-md-4 col-md-offset-4 col-xs-9">
-							<input type="text" class="form-control input-md" placeholder="Search game" ng-model="formData.text">
+							<input type="text" class="form-control input-md" placeholder="Search game" ng-model="search">
 						</div>
 						<div class="form-group col-xs-2">
 							<button type="submit" class="btn btn-primary" ng-click="searchGame()">Search</button>
@@ -71,6 +76,9 @@
 						<div ng-repeat="i in game">
 							<div class="col-xs-6 col-sm-6 col-lg-3">
 								<div class="thumbnail ">
+									<div class="circle" ng-click="addGame(i)">
+										<i class="fa fa-plus"></i>
+									</div>
 									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover_id}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
 								<div class="caption">
 									<h4>{{i.name}}</h4>
