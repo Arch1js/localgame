@@ -13,12 +13,11 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-	<script src="js/controller/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/search.js"></script> <!-- load our game service -->
-	<script src="js/services/addGame.js"></script> <!-- load our game service -->
-	<script src="/js/core.js"></script> <!-- load our main application -->
+	<script src="js/controller/searchCtrl.js"></script> <!-- load up our controller -->
+	<script src="js/services/searchService.js"></script> <!-- load our game service -->
+	<script src="/js/searchCore.js"></script> <!-- load our main application -->
 </head>
-<body ng-controller="gameController">
+<body ng-controller="searchGamesCtrl">
 	<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,14 +36,11 @@
       <ul class="nav navbar-nav">
         <li><a href="/profile">Home <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="/games">Games</a></li>
-				<li><a href="/mygames">My Games</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-				<li id="user">
-					<!-- here goes user credential google.user stuff -->
-				</li>
+
 				<li>
-					<i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i>
+					<a id="profile_link" href="/profile"><i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i></a>
 				</li>
         <li id="logout">
 					<a href="/logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
@@ -55,9 +51,9 @@
 </nav>
 <main>
     <div class="content">
-			<p>{{gameID}}</p>
+			<!-- <p>{{gameID}}</p>
 			<p>{{name}}</p>
-			<p>{{cover}}</p>
+			<p>{{cover}}</p> -->
 			<div class="col-md-12 centerBlock">
 				<div class="">
 					<form class="form-inline" role="form">
@@ -72,20 +68,18 @@
 			</div>
 			<div class="container">
 				<div class="masonary-row row">
-					<div ng-repeat="game in games">
-						<div ng-repeat="i in game">
+						<div ng-repeat="i in games">
 							<div class="col-xs-6 col-sm-6 col-lg-3">
 								<div class="thumbnail ">
-									<div class="circle" ng-click="addGame(i)">
-										<i class="fa fa-plus"></i>
+									<div class="circle" ng-click="addGame(i); disable = !disable">
+										<i ng-class="disable ? 'fa fa-check' : 'fa fa-plus'"></i>
 									</div>
-									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover_id}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
+									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
 								<div class="caption">
 									<h4>{{i.name}}</h4>
 									<p class="flex-text text-muted"></p>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>

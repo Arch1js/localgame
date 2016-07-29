@@ -1,59 +1,59 @@
 var User = require('./models/user');
 var ObjectId = require('mongodb').ObjectID;
+var unirest = require('unirest');
 
 module.exports = function(app, passport ) {
-//get game data route =========================================================
+//Game routes =========================================================
 app.post('/games', function(req, res, searchData) {
+
 		var search = req.body.search;
+
 		console.log(req);
 		console.log(search);
-		// console.log(search);
 
-		var search_key = search.replace(/ /g,"_");
+		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
 
 		console.log(search_key);
 
-				var options = {
-					host: 'www.igdb.com',
-					path: '/api/v1/games/search?q='+search_key,
-					// path: '/api/v1/games/4443',
-					// path: '/api/v1/games',
-					port: '443',
-					headers: {
-						'Accept': 'application/json',
-						'Authorization': 'Token token="t8t8KrTTgdle_C-eRJhnT31L67Cnu0X5AywkbcqJkxc"'
-					}
-				};
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover&search="+search_key)
+		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
+		.header("Accept", "application/json")
+		.end(function (result) {
+		  console.log(result.status, result.headers, result.body);
+			res.send(result.body);
+		});
 
-				callback = function(response) {
-
-					var str = ''
-					response.on('data', function (chunk) {
-						str += chunk;
-					});
-
-					response.on('end', function () {
-						console.log(str);
-						res.send(str); // return all todos in JSON format
-					});
-				}
-				var https = require('https');
-				var req = https.request(options, callback);
-				req.end();
 	});
+
+	app.post('/getnewest', function(req, res) {
+
+		console.log('Getnewest running');
+
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name")
+		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
+		.header("Accept", "application/json")
+		.end(function (result) {
+		  console.log(result.status, result.headers, result.body);
+			res.send(result.body);
+		});
+
+		});
+
 
 	app.post('/mygames', function(req, res) {
 
-			console.log('getmygames fired');
+			console.log('Getmygames post fired');
 
 			var newGame = User();
 
-			// newGame.save(function(err) {
+			// newGame.save(function(err) { //add new empty user
 			// 		if (err)
 			// 				throw err;
 			// });
 
-			var user = req.user._id;
+			var user = req.user._id; //real user
+			// var user = "5798fa124df558f0085ae9f7";
+
 			console.log(user);
 
 			User.findOne({_id: ObjectId(user)}, function(err,result) {
@@ -72,6 +72,8 @@ app.post('/games', function(req, res, searchData) {
 //record game id route =========================================================
 	app.post('/addgames', function(req, res) {
 
+		console.log('Addgames post fired');
+
 		var id = req.body.id;
 		var title = req.body.name;
 		var cover = req.body.cover;
@@ -84,11 +86,12 @@ app.post('/games', function(req, res, searchData) {
 		var newGame = User();
 
 
-		// newGame.save(function(err) {
+		// newGame.save(function(err) { //add new empty user
 		// 		if (err)
 		// 				throw err;
 		// });
 
+		// var user = "5798fa124df558f0085ae9f7";
 		var user = req.user._id;
 
 		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover}}}, function(err) {
@@ -96,19 +99,36 @@ app.post('/games', function(req, res, searchData) {
 			console.log("Error");
 		});
 
-// User.findOneAndUpdate({_id: ObjectId("5797aababa0873dc1ddbfd73")}, {$addToSet: {"games.id":search}}, function(err) {
-// 	if(err)
-// 	console.log("Error");
-// });
-
 	});
+
+	//record game id route =========================================================
+		app.post('/removegame', function(req, res) {
+
+			var id = req.body.id;
+
+
+			console.log('Removegame post fired');
+
+			// var user = "5798fa124df558f0085ae9f7";
+			var user = req.user._id;
+
+			User.update({_id: ObjectId(user)}, {$pull: {"games" : {id: id}}}, function(err) {
+				if(err)
+				console.log(err);
+				else {
+					res.send();
+				}
+			});
+
+		});
+
 
 // normal routes ===============================================================
 
 	// main login page
 	app.get('/', function(req, res) {
 		// res.render('games.ejs', { message: req.flash('loginMessage') });
-		res.render('games.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
+		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
 	// PROFILE SECTION =========================
@@ -117,6 +137,12 @@ app.post('/games', function(req, res, searchData) {
 			user : req.user
 		});
 	});
+
+	// app.get('/profile', function(req, res) { //for development to not reqire a user
+	// 	res.render('profile.ejs', {
+	// 		user : req.user
+	// 	});
+	// });
 
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
@@ -130,17 +156,6 @@ app.post('/games', function(req, res, searchData) {
 		});
 	});
 
-	app.get('/mygames', isLoggedIn, function(req, res) {
-		res.render('mygames.ejs', {
-			user : req.user
-		});
-	});
-
-	// app.get('/mygames', isLoggedIn, function(req, res) { //requires user to be logged in
-	// 	res.render('mygames.ejs', {
-	// 		message: req.flash('loginMessage')
-	// 	});
-	// });
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================

@@ -1,16 +1,23 @@
 <!doctype html>
-<html>
+<html ng-app="gameApp">
 <head>
-	<title>Profile</title>
+	<title>My Games</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link href="/css/games.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile.css" rel="stylesheet" type="text/css">
+	<link href="/css/heart_animation.css" rel="stylesheet" type="text/css">
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<script src="js/controller/profileCtrl.js"></script> <!-- load up our controller -->
+	<script src="js/services/profileService.js"></script> <!-- load our game service -->
+	<script src="/js/profileCore.js"></script> <!-- load our main application -->
 </head>
-<body>
+<body ng-controller="profileCtrl">
 	<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,16 +34,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/profile">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="/games">Games</a></li>
-				<li><a href="/mygames">My Games</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-				<li id="user">
-					<h4><%= user.facebook.name || user.google.name || user.twitter.username %></h4>
-				</li>
+
 				<li>
-					<i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i>
+					<i id="profile" class="fa fa-user fa-2x" aria-hidden="true" href="/profile"></i>
 				</li>
         <li id="logout">
 					<a href="/logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
@@ -45,101 +49,42 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
+<main>
+    <div class="content">
+			<p>{{data}}</p>
+			<div class="col-md-12 centerBlock">
+				<div class="">
+					<form class="form-inline" role="form">
+						<div class="form-group col-sm-10 col-md-4 col-md-offset-4 col-xs-9">
 
-	<div class="page-header text-center">
-		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-	</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="container">
+				<div class="masonary-row row">
+						<div ng-repeat="i in games">
+							<div class="col-xs-6 col-sm-6 col-lg-3">
+								<div class="thumbnail ">
+									<div class="circle" ng-click="removeGame(i); disable = !disable">
+										<i ng-class="disable ? 'fa fa-plus' : 'fa fa-check'"></i>
+									</div>
+									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
+								<div class="caption">
+									<h4>{{i.name}}</h4>
+									<p class="flex-text text-muted"></p>
+								</div>
+							</div>
 
-	<div class="row">
-
-		<!-- LOCAL INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
-
-				<% if (user.local.email) { %>
-					<p>
-						<strong>id</strong>: <%= user._id %><br>
-						<strong>email</strong>: <%= user.local.email %><br>
-						<strong>password</strong>: <%= user.local.password %>
-					</p>
-
-					<a href="/unlink/local" class="btn btn-default">Unlink</a>
-				<% } else { %>
-					<a href="/connect/local" class="btn btn-default">Connect Local</a>
-				<% } %>
-
+					</div>
+				</div>
 			</div>
 		</div>
-
-		<!-- FACEBOOK INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-
-				<!-- check if the user has this token (is the user authenticated with this social account) -->
-				<% if (user.facebook.token) { %>
-					<p>
-						<strong>id</strong>: <%= user.facebook.id %><br>
-						<strong>token</strong>: <%= user.facebook.token %><br>
-						<strong>email</strong>: <%= user.facebook.email %><br>
-						<strong>name</strong>: <%= user.facebook.name %><br>
-					</p>
-
-					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-				<% } else { %>
-					<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-				<% } %>
-
-			</div>
-		</div>
-	</div>
-	<div class="row">
-
-		<!-- TWITTER INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
-
-				<% if (user.twitter.token) { %>
-					<p>
-						<strong>id</strong>: <%= user.twitter.id %><br>
-						<strong>token</strong>: <%= user.twitter.token %><br>
-						<strong>display name</strong>: <%= user.twitter.displayName %><br>
-						<strong>username</strong>: <%= user.twitter.username %>
-					</p>
-
-					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
-				<% } else { %>
-					<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-				<% } %>
-
-			</div>
-		</div>
-
-		<!-- GOOGLE INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
-
-				<% if (user.google.token) { %>
-					<p>
-						<strong>id</strong>: <%= user.google.id %><br>
-						<strong>token</strong>: <%= user.google.token %><br>
-						<strong>email</strong>: <%= user.google.email %><br>
-						<strong>name</strong>: <%= user.google.name %>
-					</p>
-
-					<a href="/unlink/google" class="btn btn-danger">Unlink</a>
-				<% } else { %>
-					<a href="/connect/google" class="btn btn-danger">Connect Google</a>
-				<% } %>
-
-			</div>
-		</div>
-	</div>
-</div>
+     </div>
+		 <footer>
+		 		<div class="text-center">
+		 			Made with <span class="entypo-heart"> by Me</span>
+		 		</div>
+		 	</footer>
 </body>
 </html>

@@ -43,3 +43,6 @@ li #logout {
   width: 100px;
   margin-right: 5px;
 }
+#profile_link {
+  padding: 0px;
+}
