@@ -27,10 +27,12 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-
+    location         : Array,
     games           : Array
 
 });
+
+userSchema.index({location: '2dsphere'});
 
 // generating a hash
 userSchema.methods.generateHash = function(password) {

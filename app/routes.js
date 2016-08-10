@@ -3,6 +3,64 @@ var ObjectId = require('mongodb').ObjectID;
 var unirest = require('unirest');
 
 module.exports = function(app, passport ) {
+
+
+
+    // POST Routes
+    // --------------------------------------------------------
+    // Provides method for saving new users in the db
+    app.post('/map', function(req, res){
+
+			        var query = User.find({});
+			        query.exec(function(err, users){
+			            if(err)
+			                res.send(err);
+
+			            // If no errors are found, it responds with a JSON of all users
+									// console.log(users);
+			            res.json(users);
+
+			        });
+
+    });
+
+		app.post('/query', function(req, res){
+
+		// Grab all of the query parameters from the body.
+		var lat             = req.body.latitude;
+		var long            = req.body.longitude;
+		var distance        = req.body.distance;
+
+		console.log(lat);
+		console.log(long);
+		console.log(distance);
+		// Opens a generic Mongoose Query. Depending on the post body we will...
+		var query = User.find({});
+
+		// ...include filter by Max Distance (converting miles to meters)
+		if(distance){
+
+				// Using MongoDB's geospatial querying features. (Note how coordinates are set [long, lat]
+				query = query.where('location').near({ center: {type: 'Point', coordinates: [long, lat]},
+
+
+						// Converting meters to miles. Specifying spherical geometry (for globe)
+						maxDistance: distance * 1609.34, spherical: true});
+
+		}
+
+		// Execute Query and Return the Query Results
+		query.exec(function(err, users){
+				if(err)
+						res.send(err);
+				else
+						// If no errors, respond with a JSON of all users that meet the criteria
+						console.log(users);
+						res.json(users);
+		});
+});
+
+
 //Game routes =========================================================
 app.post('/games', function(req, res, searchData) {
 
@@ -129,6 +187,11 @@ app.post('/games', function(req, res, searchData) {
 	app.get('/', function(req, res) {
 		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
+	});
+
+	app.get('/map', function(req, res) {
+		// res.render('games.ejs', { message: req.flash('loginMessage') });
+		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
 	// PROFILE SECTION =========================
