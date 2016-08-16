@@ -24,26 +24,20 @@
 </head>
 <body ng-controller="userCtrl">
 	<div navbar></div>
-<main>
-	<div id="profile" class="col col-md-8 col-md-offset-2">
-		<div class="col-md-1">
-			<canvas id="userIdenticon" width="80" height="80" />
-		</div>
-		<div id="info" class="col-md-2">
-			<p><b>Username:</b> {{user}}</p>
-		</div>
-	</div>
-    <div class="content">
-			<div class="col-md-12 centerBlock">
-				<div class="">
-					<form class="form-inline" role="form">
-						<div class="form-group col-sm-10 col-md-4 col-md-offset-4 col-xs-9">
-
-						</div>
-					</form>
+	<main>
+		<div class="content">
+			<div id="profile" class="col col-md-11">
+				<div class="col-md-1">
+					<canvas id="userIdenticon" width="80" height="80" />
+				</div>
+				<div id="username" class="col col-md-3">
+					<b><h2>{{user}}</h2><b>
+				</div>
+				<div id="request" class="col col-md-2 col-sm-offset-3 col-md-offset-6">
+					<button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span> Send friend request</button>
 				</div>
 			</div>
-			<div class="container">
+			<div id="container">
 				<div class="masonary-row row">
 						<div ng-repeat="i in games">
 							<div class="col-xs-6 col-sm-6 col-lg-3">
@@ -57,16 +51,11 @@
 									<p class="flex-text text-muted"></p>
 								</div>
 							</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
-     </div>
-		 <footer>
-		 		<div class="text-center">
-		 			Made with <span class="entypo-heart"> by Me</span>
-		 		</div>
-		 	</footer>
+	</div>
+	<div footer></div>
 </body>
 </html>
