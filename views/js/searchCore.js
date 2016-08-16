@@ -1,1 +1,1 @@
-angular.module('gameApp', ['searchController', 'searchService']);
+var app = angular.module('gameApp', ['searchController', 'searchService','jdenticonService']);

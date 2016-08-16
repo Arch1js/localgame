@@ -3,6 +3,8 @@ var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
+var crypto = require('crypto');
+var randomstring = require("randomstring");
 
 // load up the user model
 var User       = require('../app/models/user');
@@ -75,6 +77,8 @@ module.exports = function(passport) {
         passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
     function(req, email, password, done) {
+
+        var username = req.body.username;
         if (email)
             email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
 
@@ -82,21 +86,29 @@ module.exports = function(passport) {
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                User.findOne({ 'local.email' :  email }, function(err, user) {
+                User.findOne({ $or : [{'local.email' :  email },{'username': username}] }, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
 
                     // check to see if theres already a user with that email
                     if (user) {
-                        return done(null, false, req.flash('signupMessage', 'That email is already used.'));
+                      if(user.local.email == email) {
+                        return done(null, false, req.flash('signupMessage', 'This email is already used.'));
+                      }
+                      else {
+                        return done(null, false, req.flash('signupMessage', 'This username is already used. Try other!'));
+                      }
+
                     } else {
 
                         // create the user
-                        var newUser            = new User();
+                        var newUser = new User();
 
-                        newUser.local.email    = email;
+                        newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
+                        newUser.avatar = crypto.createHash('md5').update(email).digest('hex');
+                        newUser.username = username;
 
                         newUser.save(function(err) {
                             if (err)
@@ -169,12 +181,19 @@ module.exports = function(passport) {
                         return done(null, user); // user found, return that user
                     } else {
                         // if there is no user, create them
-                        var newUser            = new User();
 
+                        var random = randomstring.generate(10);
+                        var userHash = crypto.createHash('md5').update(random).digest('hex');
+                        console.log(userHash);
+
+                        var newUser            = new User();
+                        newUser.avatar = userHash;
                         newUser.facebook.id    = profile.id;
                         newUser.facebook.token = token;
                         newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+                        newUser.avatar = crypto.createHash('md5').update(profile.name.givenName).digest('hex');
+                        newUser.username = profile.name.givenName;
 
                         newUser.save(function(err) {
                             if (err)
@@ -250,6 +269,8 @@ module.exports = function(passport) {
                         newUser.twitter.token       = token;
                         newUser.twitter.username    = profile.username;
                         newUser.twitter.displayName = profile.displayName;
+                        newUser.avatar = crypto.createHash('md5').update(profile.username).digest('hex');
+                        newUser.username = profile.username;
 
                         newUser.save(function(err) {
                             if (err)
@@ -325,6 +346,8 @@ module.exports = function(passport) {
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
                         newUser.google.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
+                        newUser.avatar = crypto.createHash('md5').update(profile.displayName).digest('hex');
+                        newUser.username = profile.displayName;
 
                         newUser.save(function(err) {
                             if (err)

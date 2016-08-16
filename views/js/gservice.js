@@ -20,11 +20,15 @@ angular.module('gservice', [])
           var selectedLat = 51.502;
           var selectedLong = -0.110;
 
+
+
+
         // Functions
         // --------------------------------------------------------------
         // Refresh the Map with new data. Function will take new latitude and longitude coordinates.
         googleMapService.refresh = function(latitude, longitude,filteredResults){
           console.log('refresh');
+
 
             // Clears the holding array of locations
             locations = [];
@@ -33,31 +37,32 @@ angular.module('gservice', [])
             selectedLat = latitude;
             selectedLong = longitude;
 
-            // If filtered results are provided in the refresh() call...
+          //   // If filtered results are provided in the refresh() call...
             if (filteredResults){
 
-                // Then convert the filtered results into map points.
+          //       // Then convert the filtered results into map points.
                 locations = convertToMapPoints(filteredResults);
-
-                // Then, initialize the map -- noting that a filter was used (to mark icons yellow)
+                console.log(filteredResults);
+          //       // Then, initialize the map -- noting that a filter was used (to mark icons yellow)
                 initialize(latitude, longitude, true);
             }
-
-            // If no filter is provided in the refresh() call...
+          //
+          //   // If no filter is provided in the refresh() call...
             else {
 
             // Perform an AJAX call to get all of the records in the db.
-            $http.post('/map').success(function(response){
-              console.log('Response:');
-              console.log(response);
+            // $http.post('/map').success(function(response){
+            //   console.log('Response:');
+            //   console.log(response);
 
                 // Convert the results into Google Map Format
-                locations = convertToMapPoints(response);
-                console.log(response);
+                // locations = convertToMapPoints(response);
+                // console.log(response);
                 // Then initialize the map.
                 initialize(latitude, longitude, false);
-            }).error(function(){});
+            // }).error(function(){});
           }
+
         };
 
         // Private Inner Functions
@@ -76,21 +81,33 @@ angular.module('gservice', [])
 
                 // Create popup windows for each record
                 var  contentString =
-                    '<p><b><a href="localhost/profile/' + user._id+'">Profile</a></b><br>'+
-                    '<b>'+user.facebook.name+'</b></p>';
+                    '<p><b><a href="/user/?id=' + user._id+'">Profile</a></b><br>'+
+                    '<p1>Platforms: </p1></p>';
                 console.log(user);
-                // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
-                locations.push({
-                    latlon: new google.maps.LatLng(user.location[1], user.location[0]),
 
-                    message: new google.maps.InfoWindow({
-                        content: contentString,
-                        maxWidth: 320
-                    }),
+                if(!user.location) {
+                  console.log('no locations');
+                  break;
+                }
+                else {
+                  console.log('locations found');
+                  // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
+                  locations.push({
 
-            });
+                      latlon: new google.maps.LatLng(user.location.lat, user.location.lng),
+
+                      message: new google.maps.InfoWindow({
+                          content: contentString,
+                          maxWidth: 320
+                      }),
+
+              });
+                }
+
+
         }
         // location is now an array populated with records in Google Maps format
+        console.log(locations);
         return locations;
     };
 

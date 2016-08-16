@@ -8,7 +8,8 @@
     <link href="/css/map.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/css/bootstrap-dialog.min.css">
+    <link href="/css/navbar.css" rel="stylesheet" type="text/css">
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhWehRQwWPVcNkrTo4Wfcxl9YNZfsvycM"></script>
 
@@ -18,48 +19,20 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
     <script src="/js/components/angularjs-geolocation.min.js"></script>
-
+    <script src="//cdn.jsdelivr.net/jdenticon/1.3.2/jdenticon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
     <!-- Angular Files -->
     <script src="/js/app.js"></script> <!-- load our main application -->
     <script src="js/controller/searchCtrl.js"></script> <!-- load up our controller -->
     <script src="js/services/searchService.js"></script> <!-- load our game service -->
-    <script src="js/mapCtrl.js"></script>
+    <script src="js/services/jdenticonService.js"></script> <!-- load our game service -->
+    <script src="js/controller/mapCtrl.js"></script>
     <script src="/js/gservice.js"></script>
+    <script src="/js/directive.js"></script>
 
 </head>
 <body ng-controller="mapCtrl">
-  <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img id="logo" src="/asets/logo.svg" class="svg"><img id="title" src="/asets/localGame.svg" class="svg"></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/profile">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="/games">Games</a></li>
-        <li class="active"><a href="/map">Map</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
-        <li>
-          <a id="profile_link" href="/profile"><i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i></a>
-        </li>
-        <li id="logout">
-          <a href="/logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+<div navbar></div> <!--navbar directive-->
   <div class="container">
       <!-- Map and Side Panel -->
       <div class="row content">
@@ -69,6 +42,7 @@
           </div>
           <!-- Side Panel -->
           <div class="col-md-2">
+            <b><p>Search for other users of localGame</p><b>
               <div class="panel panel-default">
 
                   <!-- Panel Body -->
@@ -76,22 +50,24 @@
                       <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
                       <form name ="addForm" novalidate>
                           <div class="form-group">
+                            <label for="distance">Location <i class="fa fa-location-arrow" aria-hidden="true"></i></label>
+                            <input type="text" class="form-control" id="location" placeholder="City, Country or Postcode" ng-model="formData.location">
+                          </div>
+                          <div class="form-group">
                             <label for="distance">Max. Distance (miles)</label>
-                            <input type="text" class="form-control" id="distance" placeholder="500" ng-model="formData.distance">
+                            <input type="text" class="form-control" id="distance" placeholder="100" ng-model="formData.distance">
                           </div>
                           <div class="form-group">
-                              <label for="latitude">Latitude</label>
-                              <input type="text" class="form-control" id="latitude" value="39.500" ng-model="formData.latitude" readonly>
+                              <label for="latitude">Current Latitude</label>
+                              <input type="text" class="form-control" id="latitude" value="51.511" ng-model="formData.latitude" readonly>
+                              <label for="longitude">Current Longitude</label>
+                              <input type="text" class="form-control" id="longitude" value="-0.137" ng-model="formData.longitude" readonly>
                           </div>
-                          <div class="form-group">
-                              <label for="longitude">Longitude</label>
-                              <input type="text" class="form-control" id="longitude" value="-98.350" ng-model="formData.longitude" readonly>
-                          </div>
-                          <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
                           <button type="submit" class="btn btn-success btn-block" ng-click="queryUsers()" ng-disabled="addForm.$invalid">Search</button>
                       </form>
                   </div>
               </div>
+              <p ng-show="usercount">Users found: {{queryCount}}</p>
           </div>
       </div>
       <hr/>

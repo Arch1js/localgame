@@ -4,7 +4,19 @@ var unirest = require('unirest');
 
 module.exports = function(app, passport ) {
 
+  app.post('/getJdenticon', function(req, res){
+    console.log('/jdenticon route activated');
 
+  var user = req.user._id;
+  // var user = "57ab6e546327106427a3b999";
+
+
+  User.findOne({_id: ObjectId(user)}, {"avatar":1}, function(err, user) {
+      console.log(user);
+      res.json(user);
+
+  });
+});
 
     // POST Routes
     // --------------------------------------------------------
@@ -24,7 +36,50 @@ module.exports = function(app, passport ) {
 
     });
 
+    		app.post('/saveLocation', function(req, res){
+          console.log('/saveLocation activated');
+
+    		// Grab all of the query parameters from the body.
+    		var lat = req.body.latitude;
+    		var lng = req.body.longitude;
+
+    		console.log(lat);
+    		console.log(lng);
+
+        var user = req.user._id;
+        // var user = "57b1b13e9db132982e43657e";
+
+
+        User.findOne({_id: ObjectId(user)}, function(err, user) {
+
+            user.location.lat = lat;
+            user.location.lng = lng;
+
+            user.save(function(err) {
+              if (err)
+                throw err;
+              });
+
+
+        });
+    });
+
+    app.post('/userLocation', function(req, res){
+      console.log('/userLocation activated');
+
+    var user = req.user._id;
+    // var user = "57b2fb423040a8641ef8f26e";
+
+
+    User.findOne({_id: ObjectId(user)}, {"avatar":1, "location":1}, function(err, user) {
+        console.log(user);
+        res.json(user);
+
+    });
+});
+
 		app.post('/query', function(req, res){
+
 
 		// Grab all of the query parameters from the body.
 		var lat             = req.body.latitude;
@@ -34,14 +89,15 @@ module.exports = function(app, passport ) {
 		console.log(lat);
 		console.log(long);
 		console.log(distance);
+
 		// Opens a generic Mongoose Query. Depending on the post body we will...
-		var query = User.find({});
+		var query = User.find({}, {"location": 1});
 
 		// ...include filter by Max Distance (converting miles to meters)
 		if(distance){
 
 				// Using MongoDB's geospatial querying features. (Note how coordinates are set [long, lat]
-				query = query.where('location').near({ center: {type: 'Point', coordinates: [long, lat]},
+				query = query.where('location').near({ center: {type: 'Point', coordinates: [lat, long]},
 
 
 						// Converting meters to miles. Specifying spherical geometry (for globe)
@@ -100,8 +156,6 @@ app.post('/games', function(req, res, searchData) {
 
 	app.post('/mygames', function(req, res) {
 
-			console.log('Getmygames post fired');
-
 			var newGame = User();
 
 			// newGame.save(function(err) { //add new empty user
@@ -127,6 +181,24 @@ app.post('/games', function(req, res, searchData) {
 
 		});
 
+
+    app.post('/user', function(req, res) {
+
+        var user = req.body.user;
+
+        var newGame = User();
+
+        User.findOne({_id: ObjectId(user)}, {"avatar":1, "games":1, "username":1}, function(err,result) {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            res.send(result);
+          }
+
+        });
+
+      });
 //record game id route =========================================================
 	app.post('/addgames', function(req, res) {
 
@@ -142,12 +214,6 @@ app.post('/games', function(req, res, searchData) {
 
 		// console.log(req);
 		var newGame = User();
-
-
-		// newGame.save(function(err) { //add new empty user
-		// 		if (err)
-		// 				throw err;
-		// });
 
 		// var user = "5798fa124df558f0085ae9f7";
 		var user = req.user._id;
@@ -198,6 +264,11 @@ app.post('/games', function(req, res, searchData) {
 	app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user
+		});
+	});
+  app.get('/user', function(req, res) {
+		res.render('user.ejs', {
+      user : req.user
 		});
 	});
 

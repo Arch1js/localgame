@@ -1,0 +1,35 @@
+.navbar-brand {
+  padding: 3px 3px !important;
+}
+
+.nav > li > a {
+  padding: 15px 10px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+#identicon {
+  margin-top: 4px;
+  display: inline-block;
+}
+
+
+li #logout {
+  margin-top: 15px;
+}
+
+#logo {
+  height: 30px;
+  width: 50px;
+}
+
+#title {
+  height: 40px;
+  width: 100px;
+  margin-right: 5px;
+}
+#profile_link {
+  padding: 0px;
+}

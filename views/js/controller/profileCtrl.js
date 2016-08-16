@@ -1,8 +1,17 @@
 angular.module('profileController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('profileCtrl', function($scope, $http, profile) {
+	.controller('profileCtrl', function($scope, $http, profile, jdenticonService) {
+
+		$scope.hometab = 'active'; //set navbar home tab active
+
 		$scope.formData = {};
+
+		jdenticonService.geticon()
+		.success(function(data) {
+
+			jdenticon.update("#identicon", data.avatar);
+		})
 
 
 		$scope.displayGames = function() {

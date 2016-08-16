@@ -1,7 +1,15 @@
 angular.module('searchController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('searchGamesCtrl', function($scope, $http, Games) {
+	.controller('searchGamesCtrl', function($scope, $http, Games, jdenticonService) {
+
+		$scope.gametab = 'active'; //set navbar games tab active
+
+		jdenticonService.geticon()
+		.success(function(data) {
+	
+			jdenticon.update("#identicon", data.avatar);
+		})
 
 		$scope.formData = {};
 
@@ -46,19 +54,7 @@ angular.module('searchController', [])
 
 				.success(function(data) {
 
-
 				});
-
-			// $('.circle').on("click", ".fa", function() { //change fa-plus to fa-check when clicked
-			//
-			// 		var wasPlus = $(this).hasClass('fa-plus');
-			// 		$(this).removeClass('fa-plus fa-check');
-			// 		var change = wasPlus ? 'fa-check' : 'fa-plus';
-			// 		$(this).addClass(change);
-			//
-			// 	});
-
 		};
-
 
 	});
