@@ -11,3 +11,10 @@ app.directive("footer", function () { //navigation bar
 		templateUrl: "/../templates/footer.html"
 	}
 });
+
+app.directive("tabs", function () { //navigation bar
+	return {
+		restrict: "A",
+		templateUrl: "/../templates/profile_tabs.html"
+	}
+});

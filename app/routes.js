@@ -164,7 +164,7 @@ app.post('/games', function(req, res, searchData) {
 			// });
 
 			var user = req.user._id; //real user
-			// var user = "5798fa124df558f0085ae9f7";
+			// var user = "57b317b253ad6f541b6e36e1";
 
 			console.log(user);
 
@@ -173,8 +173,7 @@ app.post('/games', function(req, res, searchData) {
 					console.log(err);
 				}
 				else {
-					console.log(result.games);
-					res.send(result.games);
+					res.send(result);
 				}
 
 			});
@@ -261,11 +260,18 @@ app.post('/games', function(req, res, searchData) {
 	});
 
 	// PROFILE SECTION =========================
-	app.get('/profile', isLoggedIn, function(req, res) {
+	app.get('/profile', function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user
 		});
 	});
+  //
+  // app.get('/profile', isLoggedIn, function(req, res) {
+  //   res.render('profile.ejs', {
+  //     user : req.user
+  //   });
+  // });
+
   app.get('/user', function(req, res) {
 		res.render('user.ejs', {
       user : req.user
@@ -303,7 +309,7 @@ app.post('/games', function(req, res, searchData) {
 
 		// process the login form
 		app.post('/login', passport.authenticate('local-login', {
-			successRedirect : '/profile', // redirect to the secure profile section
+			successRedirect : '/profile#/mygames', // redirect to the secure profile section
 			failureRedirect : '/login', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
@@ -316,7 +322,7 @@ app.post('/games', function(req, res, searchData) {
 
 		// process the signup form
 		app.post('/signup', passport.authenticate('local-signup', {
-			successRedirect : '/profile', // redirect to the secure profile section
+			successRedirect : '/profile#/mygames', // redirect to the secure profile section
 			failureRedirect : '/signup', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
@@ -329,7 +335,7 @@ app.post('/games', function(req, res, searchData) {
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
 			passport.authenticate('facebook', {
-				successRedirect : '/profile',
+				successRedirect : '/profile#/mygames',
 				failureRedirect : '/'
 			}));
 
@@ -341,7 +347,7 @@ app.post('/games', function(req, res, searchData) {
 		// handle the callback after twitter has authenticated the user
 		app.get('/auth/twitter/callback',
 			passport.authenticate('twitter', {
-				successRedirect : '/profile',
+				successRedirect : '/profile#/mygames',
 				failureRedirect : '/'
 			}));
 
@@ -354,7 +360,7 @@ app.post('/games', function(req, res, searchData) {
 		// the callback after google has authenticated the user
 		app.get('/auth/google/callback',
 			passport.authenticate('google', {
-				successRedirect : '/profile',
+				successRedirect : '/profile#/mygames',
 				failureRedirect : '/'
 			}));
 

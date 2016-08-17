@@ -1,0 +1,11 @@
+<div class="header" ng-controller="headerCtrl">
+<ul class="nav nav-tabs">
+  <li ng-class="{ active: isActive('/mygames')}"><a data-toggle="tab" href="#/mygames">My Games</a></li>
+  <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests">Requests</a></li>
+  <li><a data-toggle="tab" href="#friends">Friends</a></li>
+
+</ul>
+<div class="tab-content">
+  <div ng-view></div>
+</div>
+</div>
