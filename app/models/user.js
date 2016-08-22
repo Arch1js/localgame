@@ -33,7 +33,10 @@ var userSchema = mongoose.Schema({
         lat          : Number,
         lng          : Number,
     },
-    games           : Array
+    gameRequests     : Array,
+    friendRequests   : Array,
+    friends          : Array,
+    games            : Array
 
 });
 

@@ -24,27 +24,21 @@
 	<script src="/js/controller/headerCtrl.js"></script>
 
 </head>
-<body ng-controller="profileCtrl">
+<body ng-controller="profileCtrl" ng-init="displayGames()">
 	<div navbar></div> <!--navbar directive-->
 	<main>
-		<div class="content">
-			<div id="profile" class="col col-md-11">
-				<div class="col-md-1">
+		<div class="col col-md-10 col-sm-12 col-xs-12 content">
+			<div id="profile" class="col col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-1 col-sm-2 col-xs-5">
 					<canvas id="userIdenticon" width="80" height="80" />
 				</div>
-				<div id="username" class="col col-md-3">
+				<div id="username" class="col col-md-3 col-sm-8 col-xs-5">
 					<b><h2>{{username}}</h2><b>
 				</div>
 			</div>
-			<div id="container">
+			<div class="col col-md-12 col-sm-12 col-xs-12">
 				<div tabs></div>
-				<!-- <ul class="nav nav-pills pull-right">
-			 <li ng-class="{ active: isActive('/join')}"><a href="#/join">Join the Team</a></li>
-			<li ng-class="{ active: isActive('/find')}"><a href="#/find">Find Teammates</a></li>
-	</ul> -->
-
-
-
+				<div loading></div>
 		</div>
 	</div>
 	<div footer></div>

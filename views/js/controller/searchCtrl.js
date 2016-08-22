@@ -2,12 +2,13 @@ angular.module('searchController', [])
 
 	// inject the Todo service factory into our controller
 	.controller('searchGamesCtrl', function($scope, $http, Games, jdenticonService) {
+		$scope.loading = true;
 
 		$scope.gametab = 'active'; //set navbar games tab active
 
 		jdenticonService.geticon()
 		.success(function(data) {
-	
+
 			jdenticon.update("#identicon", data.avatar);
 		})
 
@@ -19,21 +20,30 @@ angular.module('searchController', [])
 			Games.getNewest()
 
 			.success(function(data) {
-
+				$scope.loading = false;
 				$scope.games = data;
 			});
 		}
 		$scope.getNewestGames();
 
 		$scope.searchGame = function() {
+			$scope.error = false;
+			$scope.games = false;
+			$scope.loading = true;
+
 			var search = $scope.search;
 				Games.searchGames(search)
 
 					.success(function(data) {
-
+						if(data.length == 0) {
+							$scope.error = true;
+						}
 						$scope.formData = {}; // clear the form so that new query can be entered
 						$scope.games = data; // update scope with new games
+						$scope.loading = false;
 					});
+
+			$scope.games = true;
 		};
 
 		// $scope.searchGame();

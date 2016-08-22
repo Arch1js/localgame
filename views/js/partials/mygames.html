@@ -1,10 +1,11 @@
-<div id="games" class="tab-pane fade in active">
+<div id="games" class="tab-pane fade in active col-md-12 col-sm-12 col-xs-12" ng-show="mygames">
   <div class="masonary-row row">
       <div ng-repeat="i in games">
         <div class="col-xs-6 col-sm-6 col-lg-3">
           <div class="thumbnail ">
-            <div class="circle" ng-click="removeGame(i); disable = !disable">
-              <i ng-class="disable ? 'fa fa-plus' : 'fa fa-check'"></i>
+            <div class="circle" ng-click="removeGame(i)">
+              <i class="fa fa-check"></i>
+              <i class="fa fa-times"></i>
             </div>
             <img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
           <div class="caption">

@@ -1,4 +1,4 @@
-<div ng-repeat="i in requests">
+<div ng-repeat="i in friends">
 <div id="requests" class="col col-md-12 tab-pane fade in active">
       <div class="col-md-12">
         <div class="col-md-1 col-sm-2 col-xs-5">
@@ -6,10 +6,6 @@
         </div>
         <div class="col-md-3">
           <h3><a href="/user/?id={{i.user}}" target="_blank">{{i.username}}</a></h3>
-        </div>
-        <div class="col-md-3 col-md-offset-5">
-          <button class="btn btn-success doButton" ng-click="addFriend(i)">Confirm</button>
-          <button class="btn btn-danger doButton" ng-click="delete(i)">Decline</button>
         </div>
       </div>
     </div>

@@ -18,3 +18,10 @@ app.directive("tabs", function () { //navigation bar
 		templateUrl: "/../templates/profile_tabs.html"
 	}
 });
+
+app.directive("loading", function () { //navigation bar
+	return {
+		restrict: "A",
+		templateUrl: "/../templates/loading.html"
+	}
+});

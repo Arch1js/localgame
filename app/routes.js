@@ -122,26 +122,19 @@ app.post('/games', function(req, res, searchData) {
 
 		var search = req.body.search;
 
-		console.log(req);
-		console.log(search);
-
 		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
-
-		console.log(search_key);
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover&search="+search_key)
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
-		  console.log(result.status, result.headers, result.body);
+      console.log(result.status, result.headers, result.body);
 			res.send(result.body);
 		});
 
 	});
 
 	app.post('/getnewest', function(req, res) {
-
-		console.log('Getnewest running');
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name")
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
@@ -180,10 +173,41 @@ app.post('/games', function(req, res, searchData) {
 
 		});
 
+    app.post('/getrequests', function(req, res) {
+
+        var user = req.user._id;
+        console.log(user);
+        // var user = "57b317c253ad6f541b6e36e3";
+
+        var newGame = User();
+
+        User.findOne({_id: ObjectId(user)}, {"friendRequests":1}, function(err,result) {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            console.log(result);
+            res.send(result);
+          }
+
+        });
+
+      });
 
     app.post('/user', function(req, res) {
 
+      console.log('user fired');
+
+
+
         var user = req.body.user;
+        var current_user = req.user._id;
+        console.log('User:');
+        console.log(user);
+        console.log('current_user');
+        console.log(current_user);
+        // var user = '57bafad677a4ece416877305';
+        // var other = '57bafafa77a4ece41687730c';
 
         var newGame = User();
 
@@ -192,12 +216,151 @@ app.post('/games', function(req, res, searchData) {
             console.log(err);
           }
           else {
-            res.send(result);
+
+            var r = result.toObject();
+
+            User.findOne({_id: ObjectId(current_user), 'friends.user': user}, {"_id":1}, function(err,friend) {
+              if(err) {
+                console.log(err);
+              }
+              else if (friend == null) {
+                console.log('null');
+                r.friend = 'no';
+                res.send(r);
+              }
+              else {
+                console.log('success');
+                r.friend = 'yes';
+                console.log(r);
+                res.send(r);
+              }
+
+            });
           }
 
         });
 
+
+
+
       });
+
+      app.post('/getFriends', function(req, res) {
+
+          var user = req.user._id;
+          // var user = '57b3179f53ad6f541b6e36df';
+
+          var newGame = User();
+          var resultArray = {};
+            var i = 0;
+
+          User.findOne({_id: ObjectId(user)}, {"friends":1}, function(err,result) {
+            if(err) {
+              console.log(err);
+            }
+            else {
+              console.log(result);
+              res.send(result);
+            }
+
+          });
+
+        });
+
+
+        app.post('/deleterequest', function(req, res) {
+
+            var user = req.user._id;
+            var reqId = req.body.id;
+            // var user = '57b317b253ad6f541b6e36e1';
+
+
+            var newGame = User();
+
+            User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
+              if(err)
+              console.log(err);
+
+            });
+
+
+          });
+
+      app.post('/addFriend', function(req, res) {
+
+          var friend = req.body.friend;
+          var username = req.body.username;
+
+          var user = req.user._id;
+          var reqId = req.body.id;
+          // var user = '57b317b253ad6f541b6e36e1';
+
+
+          var newGame = User();
+
+          User.update({_id: ObjectId(user),'friends.user': {$ne: friend}}, {$push: {friends:{user: friend, username: username}}}, function(err) {
+            if(err)
+            console.log("Error");
+          });
+
+          User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
+            if(err)
+            console.log(err);
+
+          });
+
+
+        });
+
+      app.post('/sendGameRequest', function(req, res) {
+
+          var game = req.body.game;
+          var receiveUser = req.body.user;
+
+          var requestUser = req.user._id;
+          // var requestUser = '57b317b253ad6f541b6e36e1';
+          var username = req.user.username;
+
+          var min = 1;
+          var max = 10000000;
+          var random_id = Math.floor(Math.random() * (max - min)) + min;
+
+          var date_time = new Date();
+
+          var newGame = User();
+
+          User.update({_id: ObjectId(receiveUser),'gameRequests.game': {$ne: game}}, {$push: {gameRequests:{id: random_id, user: requestUser, username: username, time: date_time, game: game}}}, function(err) {
+            if(err)
+            console.log("Error");
+          });
+
+        });
+
+        app.post('/sendfriendRequest', function(req, res) {
+
+            var receiveUser = req.body.user;
+
+            var requestUser = req.user._id;
+            // var requestUser = '57b317b253ad6f541b6e36e1';
+
+            var reqestUsername = req.user.username;
+            var avatar = req.user.avatar;
+
+            var min = 1;
+            var max = 10000000;
+            var random_id = Math.floor(Math.random() * (max - min)) + min;
+
+            // var date_time = new Date();
+
+            var newGame = User();
+
+            User.update({_id: ObjectId(receiveUser),'friendRequests.user': {$ne: requestUser}}, {$push: {friendRequests:{id: random_id, user: requestUser, username: reqestUsername, avatar: avatar}}}, function(err) {
+              if(err)
+              console.log("Error");
+            });
+
+          });
+
 //record game id route =========================================================
 	app.post('/addgames', function(req, res) {
 
@@ -290,7 +453,7 @@ app.post('/games', function(req, res, searchData) {
 		res.redirect('/login');
 	});
 
-	app.get('/games', isLoggedIn, function(req, res) {
+	app.get('/games', function(req, res) {
 		res.render('games.ejs', {
 			user : req.user
 		});

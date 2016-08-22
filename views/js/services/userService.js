@@ -6,6 +6,12 @@ angular.module('userService', [])
 		return {
 			getuser: function(user) {
 				return $http.post('/user', {user: user});
+			},
+			gameRequest: function(game,user) {
+				return $http.post('/sendGameRequest', {game: game, user: user});
+			},
+			friendRequest: function(user) {
+				return $http.post('/sendfriendRequest', {user: user});
 			}
 		}
 	});

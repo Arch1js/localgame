@@ -1,4 +1,21 @@
 
+@media all and (max-device-width: 720px){
+    h2 {
+        font-size: 18px;
+    }
+}
+
+@media all and (max-device-width: 640px){
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media all and (max-device-width: 320px){
+    h2 {
+        font-size: 24px;
+    }
+}
 body {
   background: #F1F2B5; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #F1F2B5 , #135058); /* Chrome 10-25, Safari 5.1-6 */
@@ -72,6 +89,17 @@ footer {
   -webkit-box-shadow: 0px 0px 2px #888;
   box-shadow: 0px 0px 2px #888;
 }
+.circle:hover{
+  background:  #f44336;
+}
+
+.circle > .fa + .fa,
+.circle:hover > .fa {
+  display: none;
+}
+.circle:hover > .fa + .fa {
+  display: inherit;
+}
 .masonary-row.row {
 	-webkit-column-gap: 30px;
 	-moz-column-gap: 30px;
@@ -111,7 +139,7 @@ footer {
 }
 
 #profile {
-display: block;
+display: inline-block;
 background: #43cea2; /* fallback for old browsers */
 background: -webkit-linear-gradient(to left, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to left, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -120,14 +148,32 @@ background: linear-gradient(to left, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, F
 -moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 }
-
+#requests {
+  background-color: white;
+  display: inline-block;
+  margin-top: 10px;
+  -webkit-box-shadow: 3px 2px 3px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 2px 3px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 2px 3px 0px rgba(0,0,0,0.75);
+}
 #username {
   margin-top: 4px;
 }
-#container {
-  display: inline-block;
-  margin-top: 10px;
-}
 .tab_content {
   width: 100%;
+}
+#reqProfile {
+  margin-top: 10px;
+  height:40px;
+  width: 40px;
+}
+.doButton {
+  display: inline-block;
+  margin-top: 15px;
+}
+a:hover {
+  text-decoration: none;
+}
+#reqContainer {
+  display: block;
 }

@@ -1,9 +1,8 @@
 <div class="header" ng-controller="headerCtrl">
 <ul class="nav nav-tabs">
-  <li ng-class="{ active: isActive('/mygames')}"><a data-toggle="tab" href="#/mygames">My Games</a></li>
-  <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests">Requests</a></li>
-  <li><a data-toggle="tab" href="#friends">Friends</a></li>
-
+  <li ng-class="{ active: isActive('/mygames')}"><a data-toggle="tab" href="#/mygames" ng-click="displayGames()">My Games</a></li>
+  <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests" ng-click="getRequests()">Requests</a></li>
+  <li ng-class="{ active: isActive('/friends')}"><a data-toggle="tab" href="#/friends" ng-click="getFriends()">Friends</a></li>
 </ul>
 <div class="tab-content">
   <div ng-view></div>

@@ -14,5 +14,10 @@ var app = angular.module('gameApp', ['profileCtrl', 'headerCtrl', 'profileServic
         templateUrl: '/js/partials/requests.html',
 
     // All else forward to the Join Team Control Panel
+  }).when('/friends', {
+        controller: 'profileCtrl',
+        templateUrl: '/js/partials/friends.html',
+
+    // All else forward to the Join Team Control Panel
   }).otherwise({redirectTo:'/'})
 });

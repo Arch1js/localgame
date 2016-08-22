@@ -81,7 +81,7 @@ angular.module('gservice', [])
 
                 // Create popup windows for each record
                 var  contentString =
-                    '<p><b><a href="/user/?id=' + user._id+'">Profile</a></b><br>'+
+                    '<p><b><a href="/user/?id=' + user._id+'" target="_blank">Profile</a></b><br>'+
                     '<p1>Platforms: </p1></p>';
                 console.log(user);
 

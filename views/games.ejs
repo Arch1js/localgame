@@ -25,10 +25,7 @@
 <body ng-controller="searchGamesCtrl">
 	<div navbar></div> <!--navbar directive-->
 	<main>
-    <div class="content">
-			<!-- <p>{{gameID}}</p>
-			<p>{{name}}</p>
-			<p>{{cover}}</p> -->
+    <div class="col col-md-10 content">
 			<div class="col-md-12 centerBlock">
 				<div class="">
 					<form class="form-inline" role="form">
@@ -42,7 +39,8 @@
 				</div>
 			</div>
 			<div class="container">
-				<div class="masonary-row row">
+				<div loading></div>
+				<div class="masonary-row row" ng-show="games">
 						<div ng-repeat="i in games">
 							<div class="col-xs-6 col-sm-6 col-lg-3">
 								<div class="thumbnail ">
@@ -57,6 +55,9 @@
 							</div>
 					</div>
 				</div>
+			</div>
+			<div class="alert alert-danger" class="col col-md-12 col-xs-12" ng-show="error">
+				<strong>Error!</strong> No results found...
 			</div>
 		</div>
   </div>

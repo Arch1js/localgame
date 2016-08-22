@@ -34,7 +34,11 @@
 					<b><h2>{{user}}</h2><b>
 				</div>
 				<div id="request" class="col col-md-2 col-sm-offset-3 col-md-offset-6">
-					<button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span> Send friend request</button>
+					<button id="friend" ng-show="friend_btn" type="submit" ng-class="sent? 'btn btn-success' : 'btn btn-primary'" ng-click="sendFriendRequest(); sent = !sent">
+						<span ng-hide="sent"><i class="fa fa-plus" aria-hidden="true"></i> Send friend request</span>
+						<span ng-show="sent"><i class="fa fa-check" aria-hidden="true"></i> Request sent</span>
+					</button>
+					<button id="friend" ng-show="friend_btn_positive" type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i> Friend</button>
 				</div>
 			</div>
 			<div id="container">
@@ -42,9 +46,9 @@
 						<div ng-repeat="i in games">
 							<div class="col-xs-6 col-sm-6 col-lg-3">
 								<div class="thumbnail ">
-									<div class="circle" ng-click="removeGame(i); disable = !disable">
-										<i ng-class="disable ? 'fa fa-plus' : 'fa fa-check'"></i>
-									</div>
+									<button ng-class="change? 'btn btn-success trade' : 'btn btn-primary trade'" ng-click="sendGameRequest(i); change = !change; send_button = true" ng-disabled="send_button">
+										<span ng-hide="change"><i class="fa fa-star" aria-hidden="true"></i> Trade</span>
+										<span ng-show="change"><i class="fa fa-check" aria-hidden="true"></i> Sent</span></button>
 									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
 								<div class="caption">
 									<h4>{{i.name}}</h4>
