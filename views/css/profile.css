@@ -142,7 +142,11 @@ footer {
 		column-count: 5;
 	}
 }
-
+.thumbnail {
+  -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+}
 #profile {
 display: inline-block;
 background: #43cea2; /* fallback for old browsers */

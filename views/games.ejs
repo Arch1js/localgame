@@ -25,24 +25,22 @@
 <body ng-controller="searchGamesCtrl">
 	<div navbar></div> <!--navbar directive-->
 	<main>
-    <div class="col col-md-10 content">
-			<div class="col-md-12 centerBlock">
-				<div class="">
-					<form class="form-inline" role="form">
-						<div class="form-group col-sm-10 col-md-4 col-md-offset-4 col-xs-9">
+    <div class="col col-md-10 col-sm-11 col-xs-12 content">
+			<div id="search_bar" class="col-md-12 col-sm-12 col-xs-12 centerBlock">
+					<form id="search" class="form-inline" role="form">
+						<div class="form-group col-sm-10 col-md-4 col-xs-9">
 							<input type="text" class="form-control input-md" placeholder="Search game" ng-model="search">
 						</div>
 						<div class="form-group col-xs-2">
 							<button type="submit" class="btn btn-primary" ng-click="searchGame()">Search</button>
 						</div>
 					</form>
-				</div>
 			</div>
-			<div class="container">
+			<div class="container col col-lg-11 col-md-11 col-sm-11 col-xs-11">
 				<div loading></div>
 				<div class="masonary-row row" ng-show="games">
 						<div ng-repeat="i in games">
-							<div class="col-xs-6 col-sm-6 col-lg-3">
+							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="thumbnail ">
 									<div class="circle" ng-click="addGame(i); disable = !disable">
 										<i ng-class="disable ? 'fa fa-check' : 'fa fa-plus'"></i>
