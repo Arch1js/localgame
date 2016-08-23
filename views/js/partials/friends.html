@@ -1,5 +1,5 @@
 <div ng-repeat="i in friends">
-<div id="requests" class="col col-md-12 tab-pane fade in active">
+<div id="requests" class="col col-md-12 tab-pane fade in active" ng-show="user_friends">
       <div class="col-md-12">
         <div class="col-md-1 col-sm-2 col-xs-5">
           <img id="reqProfile" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"></img>
@@ -9,4 +9,7 @@
         </div>
       </div>
     </div>
+</div>
+<div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="friend_error" style="margin-top: 10px">
+  <strong>No friends?</strong> Go and find some... <i class="fa fa-users"></i>
 </div>

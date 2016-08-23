@@ -10,11 +10,17 @@ angular.module('profileService', [])
 			removegame: function(id) {
 				return $http.post('/removegame', {id: id})
 			},
-			getRequests: function() {
-				return $http.post('/getrequests')
+			getFriendRequests: function() {
+				return $http.post('/getfriendrequests')
 			},
-			deleteRequest: function(id) {
-				return $http.post('/deleterequest', {id: id})
+			getGameRequests: function() {
+				return $http.post('/getgamerequests')
+			},
+			deleteFriendRequest: function(id) {
+				return $http.post('/deletefriendrequest', {id: id})
+			},
+			deleteGameRequest: function(req_id) {
+				return $http.post('/deletegamerequest', {id: req_id})
 			},
 			addFriend: function(friend, username, id) {
 				return $http.post('/addFriend', {friend: friend, username: username, id: id})

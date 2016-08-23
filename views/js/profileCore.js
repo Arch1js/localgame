@@ -9,9 +9,15 @@ var app = angular.module('gameApp', ['profileCtrl', 'headerCtrl', 'profileServic
         templateUrl: '/js/partials/mygames.html',
 
     // Find Teammates Control Panel
-  }).when('/requests', {
+  }).when('/friendrequests', {
         controller: 'profileCtrl',
-        templateUrl: '/js/partials/requests.html',
+        templateUrl: '/js/partials/friendRequests.html',
+
+    // All else forward to the Join Team Control Panel
+  })
+  .when('/gamerequests', {
+        controller: 'profileCtrl',
+        templateUrl: '/js/partials/gameRequests.html',
 
     // All else forward to the Join Team Control Panel
   }).when('/friends', {

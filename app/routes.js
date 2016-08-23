@@ -157,7 +157,7 @@ app.post('/games', function(req, res, searchData) {
 			// });
 
 			var user = req.user._id; //real user
-			// var user = "57b317b253ad6f541b6e36e1";
+			// var user = "57bb3a324f8c8a1100f4ca7a";
 
 			console.log(user);
 
@@ -173,11 +173,11 @@ app.post('/games', function(req, res, searchData) {
 
 		});
 
-    app.post('/getrequests', function(req, res) {
+    app.post('/getfriendrequests', function(req, res) {
 
         var user = req.user._id;
         console.log(user);
-        // var user = "57b317c253ad6f541b6e36e3";
+        // var user = "57bb3a324f8c8a1100f4ca7a";
 
         var newGame = User();
 
@@ -193,6 +193,27 @@ app.post('/games', function(req, res, searchData) {
         });
 
       });
+
+      app.post('/getgamerequests', function(req, res) {
+
+          var user = req.user._id;
+          console.log(user);
+          // var user = "57bb3a324f8c8a1100f4ca7a";
+
+          var newGame = User();
+
+          User.findOne({_id: ObjectId(user)}, {"gameRequests":1}, function(err,result) {
+            if(err) {
+              console.log(err);
+            }
+            else {
+              console.log(result);
+              res.send(result);
+            }
+
+          });
+
+        });
 
     app.post('/user', function(req, res) {
 
@@ -248,7 +269,7 @@ app.post('/games', function(req, res, searchData) {
       app.post('/getFriends', function(req, res) {
 
           var user = req.user._id;
-          // var user = '57b3179f53ad6f541b6e36df';
+          // var user = '57bb3a324f8c8a1100f4ca7a';
 
           var newGame = User();
           var resultArray = {};
@@ -268,23 +289,36 @@ app.post('/games', function(req, res, searchData) {
         });
 
 
-        app.post('/deleterequest', function(req, res) {
+        app.post('/deletefriendrequest', function(req, res) {
 
             var user = req.user._id;
             var reqId = req.body.id;
             // var user = '57b317b253ad6f541b6e36e1';
-
 
             var newGame = User();
 
             User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
               if(err)
               console.log(err);
+            });
+          });
+
+          app.post('/deletegamerequest', function(req, res) {
+
+              var id = req.body.id;
+              var user = req.user._id;
+              // var user = '57b317b253ad6f541b6e36e1';
+
+              var newGame = User();
+
+              User.update({_id: ObjectId(user)}, {$pull: {"gameRequests" : {id: id}}}, function(err) {
+                if(err)
+                console.log(err);
+
+              });
+
 
             });
-
-
-          });
 
       app.post('/addFriend', function(req, res) {
 
@@ -293,12 +327,17 @@ app.post('/games', function(req, res, searchData) {
 
           var user = req.user._id;
           var reqId = req.body.id;
+          var user_username = req.user.username;
           // var user = '57b317b253ad6f541b6e36e1';
-
 
           var newGame = User();
 
           User.update({_id: ObjectId(user),'friends.user': {$ne: friend}}, {$push: {friends:{user: friend, username: username}}}, function(err) {
+            if(err)
+            console.log("Error");
+          });
+
+          User.update({_id: ObjectId(friend),'friends.user': {$ne: user}}, {$push: {friends:{user: user, username: user_username}}}, function(err) {
             if(err)
             console.log("Error");
           });
@@ -315,6 +354,7 @@ app.post('/games', function(req, res, searchData) {
       app.post('/sendGameRequest', function(req, res) {
 
           var game = req.body.game;
+          var cover = req.body.cover;
           var receiveUser = req.body.user;
 
           var requestUser = req.user._id;
@@ -329,7 +369,7 @@ app.post('/games', function(req, res, searchData) {
 
           var newGame = User();
 
-          User.update({_id: ObjectId(receiveUser),'gameRequests.game': {$ne: game}}, {$push: {gameRequests:{id: random_id, user: requestUser, username: username, time: date_time, game: game}}}, function(err) {
+          User.update({_id: ObjectId(receiveUser),'gameRequests.game': {$ne: game}}, {$push: {gameRequests:{id: random_id, user: requestUser, username: username, time: date_time, game: game, cover: cover}}}, function(err) {
             if(err)
             console.log("Error");
           });

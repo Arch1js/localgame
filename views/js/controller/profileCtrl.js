@@ -11,29 +11,100 @@ var profileCtrl = angular.module('profileCtrl', [])
 		.success(function(data) {
 
 			jdenticon.update("#identicon", data.avatar);
-		})
+		});
 
-		$scope.getRequests = function() {
-			console.log('requests open');
+		$scope.askToSendConfirm = function() {
+      BootstrapDialog.show({
+          title: 'localGame',
+            message: 'Can we send message to user confirming your decision? (Currently not working)',
+            buttons: [{
+                label: 'Yes',
+                cssClass: 'btn-success',
+                action: function(dialog) {
+                	console.log('Message sent!');
+									dialog.close();
+                }
+            }, {
+                label: 'No',
+                cssClass: 'btn-warning',
+                action: function(dialog) {
+                  dialog.close();
+                }
+            }]
+        });
+    }
+		$scope.acceptGameRequest = function(i) {
+			$scope.askToSendConfirm();
+		}
 
-			profile.getRequests()
+		$scope.declineRequest = function(i) {
+			var req_id = i.id;
+			profile.deleteGameRequest(req_id);
+			$scope.getGameRequests();
+		}
+
+		$scope.getFriendRequests = function() {
+			$scope.requests = false;
+			$scope.friendrequests = {};
+			profile.getFriendRequests()
+
+			.success(function(friendrequests) {
+				console.log(friendrequests);
+				if(friendrequests.friendRequests.length == 0) {
+					console.log('no requests');
+					$scope.loading = false;
+					$scope.request_error = true;
+				}
+				else {
+					console.log('have requests');
+					$scope.friendrequests = friendrequests.friendRequests;
+					$scope.user_requests = true;
+					$scope.loading = false;
+				}
+
+			});
+		};
+
+		$scope.getGameRequests = function() {
+			$scope.requests = false;
+			$scope.game_requests = {};
+			profile.getGameRequests()
 
 			.success(function(requests) {
 				console.log(requests);
-					$scope.requests = requests.friendRequests;
+				if(requests.gameRequests.length == 0) {
+					console.log('no requests');
 					$scope.loading = false;
+					$scope.gamerequest_error = true;
+				}
+				else {
+					console.log('have requests');
+					$scope.gamerequests = requests.gameRequests;
+					$scope.game_requests = true;
+					$scope.loading = false;
+				}
+
 			});
 		};
 
 		$scope.getFriends = function() {
 			console.log('friends open');
-
+			$scope.friends = false;
+			$scope.friends = {};
 			profile.getFriends()
 
 			.success(function(friends) {
 				console.log(friends);
+
+				if(friends.friends.length == 0) {
+					$scope.friend_error = true;
+					$scope.friends = true;
+				}
+				else {
 					$scope.friends = friends.friends;
+					$scope.user_friends = true;
 					$scope.loading = false;
+				}
 			});
 		};
 
@@ -44,18 +115,19 @@ var profileCtrl = angular.module('profileCtrl', [])
 
 			profile.addFriend(friend, username, id);
 
-			profile.deleteRequest(id);
+			profile.deleteFriendRequest(id);
 
-			$scope.getRequests();
+			$scope.getFriendRequests();
 		};
 
-		$scope.delete = function(i) {
+		$scope.deleteFriendRequest = function(i) {
 			var id = i.id;
-			profile.deleteRequest(id);
-			$scope.getRequests();
+			profile.deleteFriendRequest(id);
+			$scope.getFriendRequests();
 		}
 
 		$scope.displayGames = function() {
+
 			console.log('Display games function fired!');
 
 			profile.getmygames()
@@ -63,10 +135,20 @@ var profileCtrl = angular.module('profileCtrl', [])
 			.success(function(user) {
           console.log(user);
           jdenticon.update("#userIdenticon", user.avatar);
-					$scope.games = user.games;
-          $scope.username = user.username;
-					$scope.loading = false;
-					$scope.mygames = true;
+
+					if(user.games.length == 0) {
+						$scope.games = {};
+						$scope.loading = false;
+						$scope.mygames = true;
+						$scope.games_error = true;
+					}
+					else {
+						$scope.games = user.games;
+	          $scope.username = user.username;
+						$scope.games_error = false;
+						$scope.loading = false;
+						$scope.mygames = true;
+					}
 			});
 		};
 

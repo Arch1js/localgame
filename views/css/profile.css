@@ -17,12 +17,16 @@
     }
 }
 body {
-  background: #F1F2B5; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #F1F2B5 , #135058); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #F1F2B5 , #135058); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url("../asets/profile_background.jpg");
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
 }
 a {
   color: black;
+}
+.dropdown-menu > li > a:hover {
+  background-color:  #03a9f4;
 }
 
 .centerBlock {
@@ -63,6 +67,7 @@ main {
   flex: 1;
   margin: 0px auto;
   max-width: 1200px;
+  background-color: whitesmoke;
 }
 footer {
   /*background: #2980b9;*/
@@ -176,4 +181,7 @@ a:hover {
 }
 #reqContainer {
   display: block;
+}
+#action {
+  display: inline;
 }

@@ -7,8 +7,8 @@ angular.module('userService', [])
 			getuser: function(user) {
 				return $http.post('/user', {user: user});
 			},
-			gameRequest: function(game,user) {
-				return $http.post('/sendGameRequest', {game: game, user: user});
+			gameRequest: function(game,cover,user) {
+				return $http.post('/sendGameRequest', {game: game,cover: cover, user: user});
 			},
 			friendRequest: function(user) {
 				return $http.post('/sendfriendRequest', {user: user});

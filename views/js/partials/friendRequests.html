@@ -1,5 +1,5 @@
-<div ng-repeat="i in requests">
-<div id="requests" class="col col-md-12 tab-pane fade in active">
+<div ng-repeat="i in friendrequests">
+<div id="requests" class="col col-md-12 tab-pane fade in active" ng-show="user_requests">
       <div class="col-md-12">
         <div class="col-md-1 col-sm-2 col-xs-5">
           <img id="reqProfile" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"></img>
@@ -9,8 +9,11 @@
         </div>
         <div class="col-md-3 col-md-offset-5">
           <button class="btn btn-success doButton" ng-click="addFriend(i)">Confirm</button>
-          <button class="btn btn-danger doButton" ng-click="delete(i)">Decline</button>
+          <button class="btn btn-danger doButton" ng-click="deleteFriendRequest(i)">Decline</button>
         </div>
       </div>
     </div>
+</div>
+<div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="request_error" style="margin-top: 10px">
+  <strong>Whaaaat!</strong> Looks like you don't have any pending requests! <i class="fa fa-bell-o"></i>
 </div>

@@ -17,8 +17,9 @@ angular.module('userController', [])
 		$scope.sendGameRequest = function(i) {
 			var user = getURLParameter('id');
 			var game = i.name;
+			var cover = i.cover;
 
-			userProfile.gameRequest(game,user);
+			userProfile.gameRequest(game,cover,user);
 		}
 
 		$scope.sendFriendRequest = function() {

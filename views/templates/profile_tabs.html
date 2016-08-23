@@ -1,7 +1,15 @@
 <div class="header" ng-controller="headerCtrl">
 <ul class="nav nav-tabs">
   <li ng-class="{ active: isActive('/mygames')}"><a data-toggle="tab" href="#/mygames" ng-click="displayGames()">My Games</a></li>
-  <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests" ng-click="getRequests()">Requests</a></li>
+  <!-- <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests" ng-click="getRequests()">Requests</a></li> -->
+  <li class="dropdown" href="#/requests" ng-class="{ active: isActive('/gamerequests')}">
+    <a class="dropdown-toggle" data-toggle="dropdown">Requests
+    <span class="caret"></span></a>
+   <ul class="dropdown-menu">
+     <li><a href="#/friendrequests" ng-click="getFriendRequests()">Friend Requests</a></li>
+     <li><a href="#/gamerequests" ng-click="getGameRequests()">Game Requests</a></li>
+   </ul>
+  </li>
   <li ng-class="{ active: isActive('/friends')}"><a data-toggle="tab" href="#/friends" ng-click="getFriends()">Friends</a></li>
 </ul>
 <div class="tab-content">
