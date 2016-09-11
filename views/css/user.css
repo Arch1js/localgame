@@ -1,14 +1,10 @@
 body {
-  background: #F1F2B5; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #F1F2B5 , #135058); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #F1F2B5 , #135058); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url("../asets/user_background.jpg");
+  background-size: cover;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
 }
 
-.centerBlock {
-  display: table;
-  margin: 0 auto;
-  margin-bottom: 10px;
-}
 html,
 body {
   height: 96%;
@@ -43,7 +39,11 @@ main {
   margin: 0px auto;
   max-width: 1200px;
 }
-
+.centerBlock {
+  display: table;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
 footer {
   /*background: #2980b9;*/
   color: #fff;
@@ -66,6 +66,7 @@ footer {
 	column-gap: 30px;
 	padding-left: 15px;
 	padding-right: 15px;
+  padding-top: 10px;
 	word-wrap: break-word;
 }
 .masonary-row [class*="col-"] {
@@ -73,7 +74,7 @@ footer {
 	 width: 100%;
 	 height: 100%;
 	 float: none;
-	 padding: 0px;
+	 padding: 5px;
 }
 @media (min-width: 0px) {
 	.masonary-row.row {
@@ -96,8 +97,32 @@ footer {
 		column-count: 5;
 	}
 }
+@media all and (max-device-width: 720px){
+    h2 {
+        font-size: 18px;
+    }
+}
+
+@media all and (max-device-width: 640px){
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media all and (max-device-width: 320px){
+    h2 {
+        font-size: 24px;
+    }
+}
+.thumbnail {
+  -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
 #profile {
-display: block;
+display: inline-block;
+margin-bottom: 5px;
 background: #43cea2; /* fallback for old browsers */
 background: -webkit-linear-gradient(to left, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to left, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -114,7 +139,6 @@ box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 #request {
   margin-top: 25px;
 }
-#container {
-  display: inline-block;
-  margin-top: 10px;
+.cards {
+  background-color: whitesmoke;
 }

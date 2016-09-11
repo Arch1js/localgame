@@ -2,65 +2,79 @@
 <html>
 <head>
 	<title>local Game</title>
+	<link rel="icon" type="image/svg+xml" href="/asets/logo.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<link href="/css/login.css" rel="stylesheet" type="text/css">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-7 vcenter">
-	      <div class="col-xm-12 col-xm-offset-4 col-sm-12 col-sm-offset-1 col-md-6 col-md-offset-4">
-	        <img id="logo" src="/asets/logo.svg" class="svg">
-					<img id="title" src="/asets/localGame.svg" class="svg">
-	      </div>
-	  <div class="col-sm-12 col-sm-offset-3 col-md-12 col-md-offset-4" id="social">
-	        <div class="col-xs-4 col-sm-2 col-md-1 voffset">
-	          <a href="/auth/facebook" class="facebookBtn button"></a>
-	        </div>
-	        <div class="col-xs-4 col-sm-2 col-md-1">
-	          <a href="/auth/twitter" class="twitterBtn button"></a>
-	        </div>
-	        <div class="col-xs-4 col-sm-2 col-md-1">
-	          <a href="/auth/google" class="googleplusBtn button"></a>
-	        </div>
-	  </div>
+	<main>
+		<div class="col col-md-10 col-sm-11 col-xs-11">
+			<div class="container-fluid">
+    		<div class="row-fluid">
+					<div class="centering">
+						<div class="col col-xs-11 col-xs-offset-1 col-sm-8 col-md-8 col-md-offset-5">
+							<div id="logo" class="col col-xs-11 col-sm-8 col-md-8">
+								<img id="icon" src="/asets/logo.svg" class="svg">
+								<img id="title" src="/asets/localGame.svg" class="svg">
+						</div>
+	  				<div class="col-xs-12 col-sm-12 col-md-12" id="social">
+			        <div class="col-xs-4 col-sm-2 col-md-1">
+			          <a href="/auth/facebook" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Facebook account" class="facebookBtn button"></a>
+			        </div>
+			        <div class="col-xs-4 col-sm-2 col-md-1">
+			          <a href="/auth/twitter" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Twitter account" class="twitterBtn button"></a>
+			        </div>
+			        <div class="col-xs-4 col-sm-2 col-md-1">
+			          <a href="/auth/google" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Google+ account" class="googleplusBtn button"></a>
+			        </div>
+	  				</div>
+	  				<div class="col-sm-12 col-md-4">
+	      			<hr>
+	  				</div>
+	  			<div class="col col-md-12">
+	    			<div class="col col-xs-12 col-sm-8 col-md-4">
+				      <% if (message.length > 0) { %>
+				          <div class="alert alert-danger"><%= message %></div>
+				      <% } %>
+			        <form class="omb_loginForm" action="/login" method="post">
+			        <div class="input-group">
+			          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+			          <input type="text" class="form-control" name="email" placeholder="Email address" required>
+			        </div>
+			        <span class="help-block"></span>
 
-	  <div class="col-sm-12 col-md-12">
-	    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-	      <hr>
-	    </div>
-	  </div>
-
-	  <div class="col-md-12">
-	    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-	      <% if (message.length > 0) { %>
-	          <div class="alert alert-danger"><%= message %></div>
-	      <% } %>
-	        <form class="omb_loginForm" action="/login" method="post">
-	        <div class="input-group">
-	          <span class="input-group-addon"><i class="fa fa-user"></i></span>
-	          <input type="text" class="form-control" name="email" placeholder="Email address">
-	        </div>
-	        <span class="help-block"></span>
-
-	        <div class="input-group">
-	          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-	          <input  type="password" class="form-control" name="password" placeholder="Password">
-	        </div>
-	        <br>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-	      </form>
-	    </div>
-	    </div>
-	  <div class="col-md-12">
-	    <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-4">
-	      <p><a href="#">Forgot password?</a></p>
-	    </div>
-	    <div class="col-xs-12 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-1">
-	      <p><a href="/signup">Register</a></p>
-	    </div>
-	  </div>
+			        <div class="input-group">
+			          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+			          <input  type="password" class="form-control" name="password" placeholder="Password" required>
+			        </div>
+			        <br>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			      </form>
+	    		</div>
+	    	</div>
+	  		<div class="col-md-12">
+	    		<div class="col-xs-8 col-sm-3 col-md-2">
+			      <p><a href="#">Forgot password?</a></p>
+	    		</div>
+	    		<div class="col-xs-3 col-sm-3 col-sm-offset-2 col-md-2 col-md-offset-1">
+	      		<p><a href="/signup">Register</a></p>
+	    		</div>
+	  		</div>
+			</div>
+		</div>
+		</div>
 	</div>
+	</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 </body>
 </html>
