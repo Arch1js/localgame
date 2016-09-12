@@ -186,6 +186,9 @@ a:hover {
 #reqContainer {
   display: block;
 }
+#action_buttons {
+  padding: 0px;
+}
 #action {
   display: inline;
 }

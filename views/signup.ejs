@@ -1,18 +1,22 @@
 <!doctype html>
-<html>
+<html ng-app="gameApp">
 <head>
 	<title>localGame</title>
 	<link rel="icon" type="image/svg" href="/asets/logo.svg">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<link href="/css/login.css" rel="stylesheet" type="text/css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="/js/controller/signupCtrl.js"></script> <!-- load up our controller -->
+
 
 </head>
-<body>
+<body ng-controller="signupCtrl">
 	<main>
 		<div class="col col-md-10 col-sm-11 col-xs-11">
 			<div class="container-fluid">
@@ -45,7 +49,7 @@
 								<% if (message.length > 0) { %>
 										<div class="alert alert-danger"><%= message %></div>
 								<% } %>
-							<form class="omb_loginForm" action="/signup" method="post">
+							<form class="omb_loginForm" name='signupForm' action="/signup" method="post">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
 								<input type="text" class="form-control" name="email" placeholder="Email address" required>
@@ -58,15 +62,17 @@
 							<span class="help-block"></span>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input  type="password" class="form-control" name="password" placeholder="Password" required>
+								<input ng-model="password" type="password" class="form-control" name="user_password" placeholder="Password" ng-required="true">
 							</div>
 							<span class="help-block"></span>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input  type="password" class="form-control" name="password2" placeholder="Repeat password" required>
+								<input ng-model="repeat_password" match="password"  type="password" class="form-control" name="user_password" placeholder="Repeat password" ng-required="true">
 							</div>
+							<span class="help-block"></span>
+							<div class="alert alert-danger" ng-show="signupForm.user_password.$error.mismatch">Passwords doesn't match!</div>
 							<br>
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+							<button class="btn btn-lg btn-primary btn-block" type=submit ng-disabled='signupForm.$invalid'>Sign Up</button>
 						</form>
 					</div>
 				</div>
