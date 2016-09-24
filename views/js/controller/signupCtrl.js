@@ -17,6 +17,6 @@ app.directive('match', function($parse) {
 app.controller('signupCtrl', function ($scope) {
   $scope.fields = {
     password: '',
-    repeat_password: ''
+    password2: ''
   };
 });
