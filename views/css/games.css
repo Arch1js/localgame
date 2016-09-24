@@ -130,10 +130,7 @@ footer {
 .form-inline .form-group {
   margin-bottom: 10px;
 }
-.container {
-  display: table;
-  margin: 0 auto;
-}
+
 #search_bar {
   background-color: black;
 }
