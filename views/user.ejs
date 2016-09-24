@@ -26,14 +26,14 @@
 	<div navbar></div>
 	<main>
 		<div class="content">
-			<div id="profile" class="col col-md-12 col-xs-12 col-sm-10">
+			<div id="profile" class="col col-md-12 col-xs-12 col-sm-12">
 				<div class="col-md-1 col-sm-3 col-xs-3">
 					<canvas id="userIdenticon" width="80" height="80" />
 				</div>
 				<div id="username" class="col col-md-3 col-sm-3 col-xs-6">
 					<b><h2>{{user}}</h2><b>
 				</div>
-				<div id="request" class="col col-md-2 col-sm-2 col-xs-2 col-sm-offset-3 col-md-offset-6">
+				<div id="request" class="col col-md-2 col-sm-3 col-xs-5 col-sm-offset-3 col-md-offset-6">
 					<button id="friend" ng-show="friend_btn" type="submit" ng-class="sent? 'btn btn-success' : 'btn btn-primary'" ng-click="sendFriendRequest(); sent = !sent">
 						<span ng-hide="sent"><i class="fa fa-plus" aria-hidden="true"></i> Send friend request</span>
 						<span ng-show="sent"><i class="fa fa-check" aria-hidden="true"></i> Request sent</span>

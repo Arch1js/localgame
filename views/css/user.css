@@ -82,6 +82,10 @@ footer {
 		-moz-column-count: 2;
 		column-count: 2;
 	}
+  #request {
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
 }
 @media (min-width: 480px) {
 	.masonary-row.row {
@@ -96,12 +100,15 @@ footer {
 		-moz-column-count: 5;
 		column-count: 5;
 	}
+  #request {
+    margin-top: 25px;
+  }
 }
-@media all and (max-device-width: 720px){
+/*@media all and (max-device-width: 720px){
     h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
-}
+}*/
 
 @media all and (max-device-width: 640px){
     h2 {
@@ -136,9 +143,6 @@ box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
   margin-top: 4px;
 }
 
-#request {
-  margin-top: 25px;
-}
 .cards {
   background-color: whitesmoke;
 }
