@@ -1,70 +1,94 @@
 <!doctype html>
-<html>
+<html ng-app="gameApp">
 <head>
 	<title>localGame</title>
+	<link rel="icon" type="image/svg" href="/asets/logo.svg">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<link href="/css/login.css" rel="stylesheet" type="text/css">
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="/js/controller/signupCtrl.js"></script> <!-- load up our controller -->
+
+
 </head>
-<body>
-<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-7 vcenter">
-			<div class="col-xm-12 col-xm-offset-4 col-sm-12 col-sm-offset-1 col-md-6 col-md-offset-4">
-				<img id="logo" src="/asets/logo.svg" class="svg">
-				<img id="title" src="/asets/localGame.svg" class="svg">
+<body ng-controller="signupCtrl">
+	<main>
+		<div class="col col-md-10 col-sm-11 col-xs-11">
+			<div class="container-fluid">
+    		<div class="row-fluid">
+					<div class="centering">
+						<div class="col col-xs-11 col-xs-offset-1 col-sm-8 col-md-8 col-md-offset-5">
+							<div id="logo" class="col col-xs-11 col-sm-8 col-md-8">
+								<img id="icon" src="/asets/logo.svg" class="svg">
+								<img id="title" src="/asets/localGame.svg" class="svg">
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-12" id="social">
+								<div class="col-xs-4 col-sm-2 col-md-1">
+									<a href="/auth/facebook" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Facebook account" class="facebookBtn button"></a>
+								</div>
+								<div class="col-xs-4 col-sm-2 col-md-1">
+									<a href="/auth/twitter" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Twitter account" class="twitterBtn button"></a>
+								</div>
+								<div class="col-xs-4 col-sm-2 col-md-1">
+									<a href="/auth/google" data-toggle="tooltip" data-placement="bottom" title="Sign-up with Google+ account" class="googleplusBtn button"></a>
+								</div>
+							</div>
+							<div class="col-xs-10 col-sm-8 col-md-4 text-center">
+								<div id="moto">
+									<h4><span class="fa fa-heart" style="color: red"></span> It's free! So go on and sign up.</h4>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-3 col-md-offset-5">
+								<% if (message.length > 0) { %>
+										<div class="alert alert-danger"><%= message %></div>
+								<% } %>
+							<form class="omb_loginForm" name='signupForm' action="/signup" method="post">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+								<input type="text" class="form-control" name="email" placeholder="Email address" required>
+							</div>
+							<span class="help-block"></span>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users"></i></span>
+								<input type="text" class="form-control" name="username" placeholder="Username" required>
+							</div>
+							<span class="help-block"></span>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+								<input ng-model="password" type="password" class="form-control" name="user_password" placeholder="Password" ng-required="true">
+							</div>
+							<span class="help-block"></span>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+								<input ng-model="repeat_password" match="password"  type="password" class="form-control" name="user_password" placeholder="Repeat password" ng-required="true">
+							</div>
+							<span class="help-block"></span>
+							<div class="alert alert-danger" ng-show="signupForm.user_password.$error.mismatch">Passwords doesn't match!</div>
+							<br>
+							<button class="btn btn-lg btn-primary btn-block" type=submit ng-disabled='signupForm.$invalid'>Sign Up</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-12 text-center">
+					<div class="col-xs-12 col-sm-6 col-md-3 col-md-offset-5">
+						<p><a href="/login">Already have an account?</a></p>
+					</div>
+				</div>
 			</div>
-	<div class="col-sm-12 col-sm-offset-3 col-md-12 col-md-offset-4" id="social">
-				<div class="col-xs-4 col-sm-2 col-md-1 voffset">
-					<a href="/auth/facebook" class="facebookBtn button"></a>
-				</div>
-				<div class="col-xs-4 col-sm-2 col-md-1">
-					<a href="/auth/twitter" class="twitterBtn button"></a>
-				</div>
-				<div class="col-xs-4 col-sm-2 col-md-1">
-					<a href="/auth/google" class="googleplusBtn button"></a>
-				</div>
-	</div>
-
-	<div class="col-sm-12 col-md-12">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-			<div id="moto">
-				<h4><span class="fa fa-heart"></span> It's free! So go on and sign up.</h4>
-			</div>
-			<hr>
 		</div>
 	</div>
-
-	<div class="col-md-12">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-			<% if (message.length > 0) { %>
-					<div class="alert alert-danger"><%= message %></div>
-			<% } %>
-				<form class="omb_loginForm" action="/signup" method="post">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-					<input type="text" class="form-control" name="email" placeholder="Email address">
-				</div>
-				<span class="help-block"></span>
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-users"></i></span>
-					<input type="text" class="form-control" name="username" placeholder="Username">
-				</div>
-				<span class="help-block"></span>
-
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input  type="password" class="form-control" name="password" placeholder="Password">
-				</div>
-				<br>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-			</form>
-		</div>
-		</div>
-	<div class="col-md-12">
-		<div class="col-xs-12 col-xs-offset-1  col-sm-6 col-sm-offset-3 col-md-3 col-md-offset-5">
-			<p><a href="/login">Already have an account?</a></p>
-		</div>
 	</div>
-</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 </body>
 </html>

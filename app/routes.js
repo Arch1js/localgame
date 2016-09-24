@@ -93,7 +93,7 @@ module.exports = function(app, passport ) {
     console.log(user);
 
 		// Opens a generic Mongoose Query. Depending on the post body we will...
-		var query = User.find({'_id': {$ne: user}}, {"location": 1});
+		var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1});
 
 		// ...include filter by Max Distance (converting miles to meters)
 		if(distance){

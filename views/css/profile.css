@@ -119,7 +119,7 @@ footer {
 	 width: 100%;
 	 height: 100%;
 	 float: none;
-	 padding: 0px;
+	 padding: 5px;
 }
 @media (min-width: 0px) {
 	.masonary-row.row {
@@ -185,6 +185,9 @@ a:hover {
 }
 #reqContainer {
   display: block;
+}
+#action_buttons {
+  padding: 0px;
 }
 #action {
   display: inline;

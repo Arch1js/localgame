@@ -1,9 +1,34 @@
 
-body {
-background: #2980b9; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #2980b9 , #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #2980b9 , #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+html, body{
+  height:100%;
+  background-image: url("../asets/profile_background2.jpg");
+  background-size: cover;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+}
+.container-fluid{
+  height:100%;
+  width: 100%;
+  display:table;
+  width: 100%;
+  padding: 0;
+  margin: 0px auto;
+  margin-top: 10%;
+}
 
+.row-fluid {
+  height: 100%;
+  display:table-cell;
+  vertical-align: middle;
+}
+
+.centering {
+  float:none;
+  margin:0 auto;
+}
+.col {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 a:hover {
   color:  #00bfa5;
@@ -15,11 +40,10 @@ a:hover {
     font-size: 12px;
   }
 
-  #logo {
+  #icon {
     height: 50px;
     width: 50px;
     margin-bottom: 2%;
-    margin-left: 20%;
   }
   #title {
     height: 50px;
@@ -27,12 +51,18 @@ a:hover {
     margin-top: 6%;
     margin-bottom: 3%;
   }
+  #logo {
+    margin-left: 18%;
+  }
+  #social {
+    margin-bottom: 15px;
+  }
 }
 @media (min-width: 768px) {
   h4 {
     font-size: 18px;
   }
-  #logo {
+  #icon {
     height: 80px;
     width: 80px;
     margin-bottom: 2%;
@@ -46,11 +76,10 @@ a:hover {
 
 }
 @media (min-width: 1280px) {
-  #logo {
+  #icon {
     height: 100px;
     width: 100px;
     margin-bottom: 2%;
-    margin-left: 10%;
   }
   #title {
     height: 50px;
@@ -58,19 +87,23 @@ a:hover {
     margin-top: 8%;
     margin-bottom: 3%;
   }
-  .voffset {
-    margin-left: 4%;
+  #social {
+    margin-left: 40px;
+  }
+  #logo {
+    margin-left: 5%;
   }
 }
-
-
-.button { /* global button class */
+#form {
+  border-top: 1px solid white;
+}
+.button {
     display: inline-block;
     position: relative;
     cursor: pointer;
     width: 50px;
     height: 50px;
-    border:2px solid #ddd; /* add border to the buttons */
+    border:2px solid #ddd;
 
     padding: 0px;
     text-decoration: none;
@@ -84,31 +117,30 @@ a:hover {
     -webkit-border-radius:27px;
 }
 
-/* facebook button class*/
 .facebookBtn{
     background: #4060A5;
 }
 
-.facebookBtn:before{ /* use :before to add the relevant icons */
+.facebookBtn:before{
     font-family: "FontAwesome";
-    content: "\f09a"; /* add facebook icon */
+    content: "\f09a";
 }
 
 .facebookBtn:hover{
     text-decoration: none;
     color: #4060A5;
     background: #fff;
-    border-color: #4060A5; /* change the border color on mouse hover */
+    border-color: #4060A5;
 }
 
-/* twitter button class*/
+
 .twitterBtn{
     background: #00ABE3;
 }
 
 .twitterBtn:before{
       font-family: "FontAwesome";
-      content: "\f099"; /* add twitter icon */
+      content: "\f099";
 
 }
 
@@ -119,14 +151,13 @@ a:hover {
       border-color: #00ABE3;
 }
 
-/* google plus button class*/
 .googleplusBtn{
     background: #e64522;
 }
 
 .googleplusBtn:before{
       font-family: "FontAwesome";
-      content: "\f0d5"; /* add googleplus icon */
+      content: "\f0d5";
 }
 
 .googleplusBtn:hover{
@@ -139,10 +170,13 @@ a:hover {
 #social {
   display: inline-block;
 }
-.vcenter {
-margin-top: 7%;
-}
+
 #moto {
   color: white;
-  margin-left: 5%;
+  border-bottom: 1px solid white;
+  margin-bottom: 5%;
+
+}
+.clear {
+  display: inline-block;
 }
