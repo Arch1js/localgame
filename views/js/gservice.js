@@ -128,11 +128,11 @@ var initialize = function(latitude, longitude, filter) {
     }
 
     if(filter){
-      icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+      icon = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
       map.setZoom(14);
     }
     else {
-      icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+      icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
       map.setZoom(12);
     }
 
@@ -159,7 +159,7 @@ var initialize = function(latitude, longitude, filter) {
         position: initialLocation,
         // animation: google.maps.Animation.BOUNCE,
         map: map,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
     });
     lastMarker = marker;
 
@@ -172,7 +172,7 @@ var initialize = function(latitude, longitude, filter) {
             position: e.latLng,
             animation: google.maps.Animation.BOUNCE,
             map: map,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+            icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
         // When a new spot is selected, delete the old red bouncing marker

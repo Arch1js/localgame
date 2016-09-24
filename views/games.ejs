@@ -45,7 +45,7 @@
 									<div class="circle" ng-click="addGame(i); disable = !disable">
 										<i ng-class="disable ? 'fa fa-check' : 'fa fa-plus'"></i>
 									</div>
-									<img src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg'">
+									<img ng-src="http://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" err-src="http://www.omgchrome.com/wp-content/uploads/2015/06/chrome-trex-dinosaur.jpg"/>
 								<div class="caption">
 									<h4>{{i.name}}</h4>
 									<p class="flex-text text-muted"></p>

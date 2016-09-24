@@ -14,6 +14,9 @@ angular.module('searchController', [])
 
 		$scope.formData = {};
 
+		$scope.imgError = function() {
+			console.log("Img error!!");
+		};
 		$scope.getNewestGames = function() {
 			console.log('Fetching newest games..');
 
@@ -66,5 +69,21 @@ angular.module('searchController', [])
 
 				});
 		};
+	})
+	.directive('errSrc', function() {
+	return {
+		link: function(scope, element, attrs) {
+			element.bind('error', function() {
+				if (attrs.src != attrs.errSrc) {
+					attrs.$set('src', attrs.errSrc);
+				}
+			});
 
-	});
+			attrs.$observe('ngSrc', function(value) {
+				if (!value && attrs.errSrc) {
+					attrs.$set('src', attrs.errSrc);
+				}
+			});
+		}
+	}
+});
