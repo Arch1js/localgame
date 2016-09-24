@@ -61,7 +61,14 @@ angular.module('searchController', [])
 
 			var id = i.id;
 			var name = i.name;
-			var cover = i.cover.cloudinary_id;
+
+			if(i.cover == undefined) {
+				var cover = 'nocover_qhhlj6';
+			}
+			else {
+
+				var cover = i.cover.cloudinary_id;
+			}
 
 			Games.create(id, name, cover)
 
