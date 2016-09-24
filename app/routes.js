@@ -11,10 +11,9 @@ module.exports = function(app, passport ) {
   // var user = "57ab6e546327106427a3b999";
 
 
-  User.findOne({_id: ObjectId(user)}, {"avatar":1}, function(err, user) {
+  User.findOne({_id: ObjectId(user)}, {"avatar":1, "username":1}, function(err, user) {
       console.log(user);
       res.json(user);
-
   });
 });
 
@@ -465,17 +464,17 @@ app.post('/games', function(req, res, searchData) {
 	});
 
 	// PROFILE SECTION =========================
-	app.get('/profile', function(req, res) {
-		res.render('profile.ejs', {
-			user : req.user
-		});
-	});
-  //
-  // app.get('/profile', isLoggedIn, function(req, res) {
-  //   res.render('profile.ejs', {
-  //     user : req.user
-  //   });
-  // });
+	// app.get('/profile', function(req, res) {
+	// 	res.render('profile.ejs', {
+	// 		user : req.user
+	// 	});
+	// });
+
+  app.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile.ejs', {
+      user : req.user
+    });
+  });
 
   app.get('/user', function(req, res) {
 		res.render('user.ejs', {

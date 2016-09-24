@@ -1,7 +1,7 @@
 app.directive("navbar", function () { //navigation bar
 	return {
 		restrict: "A",
-		templateUrl: "/../templates/navbar.html"
+		templateUrl: "/../templates/navbar.ejs"
 	}
 });
 

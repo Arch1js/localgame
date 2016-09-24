@@ -9,7 +9,6 @@ var profileCtrl = angular.module('profileCtrl', [])
 
 		jdenticonService.geticon()
 		.success(function(data) {
-
 			jdenticon.update("#identicon", data.avatar);
 		});
 
@@ -42,7 +41,7 @@ var profileCtrl = angular.module('profileCtrl', [])
 			profile.deleteGameRequest(req_id);
 			$scope.getGameRequests();
 		}
-
+ 
 		$scope.getFriendRequests = function() {
 			$scope.requests = false;
 			$scope.friendrequests = {};

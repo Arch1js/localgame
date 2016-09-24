@@ -33,3 +33,7 @@ li #logout {
 #profile_link {
   padding: 0px;
 }
+#username {
+  color: white;
+  margin:15px
+}
