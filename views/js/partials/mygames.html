@@ -1,3 +1,29 @@
+
+  <div id="games" class="tab-pane fade in active col-md-12 col-sm-12 col-xs-12" ng-show="mygames">
+    <div class="masonary-row row">
+        <div ng-repeat="i in games">
+          <div class="col-xs-6 col-sm-6 col-lg-3">
+            <div class="thumbnail">
+              <div class="circle" ng-click="removeGame(i)">
+                <i class="fa fa-check"></i>
+                <i class="fa fa-times"></i>
+              </div>
+              <img class="img-responsive" src="https://res.cloudinary.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = 'http://www.vishmax.com/en/innovattive-cms/themes/themax-theme-2015/images/no-image-found.gif'">
+            <div class="caption">
+              <h4>{{i.name}}</h4>
+              <p class="flex-text text-muted"></p>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+  <div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="games_error">
+    <strong>Oh snap!</strong> No games found. Go and add some! <i class="fa fa-gamepad"></i>
+  </div>
+
+<!--
 <div id="games" class="tab-pane fade in active col-md-12 col-sm-12 col-xs-12" ng-show="mygames">
   <div class="masonary-row row">
       <div ng-repeat="i in games">
@@ -19,4 +45,4 @@
 </div>
 <div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="games_error">
   <strong>Oh snap!</strong> No games found. Go and add some! <i class="fa fa-gamepad"></i>
-</div>
+</div> -->

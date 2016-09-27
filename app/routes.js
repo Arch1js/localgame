@@ -137,7 +137,7 @@ app.post('/games', function(req, res, searchData) {
 
 	app.post('/getnewest', function(req, res) {
 
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name")
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name&limit=30&offset=130")
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
@@ -324,31 +324,31 @@ app.post('/games', function(req, res, searchData) {
       app.post('/addFriend', function(req, res) {
 
           var friend = req.body.friend;
+          console.log("Friend id " + friend);
           var username = req.body.username;
 
-          var user = req.user._id;
+          var user = req._passport.session.user;
+          console.log("My id " + user);
           var reqId = req.body.id;
+          console.log("ReqId: " + reqId);
           var user_username = req.user.username;
-          // var user = '57b317b253ad6f541b6e36e1';
 
           var newGame = User();
 
           User.update({_id: ObjectId(user),'friends.user': {$ne: friend}}, {$push: {friends:{user: friend, username: username}}}, function(err) {
             if(err)
-            console.log("Error");
+            console.log(err);
           });
 
           User.update({_id: ObjectId(friend),'friends.user': {$ne: user}}, {$push: {friends:{user: user, username: user_username}}}, function(err) {
             if(err)
-            console.log("Error");
+            console.log(err);
           });
 
           User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
             if(err)
             console.log(err);
-
           });
-
 
         });
 

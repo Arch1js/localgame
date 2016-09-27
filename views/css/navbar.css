@@ -17,7 +17,8 @@
 
 
 li #logout {
-  margin-top: 15px;
+  margin: 0px;
+  display: inline;
 }
 
 #logo {
@@ -32,8 +33,11 @@ li #logout {
 }
 #profile_link {
   padding: 0px;
+  display: inline-block;
 }
 #username {
   color: white;
-  margin:15px
+  margin: 0px;
+  margin-right:15px;
+  display: inline-block;
 }

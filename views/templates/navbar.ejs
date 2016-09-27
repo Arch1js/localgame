@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -12,7 +12,7 @@
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="navbar-collapse-1">
     <ul class="nav navbar-nav">
       <li ng-class="hometab"><a href="/profile#/mygames">Home <span class="sr-only">(current)</span></a></li>
       <li ng-class="gametab"><a href="/games">Games</a></li>
@@ -21,14 +21,11 @@
     <ul class="nav navbar-nav navbar-right">
       <li>
         <h4 id="username">{{username}}</h4>
-      </li>
-      <li>
+
         <!-- <a id="profile_link" href="/profile"><i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i></a> -->
         <a id="profile_link" href="/profile#/mygames"><canvas id="identicon" width="40" height="40" /></a>
 
-      </li>
-      <li id="logout">
-        <a href="/logout"cd ><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+        <a id="logout"href="/logout"cd ><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

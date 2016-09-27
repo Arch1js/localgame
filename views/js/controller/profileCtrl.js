@@ -159,6 +159,12 @@ var profileCtrl = angular.module('profileCtrl', [])
 			console.log(id);
 			console.log('Remove game function fired!');
 
+			toastr.options = {
+				"positionClass": "toast-bottom-left",
+			};
+			var removeMessage = 'Game removed from your collection!';
+			toastr.warning(removeMessage);
+
 			profile.removegame(id)
 			.success(function() {
 				console.log('Success!');

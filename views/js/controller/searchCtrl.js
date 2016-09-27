@@ -49,9 +49,50 @@ angular.module('searchController', [])
 			$scope.games = true;
 		};
 
-		// $scope.searchGame();
+
+		$scope.askPlatform = function(i) {
+			BootstrapDialog.show({
+					title: 'localGame',
+						message: '<h3>Please choose your platform!</h3>',
+						buttons: [{
+								label: 'PlayStation',
+								cssClass: 'btn-info',
+								action: function(dialog) {
+									$scope.addGame(i);
+									dialog.close();
+								}
+						}, {
+								label: 'XBox',
+								cssClass: 'btn-success',
+								action: function(dialog) {
+									$scope.addGame(i);
+									dialog.close();
+								}
+						}, {
+							label: 'PC',
+							cssClass: 'btn-warning',
+							action: function(dialog) {
+								$scope.addGame(i);
+								dialog.close();
+							}
+						}, {
+							label: 'Nintendo',
+							cssClass: 'btn-default',
+							action: function(dialog) {
+								$scope.addGame(i);
+								dialog.close();
+							}
+						}]
+				});
+		}
 
 		$scope.addGame = function(i) {
+
+			toastr.options = {
+				"positionClass": "toast-bottom-left",
+			};
+			var addMessage = 'Game added to your collection!';
+			toastr.success(addMessage);
 
 			// $scope.gameID = i.id; //for testing purpose to see id on screen
 			// $scope.name = i.name;
