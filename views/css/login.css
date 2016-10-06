@@ -39,20 +39,9 @@ a:hover {
   h4 {
     font-size: 12px;
   }
-
-  #icon {
-    height: 50px;
-    width: 50px;
-    margin-bottom: 2%;
-  }
-  #title {
-    height: 50px;
-    width: 100px;
-    margin-top: 6%;
-    margin-bottom: 3%;
-  }
   #logo {
-    margin-left: 18%;
+    margin-left: 5%;
+    padding: 15px;
   }
   #social {
     margin-bottom: 15px;
@@ -62,31 +51,8 @@ a:hover {
   h4 {
     font-size: 18px;
   }
-  #icon {
-    height: 80px;
-    width: 80px;
-    margin-bottom: 2%;
-  }
-  #title {
-    height: 50px;
-    width: 150px;
-    margin-top: 5%;
-    margin-bottom: 3%;
-  }
-
 }
 @media (min-width: 1280px) {
-  #icon {
-    height: 100px;
-    width: 100px;
-    margin-bottom: 2%;
-  }
-  #title {
-    height: 50px;
-    width: 150px;
-    margin-top: 8%;
-    margin-bottom: 3%;
-  }
   #social {
     margin-left: 40px;
   }

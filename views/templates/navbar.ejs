@@ -1,6 +1,5 @@
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
-  <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
       <span class="sr-only">Toggle navigation</span>
@@ -8,10 +7,8 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#"><img id="logo" src="/asets/logo.svg" class="svg"><img id="title" src="/asets/localGame.svg" class="svg"></a>
+    <a class="navbar-brand" href="#/mygames"><img id="logo" src="/asets/logo_title.svg" class="svg"></a>
   </div>
-
-  <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="navbar-collapse-1">
     <ul class="nav navbar-nav">
       <li ng-class="hometab"><a href="/profile#/mygames">Home <span class="sr-only">(current)</span></a></li>
@@ -19,15 +16,18 @@
       <li ng-class="maptab"><a href="/map">Map</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li>
-        <h4 id="username">{{username}}</h4>
-
-        <!-- <a id="profile_link" href="/profile"><i id="profile" class="fa fa-user fa-2x" aria-hidden="true"></i></a> -->
-        <a id="profile_link" href="/profile#/mygames"><canvas id="identicon" width="40" height="40" /></a>
-
-        <a id="logout"href="/logout"cd ><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-      </li>
+      <div id="content">
+        <div id="user">
+          <h4 id="user_text">{{username}}</h4>
+        </div>
+        <div id="profile_pic">
+          <a href="/profile#/mygames"><svg id="identicon" width="40" height="40" /></a>
+        </div>
+        <div id="logout">
+          <a id="logout_icon"href="/logout"cd ><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+        </div>
+    </div>
     </ul>
-  </div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+  </div>
+</div>
 </nav>

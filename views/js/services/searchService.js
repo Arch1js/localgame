@@ -1,4 +1,4 @@
-angular.module('searchService', [])
+angular.module('searchService', ['ui.bootstrap'])
 
 	// super simple service
 	// each function returns a promise object

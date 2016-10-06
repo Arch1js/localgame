@@ -27,6 +27,12 @@ angular.module('profileService', [])
 			},
 			getFriends: function() {
 				return $http.post('/getFriends')
+			},
+			sendMessage: function(to, message) {
+				return $http.post('/sendMessage', {to: to, message: message})
+			},
+			getMessages: function() {
+				return $http.post('/getMessages')
 			}
 		}
 	});

@@ -196,3 +196,9 @@ a:hover {
 #action {
   display: inline;
 }
+#quicksearch {
+  padding-bottom: 10px;
+}
+.toolbar {
+  padding: 10px;
+}

@@ -1,4 +1,4 @@
-angular.module('searchController', [])
+angular.module('searchController', ['ui.bootstrap'])
 
 	// inject the Todo service factory into our controller
 	.controller('searchGamesCtrl', function($scope, $http, Games, jdenticonService) {
@@ -23,10 +23,18 @@ angular.module('searchController', [])
 			Games.getNewest()
 
 			.success(function(data) {
+				console.log(data);
 				$scope.loading = false;
 				$scope.games = data;
 			});
 		}
+
+		// $scope.$watch('search', function(nVal, oVal) {
+		//     if (nVal !== oVal) {
+		//         $scope.searchGame();
+		//     }
+		// });
+
 		$scope.getNewestGames();
 
 		$scope.searchGame = function() {

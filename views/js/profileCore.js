@@ -14,8 +14,7 @@ var app = angular.module('gameApp', ['profileCtrl', 'headerCtrl', 'profileServic
         templateUrl: '/js/partials/friendRequests.html',
 
     // All else forward to the Join Team Control Panel
-  })
-  .when('/gamerequests', {
+  }).when('/gamerequests', {
         controller: 'profileCtrl',
         templateUrl: '/js/partials/gameRequests.html',
 
@@ -23,6 +22,11 @@ var app = angular.module('gameApp', ['profileCtrl', 'headerCtrl', 'profileServic
   }).when('/friends', {
         controller: 'profileCtrl',
         templateUrl: '/js/partials/friends.html',
+
+    // All else forward to the Join Team Control Panel
+  }).when('/messages', {
+        controller: 'profileCtrl',
+        templateUrl: '/js/partials/messages.html',
 
     // All else forward to the Join Team Control Panel
   }).otherwise({redirectTo:'/'})

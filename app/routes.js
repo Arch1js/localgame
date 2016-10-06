@@ -1,4 +1,5 @@
 var User = require('./models/user');
+var Messages = require('./models/messages');
 var ObjectId = require('mongodb').ObjectID;
 var unirest = require('unirest');
 
@@ -427,6 +428,55 @@ app.post('/games', function(req, res, searchData) {
 		});
 
 	});
+
+  app.post('/sendMessage', function(req, res) {
+
+    console.log('Mesage route activated');
+
+    var to = req.body.to;
+    var from_usr = req.user.username;
+    var message = req.body.message;
+
+    console.log(to);
+    console.log(from_usr);
+    console.log(message);
+
+    var newMsg = new Messages();
+
+    newMsg.to = to;
+    newMsg.from = from_usr;
+    newMsg.msg = message;
+    newMsg.save(function(err) {
+      if(err)
+      console.log(err);
+      else {
+        res.send(res.statusCode);
+      }
+    });
+
+  });
+
+  app.post('/getMessages', function(req, res) {
+
+    console.log('Get Mesage route activated');
+    console.log(req.user.username);
+
+    var user = req.user.username;
+
+    var newMsg = Messages();
+
+    Messages.find({from: user}, function(err,result) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        console.log(result);
+        res.send(result);
+      }
+
+    });
+
+  });
 
 	//record game id route =========================================================
 		app.post('/removegame', function(req, res) {

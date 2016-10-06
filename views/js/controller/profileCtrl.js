@@ -95,6 +95,7 @@ var profileCtrl = angular.module('profileCtrl', [])
 
 			.success(function(friends) {
 				console.log(friends);
+				console.log(friends.friends.length);
 
 				if(friends.friends.length == 0) {
 					$scope.friend_error = true;
@@ -151,6 +152,21 @@ var profileCtrl = angular.module('profileCtrl', [])
 					}
 			});
 		};
+
+		$scope.sendMessage = function() {
+			var to = $scope.user;
+			var message = $scope.message;
+
+			profile.sendMessage(to, message);
+		}
+
+		$scope.getMessages = function() {
+			$scope.messages = {};
+			profile.getMessages()
+			.success(function(messages) {
+				$scope.messages = messages;
+			});
+		}
 
 		// $scope.displayGames();
 
