@@ -12,6 +12,11 @@ angular.module('searchService', ['ui.bootstrap'])
 				console.log(search);
 				return $http.post('/games', {search: search});
 			},
+			quickSearchGames : function(search) {
+				console.log('Quick Search factory fired');
+				console.log(search);
+				return $http.post('/quickgames', {search: search});
+			},
 			create : function(id, name, cover) {
 				console.log(id);
 				console.log(name);

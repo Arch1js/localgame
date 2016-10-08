@@ -14,7 +14,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js"></script><!-- Bootstrap UI -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.min.js"></script><!-- Bootstrap UI -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js"></script>
 	<script src="//cdn.jsdelivr.net/jdenticon/1.3.2/jdenticon.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
@@ -37,10 +37,17 @@
 					<form id="search" class="form-inline" role="form">
 						<div class="form-group col-sm-10 col-md-4 col-xs-9">
 							<!-- <input type="text" class="form-control input-md" placeholder="Search for games..." ng-model="search" ng-model-options="{debounce: 100}"> -->
-							<input ng-model="search" ng-model-options="{debounce: 100}"
-							uib-typeahead="game as game.name for game in games | filter:$viewValue | limitTo:8"
+							<!-- <input ng-model="search" ng-model-options="{debounce: 100}"
+							uib-typeahead="game as game.name for game in games2 | filter:$viewValue | limitTo:8"
 							class="form-control ng-valid ng-dirty ng-not-empty ng-touched ng-valid-editable"
-							aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963" style="" type="text">
+							aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963" style="" type="text"> -->
+							<input type="text" ng-model="search" ng-model-options="{debounce: 100}" placeholder="Search for games..."
+    				uib-typeahead="game.name for game in sugestions($viewValue)" typeahead-on-select="searchGame()"
+						aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963"
+    				typeahead-no-results="noResults" class="form-control">
+							<div ng-show="noResults">
+  							<i class="glyphicon glyphicon-remove"></i> No Results Found
+							</div>
 						</div>
 						<div class="form-group col-xs-2">
 							<button type="submit" class="btn btn-primary" ng-click="searchGame()">Search</button>

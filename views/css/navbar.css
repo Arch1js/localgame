@@ -20,15 +20,14 @@
   display: inline-block;
 }
 #user {
-  display: ruby-text-container;
+  display: inline-block;;
 }
 #user_text {
   color: white;
-  padding-right: 15px;
-  padding-left: 5px;
+  margin: 0 10px;
 }
 #logout {
-  display: ruby-text-container;
+  display: inline-block;;
 }
 #logout_icon {
   color: white;
@@ -37,8 +36,8 @@
 
 #logo {
   height: 30px;
-width: 180px;
-margin-top: 5px;
+  width: 180px;
+  margin-top: 5px;
 }
 
 #username {

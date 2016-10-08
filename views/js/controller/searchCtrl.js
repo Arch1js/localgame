@@ -29,13 +29,24 @@ angular.module('searchController', ['ui.bootstrap'])
 			});
 		}
 
-		// $scope.$watch('search', function(nVal, oVal) {
-		//     if (nVal !== oVal) {
-		//         $scope.searchGame();
-		//     }
-		// });
-
 		$scope.getNewestGames();
+
+		$scope.sugestions = function(val) {
+
+			var output = $.ajax({
+			    url: 'https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search='+val,
+			    type: 'GET',
+			    data: {},
+			    dataType: 'json',
+			    success: function(data) {
+			        },
+			    error: function(err) { alert(err); },
+			    beforeSend: function(xhr) {
+			    xhr.setRequestHeader("X-Mashape-Authorization", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB"); // Enter here your Mashape key
+			    }
+			});
+			return output;
+		};
 
 		$scope.searchGame = function() {
 			$scope.error = false;
@@ -43,6 +54,7 @@ angular.module('searchController', ['ui.bootstrap'])
 			$scope.loading = true;
 
 			var search = $scope.search;
+			console.log(search);
 				Games.searchGames(search)
 
 					.success(function(data) {

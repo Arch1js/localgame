@@ -136,6 +136,22 @@ app.post('/games', function(req, res, searchData) {
 
 	});
 
+  app.post('/quickgames', function(req, res, searchData) {
+
+  		var search = req.body.search;
+
+  		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
+
+  		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search="+search_key)
+  		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
+  		.header("Accept", "application/json")
+  		.end(function (result) {
+        console.log(result.status, result.headers, result.body);
+  			res.send(result.body);
+  		});
+
+  	});
+
 	app.post('/getnewest', function(req, res) {
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name&limit=30&offset=130")
