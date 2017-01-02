@@ -1,4 +1,4 @@
-var app = angular.module('gameApp', ['profileCtrl', 'headerCtrl', 'profileService','jdenticonService', 'ngRoute'])
+var app = angular.module('gameApp', ['ui.bootstrap','profileCtrl', 'headerCtrl', 'profileService','jdenticonService', 'ngRoute'])
 
 // Configures Angular routing -- showing the relevant view and controller when needed.
 .config(function($routeProvider){

@@ -1,5 +1,5 @@
 // Create the headerCtrl module and controller. Note that it depends on $location service
-var headerCtrl = angular.module('headerCtrl', []);
+var headerCtrl = angular.module('headerCtrl', ['ui.bootstrap']);
 headerCtrl.controller('headerCtrl', function($scope, $location) {
     console.log($location);
     // Sets the isActive value based on the current URL location

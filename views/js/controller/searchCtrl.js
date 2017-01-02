@@ -72,32 +72,32 @@ angular.module('searchController', ['ui.bootstrap'])
 
 		$scope.askPlatform = function(i) {
 			BootstrapDialog.show({
-					title: 'localGame',
+					title: '<img width="100px" height="40px" alt="Brand" src="../../asets/logo_title.svg">',
 						message: '<h3>Please choose your platform!</h3>',
 						buttons: [{
-								label: 'PlayStation',
+								label: '<img id="playstation" src="../../asets/PlayStation.png" /><b>PlayStation</b>',
 								cssClass: 'btn-info',
 								action: function(dialog) {
 									$scope.addGame(i);
 									dialog.close();
 								}
 						}, {
-								label: 'XBox',
+								label: '<img id="xbox" src="../../asets/Xbox.png" /><b>xBox</b>',
 								cssClass: 'btn-success',
 								action: function(dialog) {
 									$scope.addGame(i);
 									dialog.close();
 								}
 						}, {
-							label: 'PC',
+							label: '<img id="steam" src="../../asets/Steam.png" /><b>PC</b>',
 							cssClass: 'btn-warning',
 							action: function(dialog) {
 								$scope.addGame(i);
 								dialog.close();
 							}
 						}, {
-							label: 'Nintendo',
-							cssClass: 'btn-default',
+							label: '<img id="nintendo" src="../../asets/Nintendo.png" />',
+							cssClass: 'btn-primary',
 							action: function(dialog) {
 								$scope.addGame(i);
 								dialog.close();

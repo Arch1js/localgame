@@ -1,27 +1,79 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  // var socket = io.connect();
+  socket.on('chat message', function(msg,from,created){
+    var message = $(
+      '<ul class="chats">'+
+			'<li class="you">'+
+				'<div class="image">' +
+					'<img src="../asets/unnamed.jpg" />' +
+					'<b>'+ from +'</b>' +
+				'</div>' +
+				'<p>'+ msg +'</p>' +
+			'</li>'+
+    '</ul>');
+
+    $('.chatscreenNew').append(message);
+    var container = $('.messageView');
+    var height = container[0].scrollHeight;
+    container.animate({scrollTop: height},1000);
+  });
+</script>
+<div ng-hide="messages_view">
 <div class="toolbar col col-md-10">
-  <button id="new_msg" class="btn btn-info col-md-2" data-toggle="modal" data-target="#addModal"><b>New Message <span class="fa fa-envelope"></span></button>
+  <button id="new_msg" class="btn btn-info col-md-2" data-toggle="modal" data-target="#newMessage"><b>New Message <span class="fa fa-envelope"></span></button>
+
   <form ng-submit="quickSearch(1)">
 		<div class="input-group col-md-6">
-			<input id="qicksearch" type="text" class="form-control" ng-model="quicksearch" ng-init="quicksearch=''" value="" placeholder="Search for messages">
+			<input id="qicksearch" type="text" class="form-control" ng-model="quicksearch" ng-init="quicksearch=''" value="" placeholder="Search for conversation">
 			<div style="cursor:pointer" ng-click="quickSearch(1)" class="input-group-addon"><i class="fa fa-search"></i></div>
 		</div>
 	</form>
 </div>
-<div ng-repeat="i in messages">
+<div ng-repeat="i in conversation" ng-hide="conversations">
 <div id="requests" class="col col-md-12 tab-pane fade in active">
       <div class="col-md-12">
         <div class="col-md-1 col-sm-2 col-xs-5">
-          <img id="reqProfile" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"></img>
+          <img id="reqProfile" src="../../asets/user.svg"></img>
         </div>
         <div class="col-md-3">
-          <p>From: {{i.from}}</p>
-          <p>To: {{i.to}}</p>
-          <p>Message: {{i.msg}}</p>
+          <p id="withUser" ng-if="i.participants[0] == sessionUser2">Conversation with: {{i.participants[1]}}</p>
+          <p id="withUser" ng-if="i.participants[1] == sessionUser2">Conversation with: {{i.participants[0]}}</p>
         </div>
       </div>
+      <button class="btn btn-info" id="continue" ng-click="loadMessages(i.id, i.roomID, i.participants)"><i class="fa fa-comments"></i> Continue conversation</button>
     </div>
 </div>
-<div class="modal fade" id="addModal" role="dialog">
+<div ng-init="hideLoading()"></div>
+</div>
+<div ng-show="chat_view">
+  <div class="messageView">
+    <!-- <input id="msg_input" type="text" class="form-control col-md-5" ng-model="message"  value="" placeholder="Message text..">
+    <button class="btn btn-success">Send</button> -->
+    <div ng-repeat="i in messages" ng-init="$last && scrollToBottom( )" class="chatscreenOld">
+      <ul class="chats">
+        <li class="person" ng-class="setPosition(i.from)">
+          <div class="image">
+            <img src='../asets/unnamed.jpg'/>
+            <b>{{i.from}}</b>
+          </div>
+          <p>{{i.msg}}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="chatscreenNew">
+    </div>
+    <footer>
+    <form id="chatform">
+      <!-- <input id="m" autocomplete="off" /><button id="send">Send</button> -->
+      <textarea id="chatmessage" placeholder="Write something.."></textarea>
+			<button type="button" class="btn btn-success" id="submit" ng-click="sendChat()">Send</button>
+    </form>
+  </footer>
+  </div>
+</div>
+<div class="modal fade" id="newMessage" role="dialog">
     <div class="modal-dialog modal-lg">
 <div class="modal-content">
     <div class="modal-header">
@@ -30,11 +82,14 @@
 </div>
 <div class="modal-body">
     <div id="quicksearch" class="input-group col-md-12">
-      <input type="text" class="form-control" ng-model="user" value="" placeholder="Type in username...">
+    <input ng-model="to" ng-model-options="{debounce: 100}"
+    uib-typeahead="friend as friend.username for friend in friends | filter:$viewValue | limitTo:8"
+    class="form-control ng-valid ng-dirty ng-not-empty ng-touched ng-valid-editable"
+    aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963" style="" type="text" placeholder="Search for user">
       <div style="cursor:pointer" ng-click="" class="input-group-addon"><i class="fa fa-search"></i></div>
     </div>
   <div class="form-group">
-    <textarea rows="6" cols="80" ng-model="message" placeholder="Message.."></textarea>
+    <textarea rows="6" cols="70" ng-model="message" placeholder="Message.."></textarea>
   </div>
 </div>
 <div class="modal-footer">
@@ -44,6 +99,5 @@
 </div>
 </div>
 </div>
-<div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="msg_err" style="margin-top: 10px">
-  <strong>Error?</strong> No messages found... <i class="fa fa-users"></i>
+<div id="noMessages" class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="msg_err" style="margin-top: 10px">No conversations found... <i class="fa fa-users"></i>
 </div>

@@ -1,4 +1,4 @@
-angular.module('profileService', [])
+angular.module('profileService', ['ui.bootstrap'])
 
 	// super simple service
 	// each function returns a promise object
@@ -31,8 +31,17 @@ angular.module('profileService', [])
 			sendMessage: function(to, message) {
 				return $http.post('/sendMessage', {to: to, message: message})
 			},
-			getMessages: function() {
-				return $http.post('/getMessages')
+			getConversations: function() {
+				return $http.post('/getConversations')
+			},
+			getMessages: function(id) {
+				return $http.post('/getMessages', {id: id})
+			},
+			getUsers: function(user) {
+				return $http.post('/getUsers', {user: user})
+			},
+			getSession: function() {
+				return $http.post('/getSession')
 			}
 		}
 	});

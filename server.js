@@ -8,7 +8,10 @@ var app      = express();
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
+var passportSocketIo = require('passport.socketio');
 var flash    = require('connect-flash');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -35,9 +38,12 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
+
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport, io); // load our routes and pass in our app and fully configured passport
+require('./app/chat-server.js')(app,passport,io);
 // launch ======================================================================
-app.listen(port);
+http.listen(port);
 console.log('The magic happens on port ' + port);

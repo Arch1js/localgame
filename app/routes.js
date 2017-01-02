@@ -1,129 +1,92 @@
 var User = require('./models/user');
 var Messages = require('./models/messages');
+var Conversation = require('./models/conversation');
 var ObjectId = require('mongodb').ObjectID;
 var unirest = require('unirest');
+var socketio = require('socket.io');
+const uuidV1 = require('uuid/v1');
+var shortid = require('shortid');
+var io;
+io = socketio;
 
-module.exports = function(app, passport ) {
+module.exports = function(app, passport, io) {
 
   app.post('/getJdenticon', function(req, res){
-    console.log('/jdenticon route activated');
 
   var user = req.user._id;
-  // var user = "57ab6e546327106427a3b999";
-
 
   User.findOne({_id: ObjectId(user)}, {"avatar":1, "username":1}, function(err, user) {
-      console.log(user);
+      // console.log(user);
       res.json(user);
+    });
   });
-});
 
     // POST Routes
     // --------------------------------------------------------
-    // Provides method for saving new users in the db
     app.post('/map', function(req, res){
-
-			        var query = User.find({});
-			        query.exec(function(err, users){
-			            if(err)
-			                res.send(err);
-
-			            // If no errors are found, it responds with a JSON of all users
-									// console.log(users);
-			            res.json(users);
-
-			        });
-
+		  var query = User.find({});
+			query.exec(function(err, users){
+			  if(err)
+			    res.send(err);
+			    res.json(users);
+			});
+    });
+    app.post('/getSession', function(req, res){
+		  res.send(req.user.username);
     });
 
-    		app.post('/saveLocation', function(req, res){
-          console.log('/saveLocation activated');
-
-    		// Grab all of the query parameters from the body.
+    	app.post('/saveLocation', function(req, res){
     		var lat = req.body.latitude;
     		var lng = req.body.longitude;
-
-    		console.log(lat);
-    		console.log(lng);
-
         var user = req.user._id;
-        // var user = "57b1b13e9db132982e43657e";
-
 
         User.findOne({_id: ObjectId(user)}, function(err, user) {
 
-            user.location.lat = lat;
-            user.location.lng = lng;
+          user.location.lat = lat;
+          user.location.lng = lng;
 
-            user.save(function(err) {
-              if (err)
-                throw err;
-              });
-
-
+          user.save(function(err) {
+            if (err)
+              throw err;
+            });
+          });
         });
-    });
 
     app.post('/userLocation', function(req, res){
       console.log('/userLocation activated');
-
-    var user = req.user._id;
-    // var user = "57b2fb423040a8641ef8f26e";
-
-
-    User.findOne({_id: ObjectId(user)}, {"avatar":1, "location":1}, function(err, user) {
-        console.log(user);
-        res.json(user);
-
-    });
-});
+      var user = req.user._id;
+      User.findOne({_id: ObjectId(user)}, {"avatar":1, "location":1}, function(err, user) {
+          console.log(user);
+          res.json(user);
+        });
+      });
 
 		app.post('/query', function(req, res){
-
-
-		// Grab all of the query parameters from the body.
 		var lat             = req.body.latitude;
 		var long            = req.body.longitude;
 		var distance        = req.body.distance;
     var user            = req.user._id;
 
-		console.log(lat);
-		console.log(long);
-		console.log(distance);
-    console.log(user);
-
-		// Opens a generic Mongoose Query. Depending on the post body we will...
 		var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1});
 
-		// ...include filter by Max Distance (converting miles to meters)
 		if(distance){
-
-				// Using MongoDB's geospatial querying features. (Note how coordinates are set [long, lat]
 				query = query.where('location').near({ center: {type: 'Point', coordinates: [lat, long]},
-
-
-						// Converting meters to miles. Specifying spherical geometry (for globe)
 						maxDistance: distance * 1609.34, spherical: true});
-
 		}
 
-		// Execute Query and Return the Query Results
 		query.exec(function(err, users){
 				if(err)
 						res.send(err);
 				else
-						// If no errors, respond with a JSON of all users that meet the criteria
 						console.log(users);
 						res.json(users);
-		});
-});
+		        });
+      });
 
 
 //Game routes =========================================================
 app.post('/games', function(req, res, searchData) {
-
 		var search = req.body.search;
-
 		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover&search="+search_key)
@@ -136,22 +99,6 @@ app.post('/games', function(req, res, searchData) {
 
 	});
 
-  app.post('/quickgames', function(req, res, searchData) {
-
-  		var search = req.body.search;
-
-  		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
-
-  		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search="+search_key)
-  		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
-  		.header("Accept", "application/json")
-  		.end(function (result) {
-        console.log(result.status, result.headers, result.body);
-  			res.send(result.body);
-  		});
-
-  	});
-
 	app.post('/getnewest', function(req, res) {
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name&limit=30&offset=130")
@@ -162,22 +109,12 @@ app.post('/games', function(req, res, searchData) {
 			res.send(result.body);
 		});
 
-		});
+	});
 
 
 	app.post('/mygames', function(req, res) {
-
 			var newGame = User();
-
-			// newGame.save(function(err) { //add new empty user
-			// 		if (err)
-			// 				throw err;
-			// });
-
-			var user = req.user._id; //real user
-			// var user = "57bb3a324f8c8a1100f4ca7a";
-
-			console.log(user);
+			var user = req.user._id;
 
 			User.findOne({_id: ObjectId(user)}, function(err,result) {
 				if(err) {
@@ -186,17 +123,11 @@ app.post('/games', function(req, res, searchData) {
 				else {
 					res.send(result);
 				}
-
 			});
-
 		});
 
     app.post('/getfriendrequests', function(req, res) {
-
         var user = req.user._id;
-        console.log(user);
-        // var user = "57bb3a324f8c8a1100f4ca7a";
-
         var newGame = User();
 
         User.findOne({_id: ObjectId(user)}, {"friendRequests":1}, function(err,result) {
@@ -207,16 +138,11 @@ app.post('/games', function(req, res, searchData) {
             console.log(result);
             res.send(result);
           }
-
         });
-
       });
 
       app.post('/getgamerequests', function(req, res) {
-
           var user = req.user._id;
-          console.log(user);
-          // var user = "57bb3a324f8c8a1100f4ca7a";
 
           var newGame = User();
 
@@ -228,26 +154,12 @@ app.post('/games', function(req, res, searchData) {
               console.log(result);
               res.send(result);
             }
-
           });
-
         });
 
     app.post('/user', function(req, res) {
-
-      console.log('user fired');
-
-
-
         var user = req.body.user;
         var current_user = req.user._id;
-        console.log('User:');
-        console.log(user);
-        console.log('current_user');
-        console.log(current_user);
-        // var user = '57bafad677a4ece416877305';
-        // var other = '57bafafa77a4ece41687730c';
-
         var newGame = User();
 
         User.findOne({_id: ObjectId(user)}, {"avatar":1, "games":1, "username":1}, function(err,result) {
@@ -255,9 +167,7 @@ app.post('/games', function(req, res, searchData) {
             console.log(err);
           }
           else {
-
             var r = result.toObject();
-
             User.findOne({_id: ObjectId(current_user), 'friends.user': user}, {"_id":1}, function(err,friend) {
               if(err) {
                 console.log(err);
@@ -273,25 +183,16 @@ app.post('/games', function(req, res, searchData) {
                 console.log(r);
                 res.send(r);
               }
-
             });
           }
-
         });
-
-
-
-
       });
 
       app.post('/getFriends', function(req, res) {
-
           var user = req.user._id;
-          // var user = '57bb3a324f8c8a1100f4ca7a';
-
           var newGame = User();
           var resultArray = {};
-            var i = 0;
+          var i = 0;
 
           User.findOne({_id: ObjectId(user)}, {"friends":1}, function(err,result) {
             if(err) {
@@ -301,55 +202,57 @@ app.post('/games', function(req, res, searchData) {
               console.log(result);
               res.send(result);
             }
-
           });
-
         });
 
+        app.post('/getUsers', function(req, res) {
+          console.log('getUsers fired');
+            // var user = req.user._id;
 
-        app.post('/deletefriendrequest', function(req, res) {
+              var user = '57bb3a324f8c8a1100f4ca7a';
+              var friend = req.body.user;
+              console.log(friend);
+              var newGame = User();
+                User.find({_id: ObjectId(user),'friends.username': new RegExp(friend,'i')}, {"friends.username":1}, function(err,result) {
+                  if(err) {
+                    console.log(err);
+                  }
+                  else {
+                    console.log(result);
+                    return result;
+                  }
+                });
+          });
 
-            var user = req.user._id;
-            var reqId = req.body.id;
-            // var user = '57b317b253ad6f541b6e36e1';
 
-            var newGame = User();
+    app.post('/deletefriendrequest', function(req, res) {
+        var user = req.user._id;
+        var reqId = req.body.id;
+        var newGame = User();
 
-            User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
-              if(err)
+        User.update({_id: ObjectId(user)}, {$pull: {"friendRequests" : {id: reqId}}}, function(err) {
+          if(err)
+            console.log(err);
+          });
+        });
+
+      app.post('/deletegamerequest', function(req, res) {
+          var id = req.body.id;
+          var user = req.user._id;
+          var newGame = User();
+
+          User.update({_id: ObjectId(user)}, {$pull: {"gameRequests" : {id: id}}}, function(err) {
+            if(err)
               console.log(err);
             });
           });
 
-          app.post('/deletegamerequest', function(req, res) {
-
-              var id = req.body.id;
-              var user = req.user._id;
-              // var user = '57b317b253ad6f541b6e36e1';
-
-              var newGame = User();
-
-              User.update({_id: ObjectId(user)}, {$pull: {"gameRequests" : {id: id}}}, function(err) {
-                if(err)
-                console.log(err);
-
-              });
-
-
-            });
-
       app.post('/addFriend', function(req, res) {
-
           var friend = req.body.friend;
-          console.log("Friend id " + friend);
           var username = req.body.username;
-
           var user = req._passport.session.user;
-          console.log("My id " + user);
           var reqId = req.body.id;
-          console.log("ReqId: " + reqId);
           var user_username = req.user.username;
-
           var newGame = User();
 
           User.update({_id: ObjectId(user),'friends.user': {$ne: friend}}, {$push: {friends:{user: friend, username: username}}}, function(err) {
@@ -366,17 +269,13 @@ app.post('/games', function(req, res, searchData) {
             if(err)
             console.log(err);
           });
-
         });
 
       app.post('/sendGameRequest', function(req, res) {
-
           var game = req.body.game;
           var cover = req.body.cover;
           var receiveUser = req.body.user;
-
           var requestUser = req.user._id;
-          // var requestUser = '57b317b253ad6f541b6e36e1';
           var username = req.user.username;
 
           var min = 1;
@@ -395,12 +294,8 @@ app.post('/games', function(req, res, searchData) {
         });
 
         app.post('/sendfriendRequest', function(req, res) {
-
             var receiveUser = req.body.user;
-
             var requestUser = req.user._id;
-            // var requestUser = '57b317b253ad6f541b6e36e1';
-
             var reqestUsername = req.user.username;
             var avatar = req.user.avatar;
 
@@ -409,100 +304,108 @@ app.post('/games', function(req, res, searchData) {
             var random_id = Math.floor(Math.random() * (max - min)) + min;
 
             // var date_time = new Date();
-
             var newGame = User();
 
             User.update({_id: ObjectId(receiveUser),'friendRequests.user': {$ne: requestUser}}, {$push: {friendRequests:{id: random_id, user: requestUser, username: reqestUsername, avatar: avatar}}}, function(err) {
               if(err)
               console.log("Error");
             });
-
           });
 
-//record game id route =========================================================
-	app.post('/addgames', function(req, res) {
+	      app.post('/addgames', function(req, res) {
+        		var id = req.body.id;
+        		var title = req.body.name;
+        		var cover = req.body.cover;
+        		var newGame = User();
+        		var user = req.user._id;
 
-		console.log('Addgames post fired');
+        		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover}}}, function(err) {
+        			if(err)
+        			console.log("Error");
+        		});
+	        });
 
-		var id = req.body.id;
-		var title = req.body.name;
-		var cover = req.body.cover;
+      app.post('/sendMessage', function(req, res) {
+        console.log('Mesage route activated');
+        var to = req.body.to;
+        var from_usr = req.user.username;
+        var message = req.body.message;
 
-		console.log(id);
-		console.log(title);
-		console.log(cover);
+        var uuid = uuidV1();
 
-		// console.log(req);
-		var newGame = User();
 
-		// var user = "5798fa124df558f0085ae9f7";
-		var user = req.user._id;
+        var newConvo = new Conversation();
 
-		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover}}}, function(err) {
-			if(err)
-			console.log("Error");
-		});
+        newConvo.id = uuid;
+        newConvo.roomID = shortid.generate();
+        newConvo.participants = [from_usr,to]
+        newConvo.save(function(err) {
+          if(err)
+          console.log(err);
+        })
 
-	});
+        var newMsg = new Messages();
 
-  app.post('/sendMessage', function(req, res) {
+        newMsg.conversationID = uuid;
+        newMsg.to = to;
+        newMsg.from = from_usr;
+        newMsg.msg = message;
+        newMsg.save(function(err) {
+          if(err)
+          console.log(err);
+          else {
+            res.send(res.statusCode);
+          }
+        });
+      });
 
-    console.log('Mesage route activated');
+      app.post('/getMessages', function(req, res) {
+        var convoID = req.body.id;
+        console.log("Routes received id: " + convoID);
 
-    var to = req.body.to;
-    var from_usr = req.user.username;
-    var message = req.body.message;
+        var message = Messages.find({conversationID: convoID}, function(err,result) {
+          // if(err) {
+          //   console.log(err);
+          // }
+          // else {
+          //   res.send(result);
+          // }
+        });
+        message.sort('created').exec(function(err,result) {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            res.send(result);
+          }
+        })
+      });
 
-    console.log(to);
-    console.log(from_usr);
-    console.log(message);
+      app.post('/getConversations', function(req, res) {
 
-    var newMsg = new Messages();
+        var user = req.user.username;
+        var newMsg = Messages();
 
-    newMsg.to = to;
-    newMsg.from = from_usr;
-    newMsg.msg = message;
-    newMsg.save(function(err) {
-      if(err)
-      console.log(err);
-      else {
-        res.send(res.statusCode);
-      }
-    });
+        Conversation.find({ $or: [{participants: {$in:[user]}}]}, function(err,result) {
+          if(err)
+          console.log(err);
+          else if(result) {
+            res.send(result);
+          }
+        })
+        // Messages.find({ $or: [{from: user}]}, function(err,result) {
+        //   if(err) {
+        //     console.log(err);
+        //   }
+        //   else {
+        //     console.log(result);
+        //     res.send(result);
+        //   }
+        // });
+      });
 
-  });
-
-  app.post('/getMessages', function(req, res) {
-
-    console.log('Get Mesage route activated');
-    console.log(req.user.username);
-
-    var user = req.user.username;
-
-    var newMsg = Messages();
-
-    Messages.find({from: user}, function(err,result) {
-      if(err) {
-        console.log(err);
-      }
-      else {
-        console.log(result);
-        res.send(result);
-      }
-
-    });
-
-  });
-
-	//record game id route =========================================================
 		app.post('/removegame', function(req, res) {
-
 			var id = req.body.id;
-
-
-			console.log('Removegame post fired');
-
-			// var user = "5798fa124df558f0085ae9f7";
 			var user = req.user._id;
 
 			User.update({_id: ObjectId(user)}, {$pull: {"games" : {id: id}}}, function(err) {
@@ -512,11 +415,11 @@ app.post('/games', function(req, res, searchData) {
 					res.send();
 				}
 			});
-
 		});
 
 
 // normal routes ===============================================================
+
 
 	// main login page
 	app.get('/', function(req, res) {
@@ -529,17 +432,27 @@ app.post('/games', function(req, res, searchData) {
 		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
-	// PROFILE SECTION =========================
-	// app.get('/profile', function(req, res) {
-	// 	res.render('profile.ejs', {
-	// 		user : req.user
-	// 	});
-	// });
+  app.get('/chat', function(req, res) {
+    // res.render('games.ejs', { message: req.flash('loginMessage') });
+    res.render('chat.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
+  });
 
-  app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile.ejs', {
-      user : req.user
-    });
+	// PROFILE SECTION =========================
+	app.get('/profile', function(req, res) {
+		res.render('profile.ejs', {
+			user : req.user
+		});
+	});
+
+  // app.get('/profile', isLoggedIn, function(req, res) {
+  //   res.render('profile.ejs', {
+  //     user : req.user
+  //   });
+  // });
+
+  app.get('/getSession', function(req, res) {
+    console.log(req.session.user);
+    res.send('awesome');
   });
 
   app.get('/user', function(req, res) {
@@ -592,9 +505,9 @@ app.post('/games', function(req, res, searchData) {
 
 		// process the signup form
 		app.post('/signup', passport.authenticate('local-signup', { //disable for now
-			// successRedirect : '/profile#/mygames', // redirect to the secure profile section
-			// failureRedirect : '/signup', // redirect back to the signup page if there is an error
-			// failureFlash : true // allow flash messages
+			successRedirect : '/profile#/mygames', // redirect to the secure profile section
+			failureRedirect : '/signup', // redirect back to the signup page if there is an error
+			failureFlash : true // allow flash messages
 		}));
 
 	// facebook -------------------------------

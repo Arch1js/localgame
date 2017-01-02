@@ -1,6 +1,6 @@
 
 body {
-  background-image: url("../asets/profile_background2.jpg");
+  background-image: url("../asets/profile_background_optimized.jpg");
   background-size: cover;
   background-repeat: repeat-x;
   background-attachment: fixed;
@@ -140,4 +140,23 @@ footer {
 
 #search {
   margin: 10px;
+}
+#playstation {
+  height: 15px;
+  width: 20px;
+  margin-right: 10px;
+}
+#xbox {
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+}
+#steam {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+#nintendo {
+  height: 20px;
+  width: 70px;
 }

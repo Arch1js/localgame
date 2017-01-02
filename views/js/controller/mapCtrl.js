@@ -8,7 +8,7 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
   .success(function(data) {
     $scope.username = data.username;
     jdenticon.update("#identicon", data.avatar);
-  })
+  });
 
     // Initializes Variables
     // ----------------------------------------------------------------------------

@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="84cd42e1-edaa-44ac-a2b9-6ce3c5a98ff9" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/dist/async.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/dist/async.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/lib/async.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/async/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/form-data/.dockerignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/form-data/.editorconfig" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/form-data/.eslintignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/form-data/.eslintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/form-data/wercker.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/inherits/test.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/messages.js" afterPath="$PROJECT_DIR$/app/models/messages.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-conv" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-conv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-sign" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-sign" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/.bin/sshpk-verify" afterPath="$PROJECT_DIR$/node_modules/.bin/sshpk-verify" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/form-data/README.md" afterPath="$PROJECT_DIR$/node_modules/form-data/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/form-data/lib/browser.js" afterPath="$PROJECT_DIR$/node_modules/form-data/lib/browser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/form-data/lib/form_data.js" afterPath="$PROJECT_DIR$/node_modules/form-data/lib/form_data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/form-data/lib/populate.js" afterPath="$PROJECT_DIR$/node_modules/form-data/lib/populate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/form-data/package.json" afterPath="$PROJECT_DIR$/node_modules/form-data/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/inherits/inherits.js" afterPath="$PROJECT_DIR$/node_modules/inherits/inherits.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/inherits/package.json" afterPath="$PROJECT_DIR$/node_modules/inherits/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/is-my-json-valid/index.js" afterPath="$PROJECT_DIR$/node_modules/is-my-json-valid/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/is-my-json-valid/package.json" afterPath="$PROJECT_DIR$/node_modules/is-my-json-valid/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/is-my-json-valid/test/misc.js" afterPath="$PROJECT_DIR$/node_modules/is-my-json-valid/test/misc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json-schema/lib/links.js" afterPath="$PROJECT_DIR$/node_modules/json-schema/lib/links.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json-schema/lib/validate.js" afterPath="$PROJECT_DIR$/node_modules/json-schema/lib/validate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json-schema/package.json" afterPath="$PROJECT_DIR$/node_modules/json-schema/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsonpointer/.travis.yml" afterPath="$PROJECT_DIR$/node_modules/jsonpointer/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsonpointer/README.md" afterPath="$PROJECT_DIR$/node_modules/jsonpointer/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsonpointer/jsonpointer.js" afterPath="$PROJECT_DIR$/node_modules/jsonpointer/jsonpointer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsonpointer/package.json" afterPath="$PROJECT_DIR$/node_modules/jsonpointer/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsonpointer/test.js" afterPath="$PROJECT_DIR$/node_modules/jsonpointer/test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsprim/CHANGES.md" afterPath="$PROJECT_DIR$/node_modules/jsprim/CHANGES.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/jsprim/package.json" afterPath="$PROJECT_DIR$/node_modules/jsprim/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-db/HISTORY.md" afterPath="$PROJECT_DIR$/node_modules/mime-db/HISTORY.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-db/db.json" afterPath="$PROJECT_DIR$/node_modules/mime-db/db.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-db/package.json" afterPath="$PROJECT_DIR$/node_modules/mime-db/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-types/HISTORY.md" afterPath="$PROJECT_DIR$/node_modules/mime-types/HISTORY.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-types/index.js" afterPath="$PROJECT_DIR$/node_modules/mime-types/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/mime-types/package.json" afterPath="$PROJECT_DIR$/node_modules/mime-types/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/request/.travis.yml" afterPath="$PROJECT_DIR$/node_modules/request/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/request/CHANGELOG.md" afterPath="$PROJECT_DIR$/node_modules/request/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/request/README.md" afterPath="$PROJECT_DIR$/node_modules/request/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/request/package.json" afterPath="$PROJECT_DIR$/node_modules/request/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/request/request.js" afterPath="$PROJECT_DIR$/node_modules/request/request.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/README.md" afterPath="$PROJECT_DIR$/node_modules/sshpk/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-conv" afterPath="$PROJECT_DIR$/node_modules/sshpk/bin/sshpk-conv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/errors.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/errors.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/fingerprint.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/fingerprint.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/pem.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/pem.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/pkcs8.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/pkcs8.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/ssh-private.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/formats/ssh-private.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/index.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/key.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/key.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/signature.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/signature.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/ssh-buffer.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/ssh-buffer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/lib/utils.js" afterPath="$PROJECT_DIR$/node_modules/sshpk/lib/utils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/sshpk/package.json" afterPath="$PROJECT_DIR$/node_modules/sshpk/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/CHANGELOG.md" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/CHANGELOG.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/README.md" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/nacl-fast.js" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/nacl-fast.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/nacl-fast.min.js" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/nacl-fast.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/nacl.js" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/nacl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/nacl.min.js" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/nacl.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/tweetnacl/package.json" afterPath="$PROJECT_DIR$/node_modules/tweetnacl/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/css/profile.css" afterPath="$PROJECT_DIR$/views/css/profile.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/games.ejs" afterPath="$PROJECT_DIR$/views/games.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/controller/headerCtrl.js" afterPath="$PROJECT_DIR$/views/js/controller/headerCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/controller/mapCtrl.js" afterPath="$PROJECT_DIR$/views/js/controller/mapCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/controller/profileCtrl.js" afterPath="$PROJECT_DIR$/views/js/controller/profileCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/partials/gameRequests.html" afterPath="$PROJECT_DIR$/views/js/partials/gameRequests.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/partials/messages.html" afterPath="$PROJECT_DIR$/views/js/partials/messages.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/partials/mygames.html" afterPath="$PROJECT_DIR$/views/js/partials/mygames.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/profileCore.js" afterPath="$PROJECT_DIR$/views/js/profileCore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/searchCore.js" afterPath="$PROJECT_DIR$/views/js/searchCore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/services/profileService.js" afterPath="$PROJECT_DIR$/views/js/services/profileService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/js/services/searchService.js" afterPath="$PROJECT_DIR$/views/js/services/searchService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/profile.ejs" afterPath="$PROJECT_DIR$/views/profile.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/templates/navbar.ejs" afterPath="$PROJECT_DIR$/views/templates/navbar.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user.ejs" afterPath="$PROJECT_DIR$/views/user.ejs" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="localgame" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.48568088">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chat.ejs" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/views/chat.ejs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-8">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="messages.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/views/js/partials/messages.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="370">
+                  <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="signup.ejs" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/views/signup.ejs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-8">
+                  <caret line="60" column="28" lean-forward="false" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="auth.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/config/auth.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="150">
+                  <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="profileCtrl.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/views/js/controller/profileCtrl.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1305">
+                  <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="passport.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/config/passport.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/routes.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="351" column="25" lean-forward="false" selection-start-line="351" selection-start-column="25" selection-end-line="351" selection-end-column="25" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="chat-server.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/chat-server.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/views/user.ejs" />
+        <option value="$PROJECT_DIR$/views/games.ejs" />
+        <option value="$PROJECT_DIR$/views/js/partials/gameRequests.html" />
+        <option value="$PROJECT_DIR$/views/js/partials/mygames.html" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
+        <option value="$PROJECT_DIR$/views/js/controller/profileCtrl.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="localgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.HTML" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84cd42e1-edaa-44ac-a2b9-6ce3c5a98ff9" name="Default" comment="" />
+      <created>1482237818651</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1482237818651</updated>
+      <workItem from="1482237820327" duration="4031000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4031000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12760417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/views/templates/profile_tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/games.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="70" column="38" lean-forward="true" selection-start-line="70" selection-start-column="38" selection-end-line="70" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="41" column="22" lean-forward="true" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/chat.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/chat-server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/partials/friendRequests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/partials/friends.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/partials/gameRequests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="44" lean-forward="true" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/partials/mygames.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/passport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/messages.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="351" column="25" lean-forward="false" selection-start-line="351" selection-start-column="25" selection-end-line="351" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/login.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="42" column="39" lean-forward="true" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/signup.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="60" column="28" lean-forward="false" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/partials/messages.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="54" column="39" lean-forward="true" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/profileCore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/js/controller/profileCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1305">
+          <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

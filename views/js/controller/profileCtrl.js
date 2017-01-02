@@ -1,40 +1,70 @@
-var profileCtrl = angular.module('profileCtrl', [])
+var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 
-	// inject the Todo service factory into our controller
+	// inject the service factory into our controller
 	profileCtrl.controller('profileCtrl', function($scope, $http, profile, jdenticonService) {
 
 		$scope.loading = true;
 
 		$scope.hometab = 'active'; //set navbar home tab active
 
+		var sessionUser = undefined;
+		$scope.sessionUser2 = '';
+		var userToSend = undefined;
+		var roomID = undefined;
+		var convoID = undefined;
+
 		jdenticonService.geticon()
 		.success(function(data) {
 			$scope.username = data.username;
 			jdenticon.update("#identicon", data.avatar);
+			profile.getSession()
+			.success(function(user) {
+				sessionUser = user;
+				$scope.sessionUser2 = user;
+			});
 		});
 
-		$scope.askToSendConfirm = function() {
+		$scope.askToSendConfirm = function(i) {
+			var gameID = i.id;
       BootstrapDialog.show({
-          title: 'localGame',
-            message: 'Can we send message to user confirming your decision? (Currently not working)',
+          title: '<img width="100px" height="40px" alt="Brand" src="../../asets/logo_title.svg">',
+            message: '<b>Can we send message to user confirming your decision?<b>',
             buttons: [{
                 label: 'Yes',
                 cssClass: 'btn-success',
                 action: function(dialog) {
-                	console.log('Message sent!');
+									var to = i.username;
+									var game = i.game;
+									var message = 'Hey! I see that you have shown interest in ' + game;
+
+									profile.sendMessage(to, message);
+									profile.deleteGameRequest(gameID);
+									$scope.getGameRequests();
+									toastr.options = {
+										"positionClass": "toast-bottom-left",
+									};
+									var aceptMessage = 'Message has been sent!';
+									toastr.success(aceptMessage);
+
 									dialog.close();
                 }
             }, {
                 label: 'No',
                 cssClass: 'btn-warning',
                 action: function(dialog) {
+									profile.deleteGameRequest(gameID);
                   dialog.close();
                 }
             }]
         });
     }
+
+		$('#newMessage').on('shown.bs.modal', function (e) {
+		  $scope.getFriends();
+		})
+
 		$scope.acceptGameRequest = function(i) {
-			$scope.askToSendConfirm();
+			$scope.askToSendConfirm(i);
 		}
 
 		$scope.declineRequest = function(i) {
@@ -51,12 +81,10 @@ var profileCtrl = angular.module('profileCtrl', [])
 			.success(function(friendrequests) {
 				console.log(friendrequests);
 				if(friendrequests.friendRequests.length == 0) {
-					console.log('no requests');
 					$scope.loading = false;
 					$scope.request_error = true;
 				}
 				else {
-					console.log('have requests');
 					$scope.friendrequests = friendrequests.friendRequests;
 					$scope.user_requests = true;
 					$scope.loading = false;
@@ -73,12 +101,10 @@ var profileCtrl = angular.module('profileCtrl', [])
 			.success(function(requests) {
 				console.log(requests);
 				if(requests.gameRequests.length == 0) {
-					console.log('no requests');
 					$scope.loading = false;
 					$scope.gamerequest_error = true;
 				}
 				else {
-					console.log('have requests');
 					$scope.gamerequests = requests.gameRequests;
 					$scope.game_requests = true;
 					$scope.loading = false;
@@ -88,14 +114,11 @@ var profileCtrl = angular.module('profileCtrl', [])
 		};
 
 		$scope.getFriends = function() {
-			console.log('friends open');
 			$scope.friends = false;
 			$scope.friends = {};
 			profile.getFriends()
 
 			.success(function(friends) {
-				console.log(friends);
-				console.log(friends.friends.length);
 
 				if(friends.friends.length == 0) {
 					$scope.friend_error = true;
@@ -129,12 +152,10 @@ var profileCtrl = angular.module('profileCtrl', [])
 
 		$scope.displayGames = function() {
 
-			console.log('Display games function fired!');
-
 			profile.getmygames()
 
 			.success(function(user) {
-          console.log(user);
+          // console.log(user);
           jdenticon.update("#userIdenticon", user.avatar);
 
 					if(user.games.length == 0) {
@@ -151,29 +172,112 @@ var profileCtrl = angular.module('profileCtrl', [])
 						$scope.mygames = true;
 					}
 			});
+
+			profile.getSession()
+			.success(function(user) {
+				socket.emit('set nickname', user);
+			});
+
 		};
 
+		$scope.sendChat = function() {
+			var user = userToSend;
+			var message = $('#chatmessage').val();
+			socket.emit('chat message', {room: roomID, convoID: convoID, msg: message, toUser: user});
+
+				var message = $(
+		      '<ul class="chats">'+
+					'<li class="me">'+
+						'<div class="image">' +
+							'<img src="../asets/unnamed.jpg" />' +
+							'<b>'+ sessionUser +'</b>' +
+						'</div>' +
+						'<p>'+ message +'</p>' +
+					'</li>'+
+		    '</ul>');
+
+		    $('.chatscreenNew').append(message);
+				$('#chatmessage').val('');
+				$scope.scrollToBottom();
+		}
+		$scope.setPosition = function(from) {
+			if(from == sessionUser) {
+				var style = 'me';
+				return style;
+			}
+			else {
+				var style = 'you';
+				return style;
+			}
+
+		}
+		$scope.scrollToBottom = function() {
+			var container = $('.messageView');
+			var height = container[0].scrollHeight;
+			container.animate({scrollTop: height},1000);
+		}
+
+
 		$scope.sendMessage = function() {
-			var to = $scope.user;
+			var to = $scope.to;
 			var message = $scope.message;
 
 			profile.sendMessage(to, message);
 		}
+		$scope.loadMessages = function(id, room, participants) {
+			var participant1 = participants[0];
+			var participant2 = participants[1];
+			roomID = room;
 
-		$scope.getMessages = function() {
-			$scope.messages = {};
-			profile.getMessages()
+			socket.emit('join room', {room: room});
+
+			$scope.determineUser(participant1,participant2);
+
+			$scope.messages_view = true;
+			$scope.chat_view = true;
+
+			convoID = id;
+
+			profile.getMessages(convoID)
 			.success(function(messages) {
 				$scope.messages = messages;
 			});
 		}
 
-		// $scope.displayGames();
+		$scope.determineUser = function(user1,user2) {
+			if(user1 == sessionUser) {
+				userToSend = user2;
+			}
+			else {
+				userToSend = user1;
+			}
+		}
+
+		$scope.getConversations = function() {
+			// socket.emit('set nickname', sessionUser);
+			$scope.conversations = true;
+			$scope.loading = false;
+
+			$scope.getConversations = {};
+			profile.getConversations()
+			.success(function(conversation) {
+				if(conversation.length == 0) {
+					$scope.msg_err = true;
+				}
+				else {
+					$scope.conversation = conversation;
+				}
+
+			});
+		}
+
+		$scope.hideLoading = function() {
+			$scope.loading = true;
+			$scope.conversations = false;
+		}
 
 		$scope.removeGame = function(i) {
 			var id = i.id;
-			console.log(id);
-			console.log('Remove game function fired!');
 
 			toastr.options = {
 				"positionClass": "toast-bottom-left",
@@ -183,10 +287,8 @@ var profileCtrl = angular.module('profileCtrl', [])
 
 			profile.removegame(id)
 			.success(function() {
-				console.log('Success!');
 				$scope.displayGames();
 			});
 		}
-
 
 	});
