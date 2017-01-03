@@ -256,7 +256,8 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 		$scope.getConversations = function() {
 			// socket.emit('set nickname', sessionUser);
 			$scope.conversations = true;
-			$scope.loading = false;
+			$scope.loading = true;
+			$scope.messages_view = true;
 
 			$scope.getConversations = {};
 			profile.getConversations()
@@ -266,6 +267,8 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 				}
 				else {
 					$scope.conversation = conversation;
+					$scope.loading = false;
+					$scope.messages_view = false;
 				}
 
 			});
