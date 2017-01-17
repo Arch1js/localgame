@@ -1,60 +1,11 @@
-@media screen and (max-width: 1920px){
-    h2 {
-        font-size: 38px;
-    }
-    .list_item {
-      width: 20%;
-    }
-}
-@media screen and (max-width: 1024px){
-    h2 {
-        font-size: 38px;
-    }
-    .list_item {
-      width: 25%;
-    }
-}
-@media screen and (max-width: 720px){
-    h2 {
-        font-size: 38px;
-    }
-    .list_item {
-      width: 33.333%;
-    }
-}
-
-@media screen and (max-width: 640px){
-    h2 {
-        font-size: 30px;
-    }
-    .list_item {
-      width: 50%;
-    }
-}
-
-@media screen and (max-width: 320px){
-    h2 {
-        font-size: 28px;
-    }
-    .list_item {
-      width: 100%;
-      float: none;
-    }
-}
-body {
-  background-image: url("../asets/profile_background_optimized.jpg");
-  background-size: cover;
-  background-repeat: repeat-x;
-  background-attachment: fixed;
+.dropdown-menu > li > a:hover {
+  background-color:  #03a9f4;
 }
 
 .centerBlock {
   display: table;
   margin: 0 auto;
   margin-bottom: 10px;
-  -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 }
 html,
 body {
@@ -90,16 +41,7 @@ main {
   margin: 0px auto;
   max-width: 1200px;
   background-color: whitesmoke;
-  -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
 }
-.thumbnail {
-  -webkit-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
-}
-
 footer {
   /*background: #2980b9;*/
   color: #fff;
@@ -123,6 +65,17 @@ footer {
   -moz-box-shadow: 0px 0px 2px #888;
   -webkit-box-shadow: 0px 0px 2px #888;
   box-shadow: 0px 0px 2px #888;
+}
+.circle:hover{
+  background:  #f44336;
+}
+
+.circle > .fa + .fa,
+.circle:hover > .fa {
+  display: none;
+}
+.circle:hover > .fa + .fa {
+  display: inherit;
 }
 .list {
   width: 100%;
@@ -166,34 +119,18 @@ figure {
   padding: 0;
   margin: 0;
 }
-
-.form-inline .form-group {
-  margin-bottom: 10px;
+#action .col-xs-12 {
+  padding-right: 0px;
+  padding-left: 0px;
 }
-
-#search_bar {
-  background-color: black;
+#action .col-sm-12 {
+  padding-right: 0px;
+  padding-left: 0px;
 }
-
-#search {
-  margin: 10px;
+#action .col-md-6 {
+  padding-right: 0px;
+  padding-left: 0px;
 }
-#playstation {
-  height: 15px;
-  width: 20px;
-  margin-right: 10px;
-}
-#xbox {
-  height: 15px;
-  width: 15px;
-  margin-right: 10px;
-}
-#steam {
-  height: 20px;
-  width: 20px;
-  margin-right: 10px;
-}
-#nintendo {
-  height: 20px;
-  width: 70px;
+#action .btn {
+  margin: 0.2em;
 }

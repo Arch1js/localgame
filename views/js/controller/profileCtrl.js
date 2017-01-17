@@ -264,6 +264,8 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 			.success(function(conversation) {
 				if(conversation.length == 0) {
 					$scope.msg_err = true;
+					$scope.loading = false;
+					$scope.messages_view = false;
 				}
 				else {
 					$scope.conversation = conversation;

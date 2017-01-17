@@ -1,0 +1,72 @@
+.fa-check {
+  color:  #03a9f4;
+}
+.circle{
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  z-index: 1;
+  padding: 11px 14px;
+  background: #ffee4d;
+  display: inline-block;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  -moz-box-shadow: 0px 0px 2px #888;
+  -webkit-box-shadow: 0px 0px 2px #888;
+  box-shadow: 0px 0px 2px #888;
+}
+.circle:hover{
+  background:  #f44336;
+}
+
+.circle > .fa + .fa,
+.circle:hover > .fa {
+  display: none;
+}
+.circle:hover > .fa + .fa {
+  display: inherit;
+}
+.list {
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.list_item {
+  padding: 0.625rem;
+  padding-top: 15px;
+  float: left;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.list_item img {
+  width: 100%;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.list_item_inner {
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+  padding: 2px;
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.75);
+}
+.list_item figcaption {
+  padding: 1.25rem;
+}
+figure {
+  padding: 0;
+  margin: 0;
+}

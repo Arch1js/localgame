@@ -1,3 +1,4 @@
+<link href="/css/mygames.css" rel="stylesheet" type="text/css">
 <script>
   socket.on('new message', function(from){
     toastr.options = {
@@ -7,7 +8,19 @@
     toastr.success(newMessage);
   });
 </script>
-  <div id="games" class="tab-pane fade in active col-md-12 col-sm-12 col-xs-12" ng-show="mygames">
+<ul class="list" >
+  <li class="list_item" ng-repeat="i in games">
+    <figure class="list_item_inner">
+      <div class="circle" ng-click="removeGame(i)">
+        <i class="fa fa-check"></i>
+        <i class="fa fa-times"></i>
+      </div>
+      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" err-src="../asets/no-image-found.gif"/>
+      <figcaption>{{i.name}}</figcaption>
+    </figure>
+  </li>
+</ul>
+  <!-- <div id="games" class="tab-pane fade in active col-md-12 col-sm-12 col-xs-12" ng-show="mygames">
     <div class="masonary-row row">
         <div ng-repeat="i in games">
           <div class="col-xs-6 col-sm-6 col-lg-3">
@@ -25,8 +38,7 @@
       </div>
     </div>
     </div>
-
-  </div>
+  </div> -->
   <div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="games_error">
     <strong>Oh snap!</strong> No games found. Go and add some! <i class="fa fa-gamepad"></i>
   </div>

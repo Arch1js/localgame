@@ -1,25 +1,25 @@
+<link href="/css/requests.css" rel="stylesheet" type="text/css">
 <div class="col col-md-12 tab-pane fade in active" ng-show="game_requests">
-  <div class="masonary-row row">
-      <div ng-repeat="i in gamerequests">
-        <div class="col-xs-6 col-sm-6 col-lg-3">
-          <div class="thumbnail ">
-            <img src="https://images.igdb.com/igdb/image/upload/t_cover_small_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = '../asets/no-image-found.gif'">
-          <div class="caption">
-            <h3>{{i.game}}</h3>
-            <span>Requested by:</span><h5><a href="/user/?id={{i.user}}">{{i.username}}</a></h5>
-            <div id="action_buttons" class="col-md-12">
-              <div id="action" class="col-md-5">
-                <button class="btn btn-success" ng-click="acceptGameRequest(i)">Accept</button>
-              </div>
-              <div id="action" class="col-md-5">
-                <button class="btn btn-warning" ng-click="declineRequest(i)">Decline</button>
-              </div>
-            </div>
+  <ul class="list" >
+    <li class="list_item" ng-repeat="i in gamerequests">
+      <figure class="list_item_inner">
+        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" onerror="if (this.src != 'error.jpg') this.src = '../asets/no-image-found.gif'">
+        <figcaption><strong>{{i.game}}</strong>
+        <br>
+        <h5>Requested by: <a href="/user/?id={{i.user}}">{{i.username}}</a></h5>
+        <div id="action_buttons" class="col-md-12 col-sm-12 col-xs-12">
+          <div id="action">
+            <button class="btn btn-success col-md-5 col-sm-12 col-xs-12" ng-click="acceptGameRequest(i)">Accept</button>
+          </div>
+          <div id="action">
+            <button class="btn btn-warning col-md-5 col-sm-12 col-xs-12" ng-click="declineRequest(i)">Decline</button>
           </div>
         </div>
-    </div>
-  </div>
-</div>
+        </figcaption>
+      </div>
+      </figure>
+    </li>
+  </ul>
 </div>
 <div class="alert alert-info" class="col col-md-12 col-xs-12" ng-show="gamerequest_error" style="margin-top: 10px">
   <strong>Don't panic!</strong> You don't have any game requests! <i class="fa fa-bell-o"></i>
