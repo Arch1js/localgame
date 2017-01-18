@@ -53,10 +53,8 @@ module.exports = function(app, passport, io) {
         });
 
     app.post('/userLocation', function(req, res){
-      console.log('/userLocation activated');
       var user = req.user._id;
       User.findOne({_id: ObjectId(user)}, {"avatar":1, "location":1}, function(err, user) {
-          console.log(user);
           res.json(user);
         });
       });

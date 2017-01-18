@@ -83,7 +83,6 @@ angular.module('gservice', [])
                 var  contentString =
                     '<p><b><a href="/user/?id=' + user._id+'" target="_blank">'+ user.username +'</a></b><br>'+
                     '<p1>Platforms: </p1></p>';
-                console.log(user);
 
                 if(!user.location) {
                   console.log('no locations');
@@ -95,7 +94,7 @@ angular.module('gservice', [])
                   locations.push({
 
                       latlon: new google.maps.LatLng(user.location.lat, user.location.lng),
-
+                      title: user.username,
                       message: new google.maps.InfoWindow({
                           content: contentString,
                           maxWidth: 320
@@ -107,7 +106,6 @@ angular.module('gservice', [])
 
         }
         // location is now an array populated with records in Google Maps format
-        console.log(locations);
         return locations;
     };
 
@@ -141,7 +139,7 @@ var initialize = function(latitude, longitude, filter) {
         var marker = new google.maps.Marker({
             position: n.latlon,
             map: map,
-            title: "Big Map",
+            title: ''+n.title+'',
             icon: icon,
         });
 

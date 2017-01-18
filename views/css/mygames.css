@@ -53,6 +53,7 @@
 }
 ul {
   list-style: none;
+  padding: 0;
 }
 .list_item_inner {
   width: 100%;

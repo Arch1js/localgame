@@ -37,7 +37,7 @@
         font-size: 28px;
     }
     .list_item {
-      width: 100%;
+      width: 50%;
       float: none;
     }
 }
@@ -149,6 +149,7 @@ footer {
 }
 ul {
   list-style: none;
+  padding: 0;
 }
 .list_item_inner {
   width: 100%;

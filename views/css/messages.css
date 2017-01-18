@@ -1,0 +1,145 @@
+.toolbar {
+  padding: 10px;
+}
+#msg_input {
+  display: inline-block;
+}
+#message {
+text-align:center;
+display: block;
+margin:0px auto;
+width: 750px;
+height: 300px;
+}
+.me {
+	clear:both;
+	float:left;
+  margin-bottom:10px;
+  /*margin-left: 80px;*/
+}
+.you {
+	clear:both;
+	float:right;
+	margin-bottom:10px;
+  /*margin-right: 80px;*/
+}
+.chats .me p {
+	text-align:left;
+	float: left;
+	display: inline-block;
+	margin-left: 20px;
+	margin-bottom:30px;
+	padding: 25px 34px;
+	min-width: 160px;
+	min-height: 10px;
+	max-width: 510px;
+	background-color: #FFF;
+	border-radius: 3px;
+	box-shadow: 0px 3px 3px #E3E4E6;
+	color: #637277;
+	line-height: 1.4;
+	word-wrap: break-word;
+}
+.chats .you p {
+	text-align:left;
+	float: right;
+	display: inline-block;
+	margin-right:20px;
+	margin-bottom:30px;
+	padding: 25px 34px;
+	min-width: 160px;
+	min-height: 10px;
+	max-width: 510px;
+	background-color: #FFF;
+	border-radius: 3px;
+	box-shadow: 0px 3px 3px #E3E4E6;
+	color: #637277;
+	line-height: 1.4;
+	word-wrap: break-word;
+}
+.you .image{
+	float:right;
+}
+.image b {
+	overflow: hidden;
+	display: block;
+	clear: both;
+	padding-top: 7px;
+}
+
+.image i{
+	font-size: 12px;
+	line-height: 1.2;
+	display: block;
+	opacity: 0.8;
+	padding-top: 4px;
+}
+.image {
+	clear:both;
+	float:left;
+	height: 110px;
+	width: 80px;
+	text-align:center;
+	overflow: hidden;
+}
+
+.image img {
+	float: left;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+}
+.chats {
+	list-style-type: none;
+	margin-top:10px;
+}
+#chatmessage {
+	border: 1px solid #cccccc;
+	border-radius: 2px;
+	padding-left: 20px;
+	padding-top: 20px;
+	resize: none;
+	font:inherit;
+	color:black;
+  margin-bottom: 10px;
+}
+.chatscreenOld{
+	margin: 0 auto;
+	overflow:hidden;
+}
+.chatscreenNew{
+	margin: 0 auto;
+	overflow:hidden;
+}
+.messageView {
+  overflow-y: scroll;
+  height: 650px;
+  /*width: 100%;*/
+}
+#withUser {
+  margin-top: 20px;
+}
+#continue {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+#noMessages {
+  display: inline-block;
+}
+#new_msg {
+  margin-right: 5px;
+  margin-bottom: 5px
+}
+#quicksearch {
+  padding: 0px;
+}
+#submit {
+  height: 50px;
+  width: 80px;
+  font-size: large;
+}
+.col .col-xs-12 .chats {
+  padding-right: 0px;
+  padding-left: 0px;
+}

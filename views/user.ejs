@@ -27,13 +27,13 @@
 	<main>
 		<div class="content">
 			<div id="profile" class="col col-md-12 col-xs-12 col-sm-12">
-				<div class="col-md-1 col-sm-3 col-xs-3">
+				<div class="col-md-1 col-sm-2 col-xs-4">
 					<canvas id="userIdenticon" width="80" height="80" />
 				</div>
-				<div id="username" class="col col-md-3 col-sm-3 col-xs-6">
+				<div id="username" class="col col-md-3 col-sm-3 col-xs-3">
 					<b><h2>{{user}}</h2><b>
 				</div>
-				<div id="request" class="col col-md-2 col-sm-3 col-xs-5 col-sm-offset-3 col-md-offset-5">
+				<div id="request" class="col col-md-2 col-sm-3 col-xs-2 col-sm-offset-3 col-md-offset-5">
 					<button id="friend" ng-show="friend_btn" type="submit" ng-class="sent? 'btn btn-success' : 'btn btn-primary'" ng-click="sendFriendRequest(); sent = !sent">
 						<span ng-hide="sent"><i class="fa fa-plus" aria-hidden="true"></i> Send friend request</span>
 						<span ng-show="sent"><i class="fa fa-check" aria-hidden="true"></i> Request sent</span>
@@ -41,7 +41,18 @@
 					<button id="friend" ng-show="friend_btn_positive" type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i> Friend</button>
 				</div>
 			</div>
-			<div class="col col-md-12 col-sm-12 col-xs-12">
+			<ul class="list" >
+			  <li class="list_item" ng-repeat="i in games">
+			    <figure class="list_item_inner">
+						<button ng-class="change? 'btn btn-success trade' : 'btn btn-primary trade'" ng-click="sendGameRequest(i); change = !change; send_button = true" ng-disabled="send_button">
+							<span ng-hide="change"><i class="fa fa-star" aria-hidden="true"></i> Trade</span>
+							<span ng-show="change"><i class="fa fa-check" aria-hidden="true"></i> Sent</span></button>
+			      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" err-src="../asets/no-image-found.gif"/>
+			      <figcaption>{{i.name}}</figcaption>
+			    </figure>
+			  </li>
+			</ul>
+			<!-- <div class="col col-md-12 col-sm-12 col-xs-12">
 				<div class="masonary-row row cards">
 						<div ng-repeat="i in games">
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
@@ -58,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	<div footer></div>
 </body>
