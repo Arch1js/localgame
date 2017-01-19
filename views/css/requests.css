@@ -124,9 +124,9 @@ figure {
   padding-right: 0px;
   padding-left: 0px;
 }
-.col-xs-12 {
-  padding-right: 0px;
-  padding-left: 0px;
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }
 #action .col-sm-12 {
   padding-right: 0px;

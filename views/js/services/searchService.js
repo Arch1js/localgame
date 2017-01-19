@@ -12,12 +12,8 @@ angular.module('searchService', ['ui.bootstrap'])
 				console.log(search);
 				return $http.post('/games', {search: search});
 			},
-			create : function(id, name, cover) {
-				console.log(id);
-				console.log(name);
-				console.log(cover);
-
-				return $http.post('/addgames',{id: id, name: name, cover: cover});
+			create : function(id, name, cover, platform) {
+				return $http.post('/addgames',{id: id, name: name, cover: cover, platform: platform});
 			}
 
 		}

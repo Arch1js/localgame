@@ -15,11 +15,8 @@ angular.module('searchController', ['ui.bootstrap'])
 		$scope.formData = {};
 
 		$scope.imgError = function() {
-			console.log("Img error!!");
 		};
 		$scope.getNewestGames = function() {
-			console.log('Fetching newest games..');
-
 			Games.getNewest()
 
 			.success(function(data) {
@@ -78,35 +75,39 @@ angular.module('searchController', ['ui.bootstrap'])
 								label: '<img id="playstation" src="../../asets/PlayStation.png" /><b>PlayStation</b>',
 								cssClass: 'btn-info',
 								action: function(dialog) {
-									$scope.addGame(i);
+									var platform = "PlayStation";
+									$scope.addGame(i,platform);
 									dialog.close();
 								}
 						}, {
 								label: '<img id="xbox" src="../../asets/Xbox.png" /><b>xBox</b>',
 								cssClass: 'btn-success',
 								action: function(dialog) {
-									$scope.addGame(i);
+									var platform = "XBox";
+									$scope.addGame(i,platform);
 									dialog.close();
 								}
 						}, {
-							label: '<img id="steam" src="../../asets/Steam.png" /><b>PC</b>',
+							label: '<img id="steam" src="../../asets/PC.png" /><b>PC</b>',
 							cssClass: 'btn-warning',
 							action: function(dialog) {
-								$scope.addGame(i);
+								var platform = "PC";
+								$scope.addGame(i,platform);
 								dialog.close();
 							}
 						}, {
 							label: '<img id="nintendo" src="../../asets/Nintendo.png" />',
 							cssClass: 'btn-primary',
 							action: function(dialog) {
-								$scope.addGame(i);
+								var platform = "Nintendo";
+								$scope.addGame(i,platform);
 								dialog.close();
 							}
 						}]
 				});
 		}
 
-		$scope.addGame = function(i) {
+		$scope.addGame = function(i,p) {
 
 			toastr.options = {
 				"positionClass": "toast-bottom-left",
@@ -114,28 +115,20 @@ angular.module('searchController', ['ui.bootstrap'])
 			var addMessage = 'Game added to your collection!';
 			toastr.success(addMessage);
 
-			// $scope.gameID = i.id; //for testing purpose to see id on screen
-			// $scope.name = i.name;
-			// $scope.cover = i.cover.cloudinary_id;
-
 			console.log('addGame function fired');
 
 			var id = i.id;
 			var name = i.name;
+			var platform = p;
 
 			if(i.cover == undefined) {
 				var cover = 'nocover_qhhlj6';
 			}
 			else {
-
 				var cover = i.cover.cloudinary_id;
 			}
 
-			Games.create(id, name, cover)
-
-				.success(function(data) {
-
-				});
+			Games.create(id, name, cover, platform);
 		};
 	})
 	.directive('errSrc', function() {

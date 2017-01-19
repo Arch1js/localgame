@@ -198,3 +198,13 @@ figure {
   height: 20px;
   width: 70px;
 }
+#summary {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.3em;
+  max-height: 6.5em;
+}
+.nopadding {
+  padding-right: 0px;
+  padding-left: 0px;
+}

@@ -5,11 +5,14 @@
   display: inline-block;
 }
 #message {
-text-align:center;
-display: block;
-margin:0px auto;
-width: 750px;
-height: 300px;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  padding-left: 20px;
+  padding-top: 20px;
+  resize: none;
+  font:inherit;
+  color:black;
+  margin-bottom: 10px;
 }
 .me {
 	clear:both;
@@ -133,6 +136,7 @@ height: 300px;
 }
 #quicksearch {
   padding: 0px;
+  margin-bottom: 10px;
 }
 #submit {
   height: 50px;

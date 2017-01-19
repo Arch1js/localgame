@@ -87,7 +87,7 @@ app.post('/games', function(req, res, searchData) {
 		var search = req.body.search;
 		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
 
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover&search="+search_key)
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary&search="+search_key)
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
@@ -99,7 +99,7 @@ app.post('/games', function(req, res, searchData) {
 
 	app.post('/getnewest', function(req, res) {
 
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=cover,name&limit=30&offset=130")
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,popularity&order=popularity:desc&limit=30&offset=0")
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
@@ -311,13 +311,16 @@ app.post('/games', function(req, res, searchData) {
           });
 
 	      app.post('/addgames', function(req, res) {
+          console.log(req.body);
         		var id = req.body.id;
         		var title = req.body.name;
         		var cover = req.body.cover;
+            var platform = req.body.platform;
+            console.log("Platform is: " + platform);
         		var newGame = User();
         		var user = req.user._id;
 
-        		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover}}}, function(err) {
+        		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover, platform: platform}}}, function(err) {
         			if(err)
         			console.log("Error");
         		});

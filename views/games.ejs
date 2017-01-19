@@ -57,25 +57,12 @@
 				      </div>
 				      <img ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" err-src="../asets/no-image-found.gif"/>
 				      <figcaption><h4>{{i.name}}</strong></h4>
+							<div id="summary" class="col col-md-12 col-sm-12 col-xs-12 nopadding">
+								<p>{{i.summary}}</p>
+							</div>
 				    </figure>
 				  </li>
 				</ul>
-				<!-- <div class="masonary-row row" ng-show="games">
-						<div ng-repeat="i in games">
-							<div class="col-xs-6 col-sm-6 col-md-6">
-								<div class="thumbnail ">
-									<div class="circle" ng-click="askPlatform(i); disable = !disable">
-										<i ng-class="disable ? 'fa fa-check' : 'fa fa-plus'"></i>
-									</div>
-									<img ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" err-src="../asets/no-image-found.gif"/>
-								<div class="caption">
-									<h4>{{i.name}}</h4>
-									<p class="flex-text text-muted"></p>
-								</div>
-							</div>
-					</div>
-				</div>
-			</div> -->
 			<div class="alert alert-danger" class="col col-md-12 col-xs-12" ng-show="error">
 				<strong>Error!</strong> No results found...
 			</div>

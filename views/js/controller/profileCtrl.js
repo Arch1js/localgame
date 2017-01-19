@@ -155,7 +155,7 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 			profile.getmygames()
 
 			.success(function(user) {
-          // console.log(user);
+          console.log(user);
           jdenticon.update("#userIdenticon", user.avatar);
 
 					if(user.games.length == 0) {
@@ -219,9 +219,11 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 
 
 		$scope.sendMessage = function() {
-			var to = $scope.to;
+			var to = $scope.to.username;
+			console.log(to);
 			var message = $scope.message;
 
+    	$('#newMessage').modal('hide');
 			profile.sendMessage(to, message);
 		}
 		$scope.loadMessages = function(id, room, participants) {
