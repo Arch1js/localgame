@@ -7,6 +7,7 @@ var conversationSchema = mongoose.Schema({
   id: String,
   roomID: String,
   participants: Array,
+  status: String,
   created: {type: Date, default: Date.now}
 });
 

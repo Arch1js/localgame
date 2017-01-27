@@ -57,7 +57,9 @@
 				      </div>
 				      <img ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" err-src="../asets/no-image-found.gif"/>
 				      <figcaption><h4>{{i.name}}</strong></h4>
+								<p><b>Release date: </b>{{i.first_release_date | date: 'dd/MM/yyyy'}}</p>
 							<div id="summary" class="col col-md-12 col-sm-12 col-xs-12 nopadding">
+								<b>Summary: </b>
 								<p>{{i.summary}}</p>
 							</div>
 				    </figure>

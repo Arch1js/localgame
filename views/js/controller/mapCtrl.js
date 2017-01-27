@@ -1,6 +1,6 @@
 // Creates the addCtrl Module and Controller. Note that it depends on the 'geolocation' and 'gservice' modules and controllers.
-var addCtrl = angular.module('mapCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, gservice, jdenticonService){
+angular.module('mapCtrl', ['geolocation', 'gservice'])
+.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, gservice, jdenticonService){
 
   $scope.maptab = 'active'; //set navbar map tab active
 
@@ -10,8 +10,6 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
     jdenticon.update("#identicon", data.avatar);
   });
 
-    // Initializes Variables
-    // ----------------------------------------------------------------------------
     $scope.formData = {};
     var queryBody = {};
     var coords = {};
@@ -24,8 +22,6 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
     .success(function(result){
 
       if(!result.location) {
-      console.log('no location');
-
         askLocation = true;
 
         geolocation.getLocation().then(function(data){
@@ -34,7 +30,7 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
             // Set the latitude and longitude equal to the HTML5 coordinates
             $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
             $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
-
+            $scope.askToRemeber();
             gservice.refresh($scope.formData.latitude, $scope.formData.longitude);
         });
       }
@@ -44,25 +40,54 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
         $scope.formData.longitude = result.location.lng;
         gservice.refresh($scope.formData.latitude, $scope.formData.longitude);
       }
-
       jdenticon.update("#identicon", result.avatar);
-
     })
 
-    // Get coordinates based on mouse click. When a click event is detected....
     $rootScope.$on("clicked", function(){
-
-        // Run the gservice functions associated with identifying coordinates
         $scope.$apply(function(){
             $scope.formData.latitude = parseFloat(gservice.clickLat).toFixed(3);
             $scope.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);
         });
     });
+    $scope.searchGame = function() {
+      console.log("Starting search");
+			$scope.error = false;
+
+			var search = $scope.search;
+			console.log(search);
+				Games.searchGames(search)
+
+					.success(function(data) {
+						if(data.length == 0) {
+							$scope.error = true;
+						}
+						$scope.formData = {}; // clear the form so that new query can be entered
+						$scope.games = data; // update scope with new games
+						$scope.loading = false;
+					});
+		};
+    $scope.sugestions = function(val) {
+
+			var output = $.ajax({
+			    url: 'https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search='+val,
+			    type: 'GET',
+			    data: {},
+			    dataType: 'json',
+			    success: function(data) {
+            console.log(data);
+			        },
+			    error: function(err) { alert(err); },
+			    beforeSend: function(xhr) {
+			    xhr.setRequestHeader("X-Mashape-Authorization", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB"); // Enter here your Mashape key
+			    }
+			});
+			return output;
+		};
 
     $scope.askToRemeber = function() {
       BootstrapDialog.show({
-          title: 'localGame',
-            message: 'Can we save your location for next time?',
+          title: '<img width="100px" height="40px" alt="Brand" src="../../asets/logo_title.svg">',
+            message: 'Can we save your location for future use?',
             buttons: [{
                 label: 'Yes',
                 cssClass: 'btn-success',
@@ -72,7 +97,6 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
                       longitude: parseFloat($scope.formData.longitude),
                       latitude: parseFloat($scope.formData.latitude)
                   };
-                  console.log(queryBody);
                   $http.post('/saveLocation', queryBody);
 
                   dialog.close();
@@ -87,10 +111,7 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
         });
     }
 
-    // Take query parameters and incorporate into a JSON queryBody
     $scope.queryUsers = function(){
-
-
           geocoder = new google.maps.Geocoder();
 
           var address = $scope.formData.location;
@@ -100,7 +121,6 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
             geocoder.geocode( { 'address': address}, function(results, status) {
 
               if (status == 'OK') {
-                console.log('Geocode OK');
                 var lat = results[0].geometry.location.lat();
                 var lng = results[0].geometry.location.lng();
 
@@ -128,24 +148,15 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
       if(!$scope.formData.distance) {
         $scope.formData.distance = 10;
       }
-
-              // Assemble Query Body
               queryBody = {
                   longitude: parseFloat($scope.formData.longitude),
                   latitude: parseFloat($scope.formData.latitude),
                   distance: parseFloat($scope.formData.distance)
               };
 
-              // Post the queryBody to the /query POST route to retrieve the filtered results
               $http.post('/query', queryBody)
-
-                  // Store the filtered results in queryResults
                   .success(function(queryResults){
-
-                      // Pass the filtered results to the Google Map Service and refresh the map
                       gservice.refresh(queryBody.latitude, queryBody.longitude, queryResults);
-
-                      // Count the number of records retrieved for the panel-footer
                       $scope.queryCount = queryResults.length;
                       $scope.usercount = true;
                   })
@@ -154,12 +165,7 @@ addCtrl.controller('mapCtrl', function($scope, $http, $rootScope, geolocation, g
                   })
     }
 
-    // Functions
-    // ----------------------------------------------------------------------------
-    // Get coordinates based on mouse click. When a click event is detected....
     $rootScope.$on("clicked", function(){
-
-        // Run the gservice functions associated with identifying coordinates
         $scope.$apply(function(){
             $scope.formData.latitude = parseFloat(gservice.clickLat).toFixed(3);
             $scope.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);

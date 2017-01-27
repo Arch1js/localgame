@@ -24,6 +24,15 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 			});
 		});
 
+		profile.getUnreadCount()
+		.success(function(number) {
+			var count = 0;
+			for (var i in number) {
+				count++;
+			}
+			$scope.unreadCount = count;
+		});
+
 		$scope.askToSendConfirm = function(i) {
 			var gameID = i.id;
       BootstrapDialog.show({
@@ -184,7 +193,11 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 			var user = userToSend;
 			var message = $('#chatmessage').val();
 			socket.emit('chat message', {room: roomID, convoID: convoID, msg: message, toUser: user});
-
+			var date = new Date();
+			var dateNow = date.getDate();
+			var month = date.getMonth() +1;
+			var year = date.getFullYear();
+			var time = date.toLocaleTimeString();
 				var message = $(
 		      '<ul class="chats">'+
 					'<li class="me">'+
@@ -192,7 +205,7 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 							'<img src="../asets/unnamed.jpg" />' +
 							'<b>'+ sessionUser +'</b>' +
 						'</div>' +
-						'<p>'+ message +'</p>' +
+							'<p>'+ message +'<br><p1><font size="2">'+time + ' '+dateNow+'/'+month+'/'+year+'</font></p1></p>' +
 					'</li>'+
 		    '</ul>');
 
@@ -243,6 +256,7 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 			profile.getMessages(convoID)
 			.success(function(messages) {
 				$scope.messages = messages;
+				console.log(messages);
 			});
 		}
 
@@ -284,12 +298,13 @@ var profileCtrl = angular.module('profileCtrl', ['ui.bootstrap'])
 		}
 
 		$scope.removeGame = function(i) {
+			var title = i.name;
 			var id = i.id;
 
 			toastr.options = {
 				"positionClass": "toast-bottom-left",
 			};
-			var removeMessage = 'Game removed from your collection!';
+			var removeMessage = title + ' removed from your collection!';
 			toastr.warning(removeMessage);
 
 			profile.removegame(id)

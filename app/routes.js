@@ -76,7 +76,6 @@ module.exports = function(app, passport, io) {
 				if(err)
 						res.send(err);
 				else
-						console.log(users);
 						res.json(users);
 		        });
       });
@@ -87,11 +86,10 @@ app.post('/games', function(req, res, searchData) {
 		var search = req.body.search;
 		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
 
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary&search="+search_key)
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,first_release_date&search="+search_key)
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
-      console.log(result.status, result.headers, result.body);
 			res.send(result.body);
 		});
 
@@ -99,11 +97,10 @@ app.post('/games', function(req, res, searchData) {
 
 	app.post('/getnewest', function(req, res) {
 
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,popularity&order=popularity:desc&limit=30&offset=0")
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,first_release_date&order=popularity:desc&limit=30&offset=0")
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
-		  console.log(result.status, result.headers, result.body);
 			res.send(result.body);
 		});
 
@@ -339,6 +336,7 @@ app.post('/games', function(req, res, searchData) {
 
         newConvo.id = uuid;
         newConvo.roomID = shortid.generate();
+        newConvo.status = 'unseen';
         newConvo.participants = [from_usr,to]
         newConvo.save(function(err) {
           if(err)
@@ -359,18 +357,39 @@ app.post('/games', function(req, res, searchData) {
           }
         });
       });
-
+      app.post('/getUnreadCount', function(req, res) {
+        var user = req.user.username;
+        messageCount = function(request, callback) {
+        Conversation.find({ $or: [{participants: {$in:[user]}}], status: "unseen"},{"status":1}, function(err,result) {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            console.log(result);
+            res.send(result);
+          }
+        })
+      }
+        messageCount({}, function(err,count) {
+          console.log(count);
+          res.send(count);
+        })
+      });
       app.post('/getMessages', function(req, res) {
         var convoID = req.body.id;
         console.log("Routes received id: " + convoID);
 
         var message = Messages.find({conversationID: convoID}, function(err,result) {
-          // if(err) {
-          //   console.log(err);
-          // }
-          // else {
-          //   res.send(result);
-          // }
+          if(err) {
+            console.log(err);
+          }
+          else {
+            Conversation.update({id: convoID}, {$set: {status: "seen"}}, function(err) {
+              if(err) {
+                console.log(err);
+              }
+            });
+          }
         });
         message.sort('created').exec(function(err,result) {
           if(err) {
@@ -394,15 +413,6 @@ app.post('/games', function(req, res, searchData) {
             res.send(result);
           }
         })
-        // Messages.find({ $or: [{from: user}]}, function(err,result) {
-        //   if(err) {
-        //     console.log(err);
-        //   }
-        //   else {
-        //     console.log(result);
-        //     res.send(result);
-        //   }
-        // });
       });
 
 		app.post('/removegame', function(req, res) {
@@ -428,7 +438,7 @@ app.post('/games', function(req, res, searchData) {
 		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
-	app.get('/map', function(req, res) {
+	app.get('/map',isLoggedIn, function(req, res) {
 		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
@@ -439,7 +449,7 @@ app.post('/games', function(req, res, searchData) {
   });
 
 	// PROFILE SECTION =========================
-	app.get('/profile', function(req, res) {
+	app.get('/profile',isLoggedIn, function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user
 		});
@@ -462,19 +472,13 @@ app.post('/games', function(req, res, searchData) {
 		});
 	});
 
-	// app.get('/profile', function(req, res) { //for development to not reqire a user
-	// 	res.render('profile.ejs', {
-	// 		user : req.user
-	// 	});
-	// });
-
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/login');
 	});
 
-	app.get('/games', function(req, res) {
+	app.get('/games',isLoggedIn, function(req, res) {
 		res.render('games.ejs', {
 			user : req.user
 		});

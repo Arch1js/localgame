@@ -8,8 +8,6 @@ angular.module('searchService', ['ui.bootstrap'])
 				return $http.post('/getnewest');
 			},
 			searchGames : function(search) {
-				console.log('Search factory fired');
-				console.log(search);
 				return $http.post('/games', {search: search});
 			},
 			create : function(id, name, cover, platform) {

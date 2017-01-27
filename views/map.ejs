@@ -23,8 +23,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
     <!-- Angular Files -->
     <script src="/js/app.js"></script> <!-- load our main application -->
-    <script src="js/controller/searchCtrl.js"></script> <!-- load up our controller -->
-    <script src="js/services/searchService.js"></script> <!-- load our game service -->
+
+
     <script src="js/services/jdenticonService.js"></script> <!-- load our game service -->
     <script src="js/controller/mapCtrl.js"></script>
     <script src="/js/gservice.js"></script>
@@ -34,20 +34,14 @@
 <body ng-controller="mapCtrl">
 <div navbar></div> <!--navbar directive-->
   <div class="container">
-      <!-- Map and Side Panel -->
       <div class="row content">
-          <!-- Google Map -->
           <div class="col-md-10">
               <div id="map"></div>
           </div>
-          <!-- Side Panel -->
           <div class="col-md-2">
             <b><p>Search for other users of localGame</p><b>
               <div class="panel panel-default">
-
-                  <!-- Panel Body -->
                   <div class="panel-body">
-                      <!-- Creates Form (novalidate disables HTML validation, Angular will control) -->
                       <form name ="addForm" novalidate>
                           <div class="form-group">
                             <label for="distance">Location <i class="fa fa-location-arrow" aria-hidden="true"></i></label>
@@ -58,6 +52,24 @@
                             <input type="text" class="form-control" id="distance" placeholder="100" ng-model="formData.distance">
                           </div>
                           <div class="form-group">
+                            <label for="platform">Platform</label>
+                             <select class="form-control" id="platform" ng-model="platform">
+                               <option></option>
+                               <option>PC</option>
+                               <option>PlayStation</option>
+                               <option>XBox</option>
+                               <option>Nintendo</option>
+                             </select>
+                             <label for="game">Game</label>
+                             <input type="text" ng-model="search" ng-model-options="{debounce: 100}" placeholder="Search for games..."
+                   				uib-typeahead="game.name for game in sugestions($viewValue)" typeahead-on-select="searchGame()"
+               						aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963"
+                   				typeahead-no-results="noResults" class="form-control">
+               							<div ng-show="noResults">
+                 							<i class="glyphicon glyphicon-remove"></i> No Results Found
+               							</div>
+                           </div>
+                           <div class="form-group">
                               <label for="latitude">Current Latitude</label>
                               <input type="text" class="form-control" id="latitude" value="51.511" ng-model="formData.latitude" readonly>
                               <label for="longitude">Current Longitude</label>
@@ -72,6 +84,5 @@
       </div>
       <hr/>
   </div>
-
 </body>
 </html>

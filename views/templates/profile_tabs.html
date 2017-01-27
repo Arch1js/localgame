@@ -11,7 +11,7 @@
    </ul>
   </li>
   <li ng-class="{ active: isActive('/friends')}"><a data-toggle="tab" href="#/friends" ng-click="getFriends()">Friends</a></li>
-  <li ng-class="{ active: isActive('/messages')}"><a data-toggle="tab" href="#/messages" ng-click="getConversations()">Messages <span class="badge">5</span></a></li>
+  <li ng-class="{ active: isActive('/messages')}"><a data-toggle="tab" href="#/messages" ng-click="getConversations()">Messages <span class="badge">{{unreadCount}}</span></a></li>
 </ul>
 <div class="tab-content">
   <div ng-view></div>

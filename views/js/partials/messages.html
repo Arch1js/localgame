@@ -8,7 +8,7 @@
 					'<img src="../asets/unnamed.jpg" />' +
 					'<b>'+ from +'</b>' +
 				'</div>' +
-				'<p>'+ msg +'</p>' +
+				'<p>'+ msg +'<br><p1><font size="2">'+created+'</font></p1></p>' +
 			'</li>'+
     '</ul>');
 
@@ -56,7 +56,8 @@
             <img src='../asets/unnamed.jpg'/>
             <b>{{i.from}}</b>
           </div>
-          <p>{{i.msg}}</p>
+          <p>{{i.msg}}<br><p1><font size="2">{{i.created | date:'HH:mm:ss dd/MM/yy'}}</font></p1></p>
+
         </li>
       </ul>
     </div>

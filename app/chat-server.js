@@ -1,5 +1,6 @@
 var User = require('./models/user');
 var Messages = require('./models/messages');
+var Conversation = require('./models/conversation');
 var ObjectId = require('mongodb').ObjectID;
 var socketio = require('socket.io');
 var io;
@@ -61,7 +62,6 @@ function handleClientDisconnections(socket){
 
   function joinRoom(socket){
     socket.on('join room', function(data) {
-      console.log("Joined room - " + data.room);
       socket.join(data.room);
     })
   }
@@ -72,10 +72,6 @@ function handleClientDisconnections(socket){
       var to = data.toUser;
       var from = nicknames[socket.id];
       var msg = data.msg;
-      console.log("Conversation id - " + conversationID);
-      console.log("To User - " + to);
-      console.log("From user - " + from);
-      console.log("Message - " + msg);
       var client = clients[data.toUser];
 
       var saveMsg = new Messages();
@@ -86,7 +82,21 @@ function handleClientDisconnections(socket){
       saveMsg.msg = msg;
       saveMsg.save(function(err){
         if(err) throw err;
-        socket.broadcast.to(data.room).emit('chat message', data.msg, from);
+        Conversation.update({id: conversationID}, {$set: {status: "unseen"}}, function(err) {
+          if(err) {
+            console.log(err);
+          }
+          else {
+            console.log("Updated status successfully!");
+          }
+        });
+        var date = new Date();
+        var dateNow = date.getDate();
+        var month = date.getMonth() +1;
+        var year = date.getFullYear();
+        var time = date.toLocaleTimeString();
+        var date_time = time + " " + dateNow+"/"+month+"/"+year;
+        socket.broadcast.to(data.room).emit('chat message', data.msg, from, date_time);
       });
       chat.to(client).emit('new message', from);
 

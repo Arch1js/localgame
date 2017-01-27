@@ -1,6 +1,5 @@
 angular.module('searchController', ['ui.bootstrap'])
 
-	// inject the Todo service factory into our controller
 	.controller('searchGamesCtrl', function($scope, $http, Games, jdenticonService) {
 		$scope.loading = true;
 
@@ -108,11 +107,11 @@ angular.module('searchController', ['ui.bootstrap'])
 		}
 
 		$scope.addGame = function(i,p) {
-
+			var title = i.name;
 			toastr.options = {
 				"positionClass": "toast-bottom-left",
 			};
-			var addMessage = 'Game added to your collection!';
+			var addMessage = title + ' added to your collection!';
 			toastr.success(addMessage);
 
 			console.log('addGame function fired');
