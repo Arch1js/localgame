@@ -1,8 +1,9 @@
-<div ng-repeat="i in friendrequests">
+<div ng-repeat="i in friendrequests" last-element-directive>
 <div id="requests" class="col col-md-12 tab-pane fade in active" ng-show="user_requests">
       <div class="col-md-12">
         <div class="col-md-1 col-sm-2 col-xs-5">
-          <img id="reqProfile" src="../../asets/user.svg"></img>
+          <!-- <img id="reqProfile" src="../../asets/user.svg"></img> -->
+          <canvas width="50" height="50" data-jdenticon-hash="{{i.avatar}}"></canvas>
         </div>
         <div class="col-md-3">
           <h3><a href="/user/?id={{i.user}}" target="_blank">{{i.username}}</a></h3>

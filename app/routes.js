@@ -188,14 +188,21 @@ app.post('/games', function(req, res, searchData) {
           var newGame = User();
           var resultArray = {};
           var i = 0;
-
+          var userdata = [];
           User.findOne({_id: ObjectId(user)}, {"friends":1}, function(err,result) {
             if(err) {
               console.log(err);
             }
             else {
-              console.log(result);
-              res.send(result);
+
+              for (var i = 0; i < result.friends.length; i++) {
+                User.findOne({_id: ObjectId(result.friends[i].user)}, {"username":1, "avatar": 1}, function(err,result) {
+                  userdata.push(result);
+                  if(i == userdata.length) {
+                    res.send(userdata);
+                  }
+                });
+              }
             }
           });
         });

@@ -1,15 +1,15 @@
 angular.module('searchController', ['ui.bootstrap'])
 
-	.controller('searchGamesCtrl', function($scope, $http, Games, jdenticonService) {
+	.controller('searchGamesCtrl', function($scope, $http, Games) {
 		$scope.loading = true;
 
 		$scope.gametab = 'active'; //set navbar games tab active
 
-		jdenticonService.geticon()
-		.success(function(data) {
-			$scope.username = data.username;
-			jdenticon.update("#identicon", data.avatar);
-		});
+		// jdenticonService.geticon()
+		// .success(function(data) {
+		// 	$scope.username = data.username;
+		// 	jdenticon.update("#identicon", data.avatar);
+		// });
 
 		$scope.formData = {};
 

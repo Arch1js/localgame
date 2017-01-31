@@ -1,13 +1,4 @@
 <link href="/css/mygames.css" rel="stylesheet" type="text/css">
-<script>
-  socket.on('new message', function(from){
-    toastr.options = {
-      "positionClass": "toast-bottom-left",
-    };
-    var newMessage = 'New message from ' + from;
-    toastr.success(newMessage);
-  });
-</script>
 <ul class="list" >
   <li class="list_item" ng-repeat="i in games">
     <figure class="list_item_inner">
@@ -17,7 +8,7 @@
       </div>
       <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover}}" err-src="../asets/no-image-found.gif"/>
       <figcaption><h3>{{i.name}}</h3></figcaption>
-      <p class="platform">Platfrom: </p><span class="label label-primary platform"><i class="fa fa-gamepad" aria-hidden="true"></i> {{i.platform}}</span>      
+      <p class="platform">Platfrom: </p><span class="label label-primary platform"><i class="fa fa-gamepad" aria-hidden="true"></i> {{i.platform}}</span>
     </figure>
   </li>
 </ul>

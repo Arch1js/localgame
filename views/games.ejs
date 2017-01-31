@@ -3,6 +3,7 @@
 <head>
 	<title>Games</title>
 	<meta charset="UTF-8">
+	<link rel="icon" type="image/svg+xml" href="/asets/logo.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -16,10 +17,11 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.min.js"></script><!-- Bootstrap UI -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js" async></script>
-	<script src="//cdn.jsdelivr.net/jdenticon/1.3.2/jdenticon.min.js"></script>
+	<script src="//cdn.jsdelivr.net/jdenticon/1.4.0/jdenticon.min.js" async></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js" async></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js" async></script>
 
+	<script src="js/controller/navbarCtrl.js"></script> <!-- load up our controller -->
 	<script src="js/controller/searchCtrl.js"></script> <!-- load up our controller -->
 	<script src="js/services/searchService.js"></script> <!-- load our game service -->
 	<script src="js/services/jdenticonService.js"></script> <!-- load our game service -->
@@ -27,8 +29,8 @@
 	<script src="/js/directive.js"></script>
 
 </head>
+<div navbar></div> <!--navbar directive-->
 <body ng-controller="searchGamesCtrl">
-	<div navbar></div> <!--navbar directive-->
 	<main>
     <div class="col col-md-10 col-sm-11 col-xs-12 content">
 			<div id="search_bar" class="col-md-12 col-sm-12 col-xs-12 centerBlock">

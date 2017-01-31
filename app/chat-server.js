@@ -14,9 +14,6 @@ var namesUsed = [];
 
 module.exports = function(app,passport,io) {
   chat = io.on('connection', function(socket){
-  console.log('New user connected');
-  console.log("User session: " + socket.id);
-
   setNicknames(socket);
   joinRoom(socket);
   handleClientDisconnections(socket);
@@ -28,22 +25,18 @@ module.exports = function(app,passport,io) {
 
   function setNicknames(socket){
     socket.on('set nickname', function(nick) {
-      console.log("Nickname should be here - " + nick);
   if (namesUsed.indexOf(nick) !== -1) {
-    console.log('That name is already taken!  Please choose another one.');
     return;
   }
   var ind = namesUsed.push(nick) - 1;
   clients[nick] = socket.id;
   nicknames[socket.id] = nick;
-  console.log(nicknames);
 });
 }
 
 
   function newMessage(socket){
     socket.on('new message', function(data) {
-      console.log("New message route activated- " + data);
       chat.to(client).emit('new message', from);
   });
   }
@@ -51,7 +44,6 @@ module.exports = function(app,passport,io) {
 
 function handleClientDisconnections(socket){
   socket.on('disconnect', function(){
-    console.log("User has Disconnected");
     var ind = namesUsed.indexOf(nicknames[socket.id]);
     delete namesUsed[ind];
     delete clients[ind];

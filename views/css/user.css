@@ -81,6 +81,7 @@ main {
   flex: 1;
   margin: 0px auto;
   max-width: 1200px;
+  min-width: 50%;
 }
 .centerBlock {
   display: table;
@@ -194,4 +195,7 @@ box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 }
 #request {
   margin-top: 25px;
+}
+#error {
+  margin-left: 10px;
 }
