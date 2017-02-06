@@ -1,5 +1,5 @@
 // Creates the addCtrl Module and Controller. Note that it depends on the 'geolocation' and 'gservice' modules and controllers.
-angular.module('mapCtrl', ['geolocation', 'gservice'])
+angular.module('mapCtrl', ['geolocation', 'gservice','ui.bootstrap'])
 .controller('mapCtrl', function($scope, $http, $rootScope, geolocation, gservice, jdenticonService){
 
   $scope.maptab = 'active'; //set navbar map tab active
@@ -49,25 +49,9 @@ angular.module('mapCtrl', ['geolocation', 'gservice'])
             $scope.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);
         });
     });
-    $scope.searchGame = function() {
-      console.log("Starting search");
-			$scope.error = false;
 
-			var search = $scope.search;
-			console.log(search);
-				Games.searchGames(search)
-
-					.success(function(data) {
-						if(data.length == 0) {
-							$scope.error = true;
-						}
-						$scope.formData = {}; // clear the form so that new query can be entered
-						$scope.games = data; // update scope with new games
-						$scope.loading = false;
-					});
-		};
     $scope.sugestions = function(val) {
-
+      console.log(val);
 			var output = $.ajax({
 			    url: 'https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search='+val,
 			    type: 'GET',
@@ -142,6 +126,9 @@ angular.module('mapCtrl', ['geolocation', 'gservice'])
             $scope.getQueryResults();
           }
       };
+    $scope.update = function() {
+      jdenticon();
+    }
 
     $scope.getQueryResults = function() {
 

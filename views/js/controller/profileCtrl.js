@@ -1,7 +1,7 @@
 angular.module('profileCtrl', ['ui.bootstrap'])
 
 	// inject the service factory into our controller
-	.controller('profileCtrl', function($scope, $http, profile, jdenticonService) {
+	.controller('profileCtrl', function($scope, $http,$timeout, profile, jdenticonService) {
 
 		$scope.loading = true;
 		$scope.hometab = 'active'; //set navbar home tab active
@@ -16,6 +16,11 @@ angular.module('profileCtrl', ['ui.bootstrap'])
 			.success(function(user) {
 				sessionUser = user;
 				$scope.sessionUser2 = user;
+
+				profile.getSession()
+				.success(function(user) {
+					socket.emit('set nickname', user);
+				});
 		});
 
 		profile.getUnreadCount()
@@ -44,15 +49,17 @@ $scope.displayGames = function() {
 			else {
 				$scope.games = user.games;
 				$scope.username = user.username;
+				$timeout(function() {
+					$scope.loading = false;
+					$scope.mygames = true;
+	    }, 1000);
 				$scope.games_error = false;
-				$scope.loading = false;
-				$scope.mygames = true;
 			}
 	});
-	profile.getSession()
-	.success(function(user) {
-		socket.emit('set nickname', user);
-	});
+	// profile.getSession()
+	// .success(function(user) {
+	// 	socket.emit('set nickname', user);
+	// });
 };
 
 $scope.removeGame = function(i) {

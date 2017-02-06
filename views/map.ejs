@@ -2,7 +2,7 @@
 <html ng-app="gameApp">
 <head>
     <meta charset="UTF-8">
-    <title>Map-view</title>
+    <title>Map</title>
     <link rel="icon" type="image/svg+xml" href="/asets/logo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -19,6 +19,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.11/angular.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.4/ui-bootstrap-tpls.min.js"></script><!-- Bootstrap UI -->
     <script src="/js/components/angularjs-geolocation.min.js"></script>
     <script src="//cdn.jsdelivr.net/jdenticon/1.4.0/jdenticon.min.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.5/js/bootstrap-dialog.min.js"></script>
@@ -63,7 +64,7 @@
                              </select>
                              <label for="game">Game</label>
                              <input type="text" ng-model="search" ng-model-options="{debounce: 100}" placeholder="Search for games..."
-                   				uib-typeahead="game.name for game in sugestions($viewValue)" typeahead-on-select="searchGame()"
+                   				uib-typeahead="game.name for game in sugestions($viewValue)"
                						aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963"
                    				typeahead-no-results="noResults" class="form-control">
                							<div ng-show="noResults">

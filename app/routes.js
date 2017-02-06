@@ -65,7 +65,7 @@ module.exports = function(app, passport, io) {
 		var distance        = req.body.distance;
     var user            = req.user._id;
 
-		var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1});
+		var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1,"avatar":1});
 
 		if(distance){
 				query = query.where('location').near({ center: {type: 'Point', coordinates: [lat, long]},
@@ -84,7 +84,7 @@ module.exports = function(app, passport, io) {
 //Game routes =========================================================
 app.post('/games', function(req, res, searchData) {
 		var search = req.body.search;
-		var search_key = search.replace(/ /g,"_");//replace any spaces in search variable
+		var search_key = search.replace(/ /g,"_");
 
 		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,first_release_date&search="+search_key)
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
@@ -372,7 +372,6 @@ app.post('/games', function(req, res, searchData) {
             console.log(err);
           }
           else {
-            console.log(result);
             res.send(result);
           }
         })
@@ -445,7 +444,7 @@ app.post('/games', function(req, res, searchData) {
 		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
-	app.get('/map',isLoggedIn, function(req, res) {
+	app.get('/map', function(req, res) {
 		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
@@ -467,11 +466,6 @@ app.post('/games', function(req, res, searchData) {
   //     user : req.user
   //   });
   // });
-
-  app.get('/getSession', function(req, res) {
-    console.log(req.session.user);
-    res.send('awesome');
-  });
 
   app.get('/user', function(req, res) {
 		res.render('user.ejs', {

@@ -27,7 +27,6 @@ angular.module('gservice', [])
         // --------------------------------------------------------------
         // Refresh the Map with new data. Function will take new latitude and longitude coordinates.
         googleMapService.refresh = function(latitude, longitude,filteredResults){
-          console.log('refresh');
 
 
             // Clears the holding array of locations
@@ -73,8 +72,6 @@ angular.module('gservice', [])
             // Clear the locations holder
             var locations = [];
 
-
-
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.length; i++) {
                 var user = response[i];
@@ -82,7 +79,7 @@ angular.module('gservice', [])
                 // Create popup windows for each record
                 var  contentString =
                     '<p><b><a href="/user/?id=' + user._id+'" target="_blank">'+ user.username +'</a></b><br>'+
-                    '<p1>Platforms: </p1></p>';
+                    '<canvas width="40" height="40" data-jdenticon-hash="'+user.avatar+'"></canvas>';
 
                 if(!user.location) {
                   console.log('no locations');
@@ -101,6 +98,7 @@ angular.module('gservice', [])
                       }),
 
               });
+
                 }
 
 
@@ -149,6 +147,7 @@ var initialize = function(latitude, longitude, filter) {
             // When clicked, open the selected marker's message
             currentSelectedMarker = n;
             n.message.open(map, marker);
+            jdenticon();
         });
     });
     // Set initial location as a bouncing red marker

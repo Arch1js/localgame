@@ -13,3 +13,7 @@ body {
 p {
   color: white;
 }
+ul {
+  max-width: 80%;
+  overflow: hidden;
+}

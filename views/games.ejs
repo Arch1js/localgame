@@ -35,18 +35,19 @@
     <div class="col col-md-10 col-sm-11 col-xs-12 content">
 			<div id="search_bar" class="col-md-12 col-sm-12 col-xs-12 centerBlock">
 					<form id="search" class="form-inline" role="form">
-						<div class="form-group col-sm-10 col-md-4 col-xs-9">
-							<input type="text" ng-model="search" ng-model-options="{debounce: 100}" placeholder="Search for games..."
+						<div class="input-group col-md-6 col-sm-8 col-xs-12" id="searchbar">
+							<input type="text" class="form-control" ng-model="search" ng-model-options="{debounce: 100}" placeholder="Search for games..."
     				uib-typeahead="game.name for game in sugestions($viewValue)" typeahead-on-select="searchGame()"
 						aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-82-963"
-    				typeahead-no-results="noResults" class="form-control">
-							<div ng-show="noResults">
-  							<i class="glyphicon glyphicon-remove"></i> No Results Found
-							</div>
+    				typeahead-no-results="noResults">
+						<div id="noResults" ng-show="noResults">
+							<i class="glyphicon glyphicon-remove"></i> No Results Found for "{{search}}"
 						</div>
-						<div class="form-group col-xs-2">
-							<button type="submit" class="btn btn-primary" ng-click="searchGame()">Search</button>
+						<div style="cursor:pointer" class="input-group-addon" ng-click="searchGame()"><i class="fa fa-search"></i></div>
 						</div>
+						<!-- <div class="form-group col-xs-2">
+							<button type="submit" class="btn btn-primary" ng-click="searchGame()"> <i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						</div> -->
 					</form>
 			</div>
 			<div class="container col col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -54,7 +55,7 @@
 				<ul class="list" >
 				  <li class="list_item" ng-repeat="i in games">
 				    <figure class="list_item_inner">
-				      <div class="circle" ng-click="askPlatform(i); disable = !disable">
+				      <div class="circle" ng-click="askPlatform(i); disable = !disable" title="Add to your library">
 				        <i ng-class="disable ? 'fa fa-check' : 'fa fa-plus'"></i>
 				      </div>
 				      <img ng-src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/{{i.cover.cloudinary_id}}" err-src="../asets/no-image-found.gif"/>
