@@ -60,12 +60,18 @@ module.exports = function(app, passport, io) {
       });
 
 		app.post('/query', function(req, res){
-		var lat             = req.body.latitude;
-		var long            = req.body.longitude;
-		var distance        = req.body.distance;
-    var user            = req.user._id;
+		var lat = req.body.latitude;
+		var long = req.body.longitude;
+		var distance = req.body.distance;
+    var game = req.body.game;
+    var user = req.user._id;
 
-		var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1,"avatar":1});
+    if(!game) {
+      var query = User.find({'_id': {$ne: user}}, {"location": 1, "username": 1,"avatar":1});
+    }
+    else {
+      var query = User.find({'_id': {$ne: user}, 'games.name' : game}, {"location": 1, "username": 1,"avatar":1});
+    }
 
 		if(distance){
 				query = query.where('location').near({ center: {type: 'Point', coordinates: [lat, long]},
@@ -338,7 +344,6 @@ app.post('/games', function(req, res, searchData) {
 
         var uuid = uuidV1();
 
-
         var newConvo = new Conversation();
 
         newConvo.id = uuid;
@@ -444,12 +449,12 @@ app.post('/games', function(req, res, searchData) {
 		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
-	app.get('/map', function(req, res) {
+	app.get('/map',isLoggedIn, function(req, res) {
 		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
-  app.get('/chat', function(req, res) {
+  app.get('/chat',isLoggedIn, function(req, res) {
     // res.render('games.ejs', { message: req.flash('loginMessage') });
     res.render('chat.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
   });
@@ -467,7 +472,7 @@ app.post('/games', function(req, res, searchData) {
   //   });
   // });
 
-  app.get('/user', function(req, res) {
+  app.get('/user',isLoggedIn, function(req, res) {
 		res.render('user.ejs', {
       user : req.user
 		});
@@ -552,102 +557,6 @@ app.post('/games', function(req, res, searchData) {
 				successRedirect : '/profile#/mygames',
 				failureRedirect : '/'
 			}));
-
-// =============================================================================
-// AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
-// =============================================================================
-
-	// locally --------------------------------
-		app.get('/connect/local', function(req, res) {
-			res.render('connect-local.ejs', { message: req.flash('loginMessage') });
-		});
-		app.post('/connect/local', passport.authenticate('local-signup', {
-			successRedirect : '/profile', // redirect to the secure profile section
-			failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
-			failureFlash : true // allow flash messages
-		}));
-
-	// facebook -------------------------------
-
-		// send to facebook to do the authentication
-		app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email' }));
-
-		// handle the callback after facebook has authorized the user
-		app.get('/connect/facebook/callback',
-			passport.authorize('facebook', {
-				successRedirect : '/profile',
-				failureRedirect : '/'
-			}));
-
-	// twitter --------------------------------
-
-		// send to twitter to do the authentication
-		app.get('/connect/twitter', passport.authorize('twitter', { scope : 'email' }));
-
-		// handle the callback after twitter has authorized the user
-		app.get('/connect/twitter/callback',
-			passport.authorize('twitter', {
-				successRedirect : '/profile',
-				failureRedirect : '/'
-			}));
-
-
-	// google ---------------------------------
-
-		// send to google to do the authentication
-		app.get('/connect/google', passport.authorize('google', { scope : ['profile', 'email'] }));
-
-		// the callback after google has authorized the user
-		app.get('/connect/google/callback',
-			passport.authorize('google', {
-				successRedirect : '/profile',
-				failureRedirect : '/'
-			}));
-
-// =============================================================================
-// UNLINK ACCOUNTS =============================================================
-// =============================================================================
-// used to unlink accounts. for social accounts, just remove the token
-// for local account, remove email and password
-// user account will stay active in case they want to reconnect in the future
-
-	// local -----------------------------------
-	app.get('/unlink/local', function(req, res) {
-		var user            = req.user;
-		user.local.email    = undefined;
-		user.local.password = undefined;
-		user.save(function(err) {
-			res.redirect('/profile');
-		});
-	});
-
-	// facebook -------------------------------
-	app.get('/unlink/facebook', function(req, res) {
-		var user            = req.user;
-		user.facebook.token = undefined;
-		user.save(function(err) {
-			res.redirect('/profile');
-		});
-	});
-
-	// twitter --------------------------------
-	app.get('/unlink/twitter', function(req, res) {
-		var user           = req.user;
-		user.twitter.token = undefined;
-		user.save(function(err) {
-			res.redirect('/profile');
-		});
-	});
-
-	// google ---------------------------------
-	app.get('/unlink/google', function(req, res) {
-		var user          = req.user;
-		user.google.token = undefined;
-		user.save(function(err) {
-			res.redirect('/profile');
-		});
-	});
-
 
 };
 

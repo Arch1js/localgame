@@ -138,9 +138,9 @@ angular.module('mapCtrl', ['geolocation', 'gservice','ui.bootstrap'])
               queryBody = {
                   longitude: parseFloat($scope.formData.longitude),
                   latitude: parseFloat($scope.formData.latitude),
-                  distance: parseFloat($scope.formData.distance)
+                  distance: parseFloat($scope.formData.distance),
+                  game: $scope.search
               };
-
               $http.post('/query', queryBody)
                   .success(function(queryResults){
                       gservice.refresh(queryBody.latitude, queryBody.longitude, queryResults);
