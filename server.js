@@ -19,7 +19,17 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+var express = require('express'),
+  env = process.env.NODE_ENV || 'development';
 
+var forceSsl = function (req, res, next) {
+   if (req.headers['x-forwarded-proto'] !== 'https') {
+       return res.redirect(['https://', req.get('Host'), req.url].join(''));
+   }
+   return next();
+};
+
+app.use(forceSsl);
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 

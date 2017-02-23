@@ -62,6 +62,7 @@ module.exports = function(passport) {
 
                 // all is well, return user
                 else
+                console.log(user);
                     return done(null, user);
             });
         });
