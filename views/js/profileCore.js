@@ -5,27 +5,27 @@ var app = angular.module('gameApp', ['ui.bootstrap','profileCtrl', 'headerCtrl',
 
     // Join Team Control Panel
     $routeProvider.when('/mygames', {
-        controller: 'profileCtrl',
+        // controller: 'profileCtrl',
         templateUrl: '/js/partials/mygames.html',
 
     // Find Teammates Control Panel
   }).when('/friendrequests', {
-        controller: 'profileCtrl',
+        // controller: 'profileCtrl',
         templateUrl: '/js/partials/friendRequests.html',
 
     // All else forward to the Join Team Control Panel
   }).when('/gamerequests', {
-        controller: 'profileCtrl',
+        // controller: 'profileCtrl',
         templateUrl: '/js/partials/gameRequests.html',
 
     // All else forward to the Join Team Control Panel
   }).when('/friends', {
-        controller: 'profileCtrl',
+        // controller: 'profileCtrl',
         templateUrl: '/js/partials/friends.html',
 
     // All else forward to the Join Team Control Panel
   }).when('/messages', {
-        controller: 'profileCtrl',
+        // controller: 'profileCtrl',
         templateUrl: '/js/partials/messages.html',
 
     // All else forward to the Join Team Control Panel

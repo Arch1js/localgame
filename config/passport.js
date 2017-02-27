@@ -62,7 +62,6 @@ module.exports = function(passport) {
 
                 // all is well, return user
                 else
-                console.log(user);
                     return done(null, user);
             });
         });
@@ -185,7 +184,6 @@ module.exports = function(passport) {
 
                         var random = randomstring.generate(10);
                         var userHash = crypto.createHash('md5').update(random).digest('hex');
-                        console.log(userHash);
 
                         var newUser            = new User();
                         newUser.avatar = userHash;
@@ -206,7 +204,7 @@ module.exports = function(passport) {
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var user            = req.user; // pull the user out of the session
+                var user = req.user; // pull the user out of the session
 
                 user.facebook.id    = profile.id;
                 user.facebook.token = token;

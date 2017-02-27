@@ -37,8 +37,9 @@
 				"positionClass": "toast-bottom-left",
 			};
 			var newMessage = 'New message from ' + from;
-			console.log("here1");
 			toastr.success(newMessage);
+			var currentMessageCount = document.getElementById('msgBadge').innerHTML;
+			document.getElementById('msgBadge').innerHTML = parseInt(currentMessageCount, 10) + 1;
 		});
 	</script>
 </head>

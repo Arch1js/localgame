@@ -192,9 +192,11 @@ box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 
 #username {
   margin-top: 4px;
+  display: inline-table;
 }
 #request {
   margin-top: 25px;
+  margin-bottom: 10px;
 }
 #error {
   margin-left: 10px;

@@ -78,9 +78,7 @@ function handleClientDisconnections(socket){
           if(err) {
             console.log(err);
           }
-          else {
-            console.log("Updated status successfully!");
-          }
+
         });
         var date = new Date();
         var dateNow = date.getDate();
@@ -92,8 +90,5 @@ function handleClientDisconnections(socket){
       });
       chat.to(client).emit('new message', from);
 
-        // chat.to(client).emit('chat message', data.msg, from);
-
-        // chat.emit('chat message', data.msg);
       });
   }

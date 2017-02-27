@@ -45,6 +45,9 @@ angular.module('profileService', ['ui.bootstrap'])
 			},
 			getUnreadCount: function() {
 				return $http.post('/getUnreadCount')
+			},
+			getRequestCount: function(request) {
+				return $http.post('/getRequests', {type: request})
 			}
 		}
 	});

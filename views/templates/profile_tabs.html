@@ -3,15 +3,15 @@
   <li ng-class="{ active: isActive('/mygames')}"><a data-toggle="tab" href="#/mygames" ng-click="displayGames()">My Games</a></li>
   <!-- <li ng-class="{ active: isActive('/requests')}"><a data-toggle="tab" href="#/requests" ng-click="getRequests()">Requests</a></li> -->
   <li class="dropdown" href="#/requests" ng-class="{ active: isActive('/gamerequests')}">
-    <a class="dropdown-toggle" data-toggle="dropdown">Requests
+    <a class="dropdown-toggle" data-toggle="dropdown">Requests <span id="reqBadge" class="badge progress-bar-success">0</span>
     <span class="caret"></span></a>
    <ul class="dropdown-menu">
-     <li><a href="#/friendrequests" ng-click="getFriendRequests()">Friend Requests</a></li>
-     <li><a href="#/gamerequests" ng-click="getGameRequests()">Game Requests</a></li>
+     <li><a href="#/friendrequests" ng-click="getFriendRequests()">Friend Requests <span id="friendBadge" class="badge progress-bar-success">0</span></a></li>
+     <li><a href="#/gamerequests" ng-click="getGameRequests()">Game Requests <span id="gameBadge" class="badge progress-bar-success">0</span></a></li>
    </ul>
   </li>
   <li ng-class="{ active: isActive('/friends')}"><a data-toggle="tab" href="#/friends" ng-click="getFriends()">Friends</a></li>
-  <li ng-class="{ active: isActive('/messages')}"><a data-toggle="tab" href="#/messages" ng-click="getConversations()">Messages <span class="badge">{{unreadCount}}</span></a></li>
+  <li ng-class="{ active: isActive('/messages')}"><a data-toggle="tab" href="#/messages" ng-click="getAllConversations()">Messages <span id="msgBadge" class="badge progress-bar-success">0</span></a></li>
 </ul>
 <div class="tab-content">
   <div ng-view></div>

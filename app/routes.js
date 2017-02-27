@@ -16,7 +16,6 @@ module.exports = function(app, passport, io) {
   var user = req.user._id;
 
   User.findOne({_id: ObjectId(user)}, {"avatar":1, "username":1}, function(err, user) {
-      // console.log(user);
       res.json(user);
     });
   });
@@ -134,7 +133,6 @@ app.post('/games', function(req, res, searchData) {
             console.log(err);
           }
           else {
-            console.log(result);
             res.send(result);
           }
         });
@@ -150,7 +148,6 @@ app.post('/games', function(req, res, searchData) {
               console.log(err);
             }
             else {
-              console.log(result);
               res.send(result);
             }
           });
@@ -172,14 +169,11 @@ app.post('/games', function(req, res, searchData) {
                 console.log(err);
               }
               else if (friend == null) {
-                console.log('null');
                 r.friend = 'no';
                 res.send(r);
               }
               else {
-                console.log('success');
                 r.friend = 'yes';
-                console.log(r);
                 res.send(r);
               }
             });
@@ -198,33 +192,36 @@ app.post('/games', function(req, res, searchData) {
               console.log(err);
             }
             else {
-
-              for (var i = 0; i < result.friends.length; i++) {
-                User.findOne({_id: ObjectId(result.friends[i].user)}, {"username":1, "avatar": 1}, function(err,result) {
-                  userdata.push(result);
-                  if(i == userdata.length) {
-                    res.send(userdata);
-                  }
-                });
+              if(result.friends.length > 0) {
+                for (var i = 0; i < result.friends.length; i++) {
+                  User.findOne({_id: ObjectId(result.friends[i].user)}, {"username":1, "avatar": 1}, function(err,result) {
+                    userdata.push(result);
+                    console.log(result);
+                    if(i == userdata.length) {
+                      res.send(userdata);
+                    }
+                  })
+                }
+              }
+              else {
+                var empty = {"friends":0};
+                res.send(empty);
               }
             }
           });
         });
 
         app.post('/getUsers', function(req, res) {
-          console.log('getUsers fired');
-            // var user = req.user._id;
-
-              var user = '57bb3a324f8c8a1100f4ca7a';
+            var user = req.user._id;
+              // var user = '57bb3a324f8c8a1100f4ca7a';
               var friend = req.body.user;
-              console.log(friend);
+
               var newGame = User();
                 User.find({_id: ObjectId(user),'friends.username': new RegExp(friend,'i')}, {"friends.username":1}, function(err,result) {
                   if(err) {
                     console.log(err);
                   }
                   else {
-                    console.log(result);
                     return result;
                   }
                 });
@@ -294,7 +291,7 @@ app.post('/games', function(req, res, searchData) {
 
           User.update({_id: ObjectId(receiveUser),'gameRequests.game': {$ne: game}}, {$push: {gameRequests:{id: random_id, user: requestUser, username: username, time: date_time, game: game, cover: cover}}}, function(err) {
             if(err)
-            console.log("Error");
+            console.log(err);
           });
 
         });
@@ -314,28 +311,25 @@ app.post('/games', function(req, res, searchData) {
 
             User.update({_id: ObjectId(receiveUser),'friendRequests.user': {$ne: requestUser}}, {$push: {friendRequests:{id: random_id, user: requestUser, username: reqestUsername, avatar: avatar}}}, function(err) {
               if(err)
-              console.log("Error");
+              console.log(err);
             });
           });
 
 	      app.post('/addgames', function(req, res) {
-          console.log(req.body);
         		var id = req.body.id;
         		var title = req.body.name;
         		var cover = req.body.cover;
             var platform = req.body.platform;
-            console.log("Platform is: " + platform);
         		var newGame = User();
         		var user = req.user._id;
 
         		User.update({_id: ObjectId(user)}, {$addToSet: {games:{id: id, name: title, cover: cover, platform: platform}}}, function(err) {
         			if(err)
-        			console.log("Error");
+        			console.log(err);
         		});
 	        });
 
       app.post('/sendMessage', function(req, res) {
-        console.log('Mesage route activated');
         var to = req.body.to;
         var from_usr = req.user.username;
         var message = req.body.message;
@@ -369,24 +363,19 @@ app.post('/games', function(req, res, searchData) {
       });
       app.post('/getUnreadCount', function(req, res) {
         var user = req.user.username;
-        messageCount = function(request, callback) {
-        Conversation.find({ $or: [{participants: {$in:[user]}}], status: "unseen"},{"status":1}, function(err,result) {
+        Conversation.count({ $or: [{participants: {$in:[user]}}], status: "unseen"}, function(err,result) {
           if(err) {
             console.log(err);
           }
           else {
-            res.send(result);
+            var unreadCount = {"count":result};
+            res.send(unreadCount);
           }
         })
-      }
-        messageCount({}, function(err,count) {
-          console.log(count);
-          res.send(count);
-        })
       });
+
       app.post('/getMessages', function(req, res) {
         var convoID = req.body.id;
-        console.log("Routes received id: " + convoID);
 
         var message = Messages.find({conversationID: convoID}, function(err,result) {
           if(err) {
@@ -411,7 +400,6 @@ app.post('/games', function(req, res, searchData) {
       });
 
       app.post('/getConversations', function(req, res) {
-
         var user = req.user.username;
         var newMsg = Messages();
 
@@ -422,6 +410,30 @@ app.post('/games', function(req, res, searchData) {
             res.send(result);
           }
         })
+      });
+
+      app.post('/getRequests', function(req, res) {
+        var user = req.user._id;
+
+        if(req.body.type == "game") {
+          User.aggregate([{$match:{_id: ObjectId(user)}},{$unwind: "$gameRequests"}, {$group: {_id:null, count: {$sum: 1}}}],function(err,result) {
+            if(err)
+            console.log(err);
+            else if(result) {
+              res.send(result);
+            }
+          })
+        }
+        if(req.body.type == "friends") {
+          User.aggregate([{$match:{_id: ObjectId(user)}},{$unwind: "$friendRequests"}, {$group: {_id:null, count: {$sum: 1}}}],function(err,result) {
+            if(err)
+            console.log(err);
+            else if(result) {
+              res.send(result);
+            }
+          })
+        }
+
       });
 
 		app.post('/removegame', function(req, res) {

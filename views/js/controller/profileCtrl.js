@@ -16,22 +16,41 @@ angular.module('profileCtrl', ['ui.bootstrap'])
 			.success(function(user) {
 				sessionUser = user;
 				$scope.sessionUser2 = user;
-
-				profile.getSession()
-				.success(function(user) {
-					socket.emit('set nickname', user);
-				});
+				socket.emit('set nickname', user);
 		});
 
-		profile.getUnreadCount()
-		.success(function(number) {
-			var count = 0;
-			for (var i in number) {
-				count++;
-			}
-			$scope.unreadCount = count;
-		});
+$scope.getUnreadMessageCount = function() {
+	profile.getUnreadCount()
+	.success(function(notifications) {
+		document.getElementById('msgBadge').innerHTML = notifications.count;
+	});
+}
+$scope.getGameRequestCount = function() {
+	var game = "game";
+	profile.getRequestCount(game)
+	.success(function(count) {
+		if (count[0] != undefined) {
+			document.getElementById('gameBadge').innerHTML = count[0].count;
+			document.getElementById('reqBadge').innerHTML = "New";
+		}
 
+	})
+}
+
+$scope.getFriendRequestCount = function() {
+	var friends = "friends";
+	profile.getRequestCount(friends)
+	.success(function(count) {
+		if (count[0] != undefined) {
+			document.getElementById('friendBadge').innerHTML = count[0].count;
+			document.getElementById('reqBadge').innerHTML = "New";
+		}
+	})
+}
+
+$scope.getUnreadMessageCount();
+$scope.getGameRequestCount();
+$scope.getFriendRequestCount();
 /////////////////// My games tab functions/////////////////////
 $scope.displayGames = function() {
 
@@ -56,10 +75,6 @@ $scope.displayGames = function() {
 				$scope.games_error = false;
 			}
 	});
-	// profile.getSession()
-	// .success(function(user) {
-	// 	socket.emit('set nickname', user);
-	// });
 };
 
 $scope.removeGame = function(i) {
@@ -151,10 +166,9 @@ $scope.removeGame = function(i) {
 $scope.getFriendRequests = function() {
 	$scope.requests = false;
 	$scope.friendrequests = {};
-	profile.getFriendRequests()
 
+	profile.getFriendRequests()
 	.success(function(friendrequests) {
-		console.log(friendrequests);
 		if(friendrequests.friendRequests.length == 0) {
 			$scope.loading = false;
 			$scope.request_error = true;
@@ -191,10 +205,10 @@ $scope.deleteFriendRequest = function(i) {
 	$scope.getFriends = function() {
 		$scope.friends = false;
 		$scope.friends = {};
-		profile.getFriends()
 
+		profile.getFriends()
 		.success(function(friends) {
-			if(friends.length == 0) {
+			if(friends.friends == 0) {
 				$scope.friend_error = true;
 				$scope.friends = true;
 			}
@@ -210,7 +224,7 @@ $scope.deleteFriendRequest = function(i) {
 /////////////////// Messages tab functions/////////////////////
 
 ///////// Conversations /////////////////////
-	$scope.getConversations = function() {
+	$scope.getAllConversations = function() {
 		$scope.conversations = true;
 		$scope.loading = true;
 		$scope.messages_view = true;
@@ -218,7 +232,7 @@ $scope.deleteFriendRequest = function(i) {
 		$scope.getConversations = {};
 		profile.getConversations()
 		.success(function(conversation) {
-			console.log(conversation);
+
 			if(conversation.length == 0) {
 				$scope.msg_err = true;
 				$scope.loading = false;
@@ -228,6 +242,7 @@ $scope.deleteFriendRequest = function(i) {
 				$scope.conversation = conversation;
 				$scope.loading = false;
 				$scope.messages_view = false;
+
 			}
 		});
 	}
@@ -254,6 +269,7 @@ $scope.deleteFriendRequest = function(i) {
 		.success(function(messages) {
 			console.log(messages);
 			$scope.messages = messages;
+			$scope.getUnreadMessageCount();
 		});
 	}
 
@@ -284,6 +300,7 @@ $scope.deleteFriendRequest = function(i) {
 		    $('.chatscreenNew').append(message);
 				$('#chatmessage').val('');
 				$scope.scrollToBottom();
+				$scope.unreadCount = 0;
 		}
 
 		$scope.sendMessage = function() {
