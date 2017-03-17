@@ -136,16 +136,14 @@ a:hover {
   display: inline-block;
 }
 
-#moto {
-  color: white;
-  border-bottom: 1px solid white;
-  margin-bottom: 5%;
-
-}
 .clear {
   display: inline-block;
 }
 .nopadding {
   padding-right: 0px;
   padding-left: 0px;
+}
+#app_logo {
+  height: 55px;
+  width: 300px;
 }

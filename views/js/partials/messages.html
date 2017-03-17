@@ -38,8 +38,8 @@
           <img id="reqProfile" src="../../asets/user.svg"></img>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-9">
-          <p id="withUser" ng-if="i.participants[0] == sessionUser2"> <span id="convoBadge" class="badge progress-bar-success">{{i.status}}</span> Conversation with: {{i.participants[1]}}</p>
-          <p id="withUser" ng-if="i.participants[1] == sessionUser2">Conversation with: {{i.participants[0]}}</p>
+          <p id="withUser" ng-if="i.participants[0] == sessionUser2"><span id="convoBadge" class="badge progress-bar-success">{{i.status}}</span> Conversation with: {{i.participants[1]}}</p>
+          <p id="withUser" ng-if="i.participants[1] == sessionUser2"><span id="convoBadge" class="badge progress-bar-success">{{i.status}}</span> Conversation with: {{i.participants[0]}}</p>
         </div>
           <button class="btn btn-info" id="continue" ng-click="loadMessages(i.id, i.roomID, i.participants)"><i class="fa fa-comments"></i> Continue conversation</button>
       </div>

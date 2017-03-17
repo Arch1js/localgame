@@ -34,12 +34,12 @@ var express = require('express'),
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
-
+var oneDay = 86400000;
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views',{ maxAge: oneDay }));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
