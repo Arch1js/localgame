@@ -101,7 +101,7 @@ app.post('/games', function(req, res, searchData) {
 	});
 
 	app.post('/getnewest', function(req, res) {
-		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,first_release_date&order=popularity:desc&limit=30&offset=0")
+		unirest.get("https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name,cover,summary,first_release_date&order=rating_count:desc&limit=30&offset=0")
 		.header("X-Mashape-Key", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB")
 		.header("Accept", "application/json")
 		.end(function (result) {
