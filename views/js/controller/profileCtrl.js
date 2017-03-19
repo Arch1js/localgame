@@ -227,7 +227,7 @@ $scope.deleteFriendRequest = function(i) {
 	$scope.getAllConversations = function() {
 		$scope.loading = true;
 		$scope.chat_view = false;
-		
+
 
 		$scope.getConversations = {};
 		profile.getConversations()
@@ -304,9 +304,8 @@ $scope.deleteFriendRequest = function(i) {
 		}
 
 		$scope.sendMessage = function() {
-			var to = $scope.to.username;
-			var message = $scope.message;
-
+			var to = $('#to').val();
+			var message = $('#message').val();
 			$('#newMessage').modal('hide');
 			profile.sendMessage(to, message);
 		}

@@ -330,6 +330,7 @@ app.post('/games', function(req, res, searchData) {
 	        });
 
       app.post('/sendMessage', function(req, res) {
+        console.log("Message is sending");
         var to = req.body.to;
         var from_usr = req.user.username;
         var message = req.body.message;
