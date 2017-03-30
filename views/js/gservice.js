@@ -36,7 +36,7 @@ angular.module('gservice', [])
                 var user = response[i];
 
                 var  contentString =
-                    '<p><b><a href="/user/?id=' + user._id+'" target="_blank">'+ user.username +'</a></b><br>'+
+                    '<p><b><a alt="marker" href="/user/?id=' + user._id+'" target="_blank">'+ user.username +'</a></b><br>'+
                     '<canvas width="40" height="40" data-jdenticon-hash="'+user.avatar+'"></canvas>';
 
                 if(!user.location) {

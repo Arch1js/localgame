@@ -3,6 +3,8 @@
 <head>
 	<title>User profile</title>
 	<meta charset="UTF-8">
+	<meta name="theme-color" content="#2196F3">
+	<link rel="manifest" href="/manifest2.json">
 	<link rel="icon" type="image/svg+xml" href="/asets/logo.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
@@ -49,7 +51,7 @@
 						<button ng-class="change? 'btn btn-success trade' : 'btn btn-primary trade'" ng-click="sendGameRequest(i); change = !change; send_button = true" ng-disabled="send_button">
 							<span ng-hide="change"><i class="fa fa-star" aria-hidden="true"></i> Trade</span>
 							<span ng-show="change"><i class="fa fa-check" aria-hidden="true"></i> Sent</span></button>
-			      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{i.cover}}" err-src="../asets/no-image-found.gif"/>
+			      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{i.cover}}" alt="Cover Image" err-src="../asets/no-image-found.gif"/>
 			      <figcaption>{{i.name}}</figcaption>
 			    </figure>
 			  </li>

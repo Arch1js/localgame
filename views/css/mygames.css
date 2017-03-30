@@ -32,7 +32,7 @@
   width: 100%;
   overflow: hidden;
   display: -webkit-flex;
-  display: -ms-flexbox;
+  display: -ms-flex;
   display: flex;
 
   -webkit-flex-wrap: wrap;
@@ -44,7 +44,7 @@
   padding-top: 15px;
   float: left;
   display: -webkit-flex;
-  display: -ms-flexbox;
+  display: -ms-flex;
   display: flex;
 }
 .list_item img {
