@@ -456,17 +456,14 @@ app.post('/games', function(req, res, searchData) {
 
 	// main login page
 	app.get('/', function(req, res) {
-		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('login.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
 	app.get('/map',isLoggedIn, function(req, res) {
-		// res.render('games.ejs', { message: req.flash('loginMessage') });
 		res.render('map.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
 	});
 
   app.get('/chat',isLoggedIn, function(req, res) {
-    // res.render('games.ejs', { message: req.flash('loginMessage') });
     res.render('chat.ejs', { message: req.flash('loginMessage') }); //for development porposes - doesnt require login on games page
   });
 
@@ -476,12 +473,6 @@ app.post('/games', function(req, res, searchData) {
 			user : req.user
 		});
 	});
-
-  // app.get('/profile', isLoggedIn, function(req, res) {
-  //   res.render('profile.ejs', {
-  //     user : req.user
-  //   });
-  // });
 
   app.get('/user',isLoggedIn, function(req, res) {
 		res.render('user.ejs', {
