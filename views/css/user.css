@@ -197,6 +197,7 @@ box-shadow: 3px 4px 5px 0px rgba(0,0,0,0.75);
 #request {
   margin-top: 25px;
   margin-bottom: 10px;
+  display: table;
 }
 #error {
   margin-left: 10px;
