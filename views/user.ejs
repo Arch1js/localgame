@@ -4,7 +4,7 @@
 	<title>User profile</title>
 	<meta charset="UTF-8">
 	<meta name="theme-color" content="#2196F3">
-	<link rel="manifest" href="/manifest2.json">
+	<link rel="manifest" href="/manifest.json">
 	<link rel="icon" type="image/svg+xml" href="/asets/logo.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
@@ -52,8 +52,10 @@
 							<span ng-hide="change"><i class="fa fa-star" aria-hidden="true"></i> Trade</span>
 							<span ng-show="change"><i class="fa fa-check" aria-hidden="true"></i> Sent</span></button>
 			      <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{i.cover}}" alt="Cover Image" err-src="../asets/no-image-found.gif"/>
-			      <figcaption>{{i.name}}</figcaption>
-			    </figure>
+			      <figcaption><h3>{{i.name}}<h3></figcaption>
+						<div ng-if="i.platform != null"><p class="platform">Platfrom: </p><span class="label label-primary platform"><i class="fa fa-gamepad" aria-hidden="true" ></i> {{i.platform}}</span></div>
+						<div ng-if="i.platform == null"><p class="platform">Platfrom: </p><span class="label label-primary platform"><i class="fa fa-gamepad" aria-hidden="true"></i> Unknown</span></div>
+					</figure>
 			  </li>
 				<div class="alert alert-info" id="error" class="col col-md-12 col-xs-12" ng-show="games_error" style="margin-top: 10px">
 				  <strong>Hmmmm...</strong> Looks like this user hasn't added any games! <i class="fa fa-frown-o"></i>

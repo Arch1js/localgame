@@ -22,14 +22,14 @@ var configDB = require('./config/database.js');
 var express = require('express'),
   env = process.env.NODE_ENV || 'development';
 
-var forceSsl = function (req, res, next) { //enable for ssl on heroku
-   if (req.headers['x-forwarded-proto'] !== 'https') {
-       return res.redirect(['https://', req.get('Host'), req.url].join(''));
-   }
-   return next();
-};
-
-app.use(forceSsl);
+// var forceSsl = function (req, res, next) { //enable for ssl on heroku
+//    if (req.headers['x-forwarded-proto'] !== 'https') {
+//        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//    }
+//    return next();
+// };
+//
+// app.use(forceSsl);
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
