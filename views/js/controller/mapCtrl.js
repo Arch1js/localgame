@@ -51,7 +51,6 @@ angular.module('mapCtrl', ['geolocation', 'gservice','ui.bootstrap'])
     });
 
     $scope.sugestions = function(val) {
-      console.log(val);
 			var output = $.ajax({
 			    url: 'https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=name&search='+val,
 			    type: 'GET',
@@ -62,7 +61,7 @@ angular.module('mapCtrl', ['geolocation', 'gservice','ui.bootstrap'])
 			        },
 			    error: function(err) { alert(err); },
 			    beforeSend: function(xhr) {
-			    xhr.setRequestHeader("X-Mashape-Authorization", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB"); // Enter here your Mashape key
+			    xhr.setRequestHeader("X-Mashape-Authorization", "A0XH7oOSxqmshUWW2RKqSKJBx9X9p1GgsC8jsnl1jpgAIMfTfB");
 			    }
 			});
 			return output;
